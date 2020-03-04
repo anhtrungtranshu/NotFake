@@ -7,3 +7,12 @@ F:\SDEsign\NotFake\DAO\obj\Debug\netcoreapp2.1\DAO.AssemblyInfo.cs
 F:\SDEsign\NotFake\DAO\bin\Debug\netcoreapp2.1\DAO.pdb
 F:\SDEsign\NotFake\DAO\obj\Debug\netcoreapp2.1\DAO.dll
 F:\SDEsign\NotFake\DAO\obj\Debug\netcoreapp2.1\DAO.pdb
+F:\MyWork\New folder\NotFake-master\DAO\bin\Debug\netcoreapp2.1\DAO.deps.json
+F:\MyWork\New folder\NotFake-master\DAO\bin\Debug\netcoreapp2.1\DAO.dll
+F:\MyWork\New folder\NotFake-master\DAO\bin\Debug\netcoreapp2.1\DAO.pdb
+F:\MyWork\New folder\NotFake-master\DAO\obj\Debug\netcoreapp2.1\DAO.csprojAssemblyReference.cache
+F:\MyWork\New folder\NotFake-master\DAO\obj\Debug\netcoreapp2.1\DAO.csproj.CoreCompileInputs.cache
+F:\MyWork\New folder\NotFake-master\DAO\obj\Debug\netcoreapp2.1\DAO.AssemblyInfoInputs.cache
+F:\MyWork\New folder\NotFake-master\DAO\obj\Debug\netcoreapp2.1\DAO.AssemblyInfo.cs
+F:\MyWork\New folder\NotFake-master\DAO\obj\Debug\netcoreapp2.1\DAO.dll
+F:\MyWork\New folder\NotFake-master\DAO\obj\Debug\netcoreapp2.1\DAO.pdb
