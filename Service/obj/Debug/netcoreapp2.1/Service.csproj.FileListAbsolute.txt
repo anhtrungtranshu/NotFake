@@ -10,3 +10,5 @@ F:\SDEsign\NotFake\Service\bin\Debug\netcoreapp2.1\DAO.pdb
 F:\SDEsign\NotFake\Service\obj\Debug\netcoreapp2.1\Service.csproj.CopyComplete
 F:\SDEsign\NotFake\Service\obj\Debug\netcoreapp2.1\Service.dll
 F:\SDEsign\NotFake\Service\obj\Debug\netcoreapp2.1\Service.pdb
+F:\SDEsign\NotFake\Service\bin\Debug\netcoreapp2.1\Service.runtimeconfig.json
+F:\SDEsign\NotFake\Service\bin\Debug\netcoreapp2.1\Service.runtimeconfig.dev.json

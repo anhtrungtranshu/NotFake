@@ -7,3 +7,5 @@ F:\SDEsign\NotFake\DAO\obj\Debug\netcoreapp2.1\DAO.AssemblyInfo.cs
 F:\SDEsign\NotFake\DAO\bin\Debug\netcoreapp2.1\DAO.pdb
 F:\SDEsign\NotFake\DAO\obj\Debug\netcoreapp2.1\DAO.dll
 F:\SDEsign\NotFake\DAO\obj\Debug\netcoreapp2.1\DAO.pdb
+F:\SDEsign\NotFake\DAO\bin\Debug\netcoreapp2.1\DAO.runtimeconfig.json
+F:\SDEsign\NotFake\DAO\bin\Debug\netcoreapp2.1\DAO.runtimeconfig.dev.json

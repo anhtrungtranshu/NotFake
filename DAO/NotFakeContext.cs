@@ -14,5 +14,6 @@ namespace DAO
         }
 
         public DbSet<User> User { get; set; }
+
     }
 }

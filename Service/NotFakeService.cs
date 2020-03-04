@@ -9,12 +9,11 @@ namespace Service
 {
     public class NotFakeService : INotFakeService
     {
-        public NotFakeService()
+        public NotFakeService(NotFakeContext context)
         {
-            NotFakeContext context = new NotFakeContext();
             User = new UserRepository(context);
         }
-        IUserRepository User { get; set; }
+        public IUserRepository User { get; set; }
 
     }
 }
