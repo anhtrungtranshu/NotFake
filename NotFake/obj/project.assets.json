@@ -11798,11 +11798,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\MyWork\\New folder\\NotFake-master\\NotFake\\NotFake.csproj",
+      "projectUniqueName": "F:\\MyWork\\Project\\NotFake-master\\NotFake\\NotFake.csproj",
       "projectName": "NotFake",
-      "projectPath": "F:\\MyWork\\New folder\\NotFake-master\\NotFake\\NotFake.csproj",
+      "projectPath": "F:\\MyWork\\Project\\NotFake-master\\NotFake\\NotFake.csproj",
       "packagesPath": "C:\\Users\\b9034710\\.nuget\\packages\\",
-      "outputPath": "F:\\MyWork\\New folder\\NotFake-master\\NotFake\\obj\\",
+      "outputPath": "F:\\MyWork\\Project\\NotFake-master\\NotFake\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -11821,11 +11821,11 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "F:\\MyWork\\New folder\\NotFake-master\\DAO\\DAO.csproj": {
-              "projectPath": "F:\\MyWork\\New folder\\NotFake-master\\DAO\\DAO.csproj"
+            "F:\\MyWork\\Project\\NotFake-master\\DAO\\DAO.csproj": {
+              "projectPath": "F:\\MyWork\\Project\\NotFake-master\\DAO\\DAO.csproj"
             },
-            "F:\\MyWork\\New folder\\NotFake-master\\Service\\Service.csproj": {
-              "projectPath": "F:\\MyWork\\New folder\\NotFake-master\\Service\\Service.csproj"
+            "F:\\MyWork\\Project\\NotFake-master\\Service\\Service.csproj": {
+              "projectPath": "F:\\MyWork\\Project\\NotFake-master\\Service\\Service.csproj"
             }
           }
         }
