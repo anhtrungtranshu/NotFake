@@ -15,10 +15,18 @@ namespace DAO
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().HasData(new User()
+            {
+                Id = 1,
+                Email = "admin@demo.com",
+                Password = "@123456Xx",
+                Role = UserRoles.Admin,
+                Fullname = "admin"
+            });
         }
 
         public DbSet<User> User { get; set; }
 
-
+     
     }
 }

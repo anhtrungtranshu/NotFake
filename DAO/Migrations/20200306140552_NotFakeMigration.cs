@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAO.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class NotFakeMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,6 +22,11 @@ namespace DAO.Migrations
                 {
                     table.PrimaryKey("PK_User", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "Email", "Fullname", "Password", "Role" },
+                values: new object[] { 1, "admin@demo.com", "admin", "@123456Xx", 1 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

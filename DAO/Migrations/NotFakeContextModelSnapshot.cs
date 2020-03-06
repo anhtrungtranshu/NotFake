@@ -35,6 +35,10 @@ namespace DAO.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new { Id = 1, Email = "admin@demo.com", Fullname = "admin", Password = "@123456Xx", Role = 1 }
+                    );
                 });
 #pragma warning restore 612, 618
         }

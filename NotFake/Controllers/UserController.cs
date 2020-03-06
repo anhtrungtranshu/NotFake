@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DAO.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
@@ -17,7 +18,9 @@ namespace NotFake.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            IList<User> userList = service.User.ListAll();
+
+            return View(userList);
         }
     }
 }
