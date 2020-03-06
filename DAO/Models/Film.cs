@@ -7,10 +7,9 @@ namespace DAO.Models
 {
     class Film
     {
-        private string FilmName;
 
         [Key]
-        int Id { get; set; }
+        public int Id { get; set; }
         
         public string Name {get; set;}
 

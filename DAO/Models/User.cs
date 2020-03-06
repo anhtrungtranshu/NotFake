@@ -13,10 +13,10 @@ namespace DAO.Models
     public class User
     {
         [Key]
-        int Id { get; set; }
-        string Email { get; set; }
-        string Password { get; set; }
-        UserRoles Role { get; set; }
-        string Fullname { get; set; }
+        public int Id { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public UserRoles Role { get; set; }
+        public string Fullname { get; set; }
 }
 }

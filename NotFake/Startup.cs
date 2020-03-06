@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore;
+using Service;
 
 namespace NotFake
 {
@@ -40,6 +41,8 @@ namespace NotFake
             services.AddDbContext<NotFakeContext>(options =>
                 options.UseSqlServer(sqlConnectionString)
             );
+
+            services.AddScoped<INotFakeService, NotFakeService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
         }

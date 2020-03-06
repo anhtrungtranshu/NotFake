@@ -13,7 +13,12 @@ namespace DAO
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+        }
+
         public DbSet<User> User { get; set; }
+
 
     }
 }
