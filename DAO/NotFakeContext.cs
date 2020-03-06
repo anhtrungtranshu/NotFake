@@ -14,5 +14,8 @@ namespace DAO
         }
 
         public DbSet<User> User { get; set; }
+        public DbSet<Friendship> Friendships { get; set; }
+        public DbSet<UserFilmInvite> UserFilmInvites { get; set; }
+        public DbSet<Post> Posts { get; set; }
     }
 }
