@@ -1,9 +1,0 @@
-F:\SDEsign\NotFake\DAO\bin\Debug\netcoreapp2.1\DAO.deps.json
-F:\SDEsign\NotFake\DAO\bin\Debug\netcoreapp2.1\DAO.dll
-F:\SDEsign\NotFake\DAO\obj\Debug\netcoreapp2.1\DAO.csprojAssemblyReference.cache
-F:\SDEsign\NotFake\DAO\obj\Debug\netcoreapp2.1\DAO.csproj.CoreCompileInputs.cache
-F:\SDEsign\NotFake\DAO\obj\Debug\netcoreapp2.1\DAO.AssemblyInfoInputs.cache
-F:\SDEsign\NotFake\DAO\obj\Debug\netcoreapp2.1\DAO.AssemblyInfo.cs
-F:\SDEsign\NotFake\DAO\bin\Debug\netcoreapp2.1\DAO.pdb
-F:\SDEsign\NotFake\DAO\obj\Debug\netcoreapp2.1\DAO.dll
-F:\SDEsign\NotFake\DAO\obj\Debug\netcoreapp2.1\DAO.pdb
