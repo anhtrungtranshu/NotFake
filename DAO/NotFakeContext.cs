@@ -8,10 +8,7 @@ namespace DAO
 {
     public class NotFakeContext : DbContext
     {
-        public NotFakeContext(DbContextOptions<NotFakeContext> options) : base(options)
-        {
-
-        }
+        public NotFakeContext(DbContextOptions<NotFakeContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,5 +26,8 @@ namespace DAO
         public DbSet<Friendship> Friendships { get; set; }
         public DbSet<UserFilmInvite> UserFilmInvites { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Film> Film { get; set; }
+        public DbSet<Genre> Genre { get; set; }
+        public DbSet<UserFilm> UserFilm { get; set; }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DAO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Service;
+using DAO;
 
 namespace NotFake
 {
@@ -34,9 +34,7 @@ namespace NotFake
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
-
 
             services.AddDbContext<NotFakeContext>(options =>
                 options.UseSqlServer(sqlConnectionString)

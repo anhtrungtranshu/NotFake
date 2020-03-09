@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAO.Models
 {
-    class Film
+    public class Film
     {
-
         [Key]
-        public int Id { get; set; }
-        
-        public string Name {get; set;}
+        int FilmId { get; set; }
+        string Name { get; set; }
+        int RunTime { get; set; }
+        string FilmAddress { get; set; }
 
-
+        [ForeignKey("Genre")]
+        public int GenreID { get; set; }
 
     }
 }
