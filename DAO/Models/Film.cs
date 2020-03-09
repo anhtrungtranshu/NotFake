@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DAO.Models
 {
-    class Film
+    public class Film
     {
         [Key]
         int FilmId { get; set; }

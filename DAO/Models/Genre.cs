@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAO.Models
 {
-    class Genre
+    public class Genre
     {
         [Key]
         int GenreId { get; set; }
