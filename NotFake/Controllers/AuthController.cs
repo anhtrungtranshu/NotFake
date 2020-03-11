@@ -51,7 +51,6 @@ namespace NotFake.Controllers
                 // redirect response value.
             };
 
-
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(principal, authProperties);

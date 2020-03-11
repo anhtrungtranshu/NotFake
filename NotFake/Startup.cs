@@ -48,8 +48,8 @@ namespace NotFake
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("User", policy => policy.RequireClaim("Role = User"));
-                options.AddPolicy("Admin", policy => policy.RequireClaim("Role = Admin"));
+                options.AddPolicy("User", policy => policy.RequireClaim("Role","User"));
+                options.AddPolicy("Admin", policy => policy.RequireClaim("Role","Admin"));
             });
                 
                 

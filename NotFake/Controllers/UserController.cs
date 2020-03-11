@@ -17,7 +17,7 @@ namespace NotFake.Controllers
             service = _service;
         }
 
-        public ClaimsIdentity Email { get; internal set; }
+        
 
         public IActionResult Index()
         {
