@@ -12,7 +12,6 @@ namespace DAO
         {
 
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(new User()

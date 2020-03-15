@@ -10,7 +10,7 @@ namespace DAO.Models
     {
         [Key]
         [ForeignKey("User")]
-        int User1ID { get; set; }
+        int User1ID {get;set;}
         [Key]
         [ForeignKey("User")]
         int User2ID { get; set; }
