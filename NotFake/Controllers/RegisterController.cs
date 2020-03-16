@@ -7,17 +7,18 @@ using DAO.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NotFake.Models;
+using Service;
 
 namespace NotFake.Controllers
 {
     public class RegisterController : Controller
     {
-        //private INotFakeService service;
+        private INotFakeService service;
 
-        //public RegisterController(INotFakeService _service)
-        //{
-        //    service = _service;
-        //}
+        public RegisterController(INotFakeService _service)
+        {
+            service = _service;
+        }
 
         private NotFakeContext db;
 
@@ -37,7 +38,7 @@ namespace NotFake.Controllers
             {
                 User user = new User();
 
-                if (!Utility.IsEmailValid(user.Email))
+                if (!Utility.IsEmailValid(model.Email))
                 {
                     ViewData["message"] = "Enter Email";
                 }
