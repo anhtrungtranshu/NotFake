@@ -12,6 +12,6 @@ namespace DAO.Models
         public int UserId { get; set; }
         [ForeignKey("Film")]
         public int FilmId { get; set; }
-        int SecondsWatched { get; set; }
+        public int SecondsWatched { get; set; }
     }
 }

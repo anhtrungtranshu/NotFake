@@ -15,8 +15,8 @@ namespace DAO.Models
         [ForeignKey("User")]
         public int User2ID { get; set; }
         [Required]
-        string Content { get; set; }
+        public string Content { get; set; }
         [Required]
-        DateTime Created { get; set; }
+        public DateTime Created { get; set; }
     }
 }

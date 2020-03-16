@@ -8,7 +8,7 @@ namespace DAO.Models
     public class Genre
     {
         [Key]
-        int GenreId { get; set; }
-        string Name { get; set; }
+        public int GenreId { get; set; }
+        public string Name { get; set; }
     }
 }

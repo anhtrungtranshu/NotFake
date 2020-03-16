@@ -14,6 +14,6 @@ namespace DAO.Models
         [ForeignKey("User")]
         public int User2ID { get; set; }
         [Required]
-        string status { get; set; }
+        public string status { get; set; }
     }
 }

@@ -17,9 +17,9 @@ namespace DAO.Models
         public int FilmID { get; set; }
         public DateTime WatchDate { get; set; }
         [Required]
-        DateTime Created { get; set; }
+        public DateTime Created { get; set; }
         [Required]
-        Boolean isAccepted { get; set; }
+        public Boolean isAccepted { get; set; }
 
 
     }
