@@ -3,6 +3,7 @@ using DAO.Models;
 using Service.IRepository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Service.Repository
@@ -11,5 +12,9 @@ namespace Service.Repository
     {
         public UserRepository(NotFakeContext context) : base(context) { }
 
+        public User GetByEmail(string email)
+        {
+            return context.User.Where(user => user.Email == email).FirstOrDefault();            
+        }
     }
 }

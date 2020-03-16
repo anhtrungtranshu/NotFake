@@ -53,7 +53,7 @@ namespace Service.Utilities
             return ByteArraysEqual(buffer3, buffer4);
         }
 
-        public static bool ByteArraysEqual(byte[] b1, byte[] b2)
+        protected static bool ByteArraysEqual(byte[] b1, byte[] b2)
         {
             if (b1 == b2) return true;
             if (b1 == null || b2 == null) return false;
