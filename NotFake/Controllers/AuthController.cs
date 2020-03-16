@@ -57,5 +57,14 @@ namespace NotFake.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        
+        private async Task<IActionResult> SignOut()
+        {
+            await HttpContext.SignOutAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction("Index", "Home");//change this to Log in once completed
+        }
     }
 }
