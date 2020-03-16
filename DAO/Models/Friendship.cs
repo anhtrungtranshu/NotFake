@@ -8,12 +8,11 @@ namespace DAO.Models
 {
     public class Friendship
     {
-        [Key]
+        
         [ForeignKey("User")]
-        int User1ID { get; set; }
-        [Key]
+        public int User1ID { get; set; }
         [ForeignKey("User")]
-        int User2ID { get; set; }
+        public int User2ID { get; set; }
         [Required]
         string status { get; set; }
     }

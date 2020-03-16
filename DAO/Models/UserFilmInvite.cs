@@ -8,17 +8,14 @@ namespace DAO.Models
 {
     public class UserFilmInvite
     {
-        [Key]
+        
         [ForeignKey("User")]
-        int User1ID { get; set; }
-        [Key]
+        public int User1ID { get; set; }
         [ForeignKey("User")]
-        int User2ID { get; set; }
-        [Key]
+        public int User2ID { get; set; }
         [ForeignKey("Film")]
-        int FilmID { get; set; }
-        [Key]
-        DateTime WatchDate { get; set; }
+        public int FilmID { get; set; }
+        public DateTime WatchDate { get; set; }
         [Required]
         DateTime Created { get; set; }
         [Required]

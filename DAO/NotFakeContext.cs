@@ -20,6 +20,15 @@ namespace DAO
                 Role = UserRoles.Admin,
                 Fullname = "admin"
             });
+            
+            modelBuilder.Entity<Friendship>()
+                .HasKey( o => new { o.User1ID, o.User2ID });
+            modelBuilder.Entity<Post>()
+                .HasKey(o => new { o.User1ID, o.User2ID });
+            modelBuilder.Entity<UserFilmInvite>()
+                .HasKey(o => new { o.User1ID, o.User2ID, o.FilmID, o.WatchDate });
+            modelBuilder.Entity<UserFilm>()
+                .HasKey(o => new { o.UserId, o.FilmId });
         }
 
         public DbSet<User> User { get; set; }
