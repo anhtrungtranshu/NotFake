@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using DAO.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,8 @@ namespace NotFake.Controllers
         {
             service = _service;
         }
+
+        
 
         public IActionResult Index()
         {

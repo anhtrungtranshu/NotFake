@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DAO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Service;
+using DAO;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace NotFake
 {
@@ -34,16 +35,24 @@ namespace NotFake
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
-
 
             services.AddDbContext<NotFakeContext>(options =>
                 options.UseSqlServer(sqlConnectionString)
             );
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();   
+
             services.AddScoped<INotFakeService, NotFakeService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("User", policy => policy.RequireClaim("Role","User"));
+                options.AddPolicy("Admin", policy => policy.RequireClaim("Role","Admin"));
+            });
+                
+                
 
         }
 
@@ -61,6 +70,7 @@ namespace NotFake
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
