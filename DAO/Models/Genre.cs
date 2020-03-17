@@ -10,5 +10,6 @@ namespace DAO.Models
         [Key]
         public int GenreId { get; set; }
         public string Name { get; set; }
+        public List<Film> Films { get; set; }
     }
 }

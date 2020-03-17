@@ -8,12 +8,8 @@ namespace DAO.Models
 {
     public class Post
     {
-        
-        [ForeignKey("User")]
-        public int User1ID { get; set; }
-        
-        [ForeignKey("User")]
-        public int User2ID { get; set; }
+        [Key]
+        public int PostID { get; set; }
         [Required]
         public string Content { get; set; }
         [Required]

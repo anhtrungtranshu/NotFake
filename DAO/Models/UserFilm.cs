@@ -8,8 +8,8 @@ namespace DAO.Models
 {
     public class UserFilm
     {
-        [ForeignKey("User")]
-        public int UserId { get; set; }
+
+        public int UserFilmID { get; set; }
         [ForeignKey("Film")]
         public int FilmId { get; set; }
         public int SecondsWatched { get; set; }

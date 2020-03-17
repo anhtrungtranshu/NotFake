@@ -21,18 +21,9 @@ namespace DAO
                 Fullname = "admin"
             });
             
-            modelBuilder.Entity<Friendship>()
-                .HasKey( o => new { o.User1ID, o.User2ID });
-            modelBuilder.Entity<Post>()
-                .HasKey(o => new { o.User1ID, o.User2ID });
-            modelBuilder.Entity<UserFilmInvite>()
-                .HasKey(o => new { o.User1ID, o.User2ID, o.FilmID, o.WatchDate });
-            modelBuilder.Entity<UserFilm>()
-                .HasKey(o => new { o.UserId, o.FilmId });
         }
 
         public DbSet<User> User { get; set; }
-        public DbSet<Friendship> Friendships { get; set; }
         public DbSet<UserFilmInvite> UserFilmInvites { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Film> Film { get; set; }

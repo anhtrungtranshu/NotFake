@@ -11,8 +11,5 @@ namespace DAO.Models
         public int RunTime { get; set; }
         public string FilmAddress { get; set; }
 
-        [ForeignKey("Genre")]
-        public int GenreID { get; set; }
-
     }
 }
