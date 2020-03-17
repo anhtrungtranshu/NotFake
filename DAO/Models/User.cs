@@ -21,6 +21,7 @@ namespace DAO.Models
         public List<User> Friends { get; set; }
         public List<Post> PostsToOtherUsers { get; set; }
         public List<Post> PostsFromOtherUsers { get; set; }
+        public List<UserFilm> Films { get; set; }
         public List<UserFilmInvite> InvitesToOtherUsers { get; set; }
         public List<UserFilmInvite> InvitesFromOtherUsers { get; set; }
     }

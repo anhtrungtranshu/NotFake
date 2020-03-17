@@ -4,14 +4,16 @@ using DAO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAO.Migrations
 {
     [DbContext(typeof(NotFakeContext))]
-    partial class NotFakeContextModelSnapshot : ModelSnapshot
+    [Migration("20200317171534_InitialTest")]
+    partial class InitialTest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,11 +116,7 @@ namespace DAO.Migrations
 
                     b.Property<int>("SecondsWatched");
 
-                    b.Property<int?>("UserId");
-
                     b.HasKey("UserFilmID");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("UserFilm");
                 });
@@ -172,13 +170,6 @@ namespace DAO.Migrations
                 {
                     b.HasOne("DAO.Models.User")
                         .WithMany("Friends")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("DAO.Models.UserFilm", b =>
-                {
-                    b.HasOne("DAO.Models.User")
-                        .WithMany("Films")
                         .HasForeignKey("UserId");
                 });
 
