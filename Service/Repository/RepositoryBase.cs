@@ -9,7 +9,7 @@ namespace Service.Repository
 {
     public class RepositoryBase<T> : IRepositoryBase<T> where T: class
     {
-        private NotFakeContext context;
+        protected NotFakeContext context;
         public RepositoryBase(NotFakeContext notFakeContext)
         {
             context = notFakeContext;

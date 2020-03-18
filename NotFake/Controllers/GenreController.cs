@@ -21,6 +21,12 @@ namespace NotFake.Controllers
             IList<Genre> genrelist = service.Genre.ListAll();
             return View(genrelist);
         }
+        public IActionResult GetFilmsInGenre(int id)
+        {
+            IList<Film> filmlist = service.Genre.FilmsInGenre(id);
+            return View("FilmsInGenre", filmlist);
+
+        }
         // GET: Genre
         public ActionResult Index()
         {
