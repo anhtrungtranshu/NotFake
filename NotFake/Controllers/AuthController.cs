@@ -102,5 +102,49 @@ namespace NotFake.Controllers
 
             return RedirectToAction("Index", "Home");//change this to Log in once completed
         }
+
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = new User();
+
+                if (!Utility.IsEmailValid(model.Email))
+                {
+                    ViewData["message"] = "Enter Email";
+                }
+                else
+                {
+
+                    User existingUser = service.User.GetByEmail(model.Email);
+                    if (existingUser != null)
+                    {
+                        ModelState.AddModelError("Email", "User with this email already exists");
+                        return View(model);
+                    }
+                }
+                user.Email = model.Email;
+                user.Fullname = model.Fullname;
+                user.Password = model.Password;
+                user.Role = UserRoles.User;
+
+                service.User.Add(user);
+
+                ViewData["message"] = "User created successfully!";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewData["message"] = "Something went wrong";
+            }
+            return View(model);
+        }
+
     }
 }

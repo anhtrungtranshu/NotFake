@@ -33,5 +33,12 @@ namespace Service.Repository
             context.Set<T>().Remove(entity);
             return context.SaveChanges();
         }
+
+        public T Add(T entity)
+        {
+            context.Set<T>().Add(entity);
+            context.SaveChanges();
+            return entity;
+        }
     }
 }

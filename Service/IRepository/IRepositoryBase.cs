@@ -10,5 +10,6 @@ namespace Service.IRepository
         IList<T> ListAll();
         int Update(T entity);
         int Delete(T entity);
+        T Add(T entity);
     }
 }
