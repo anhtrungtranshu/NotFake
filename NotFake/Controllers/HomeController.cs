@@ -6,17 +6,22 @@ using System.Threading.Tasks;
 using DAO.Models;
 using Microsoft.AspNetCore.Mvc;
 using NotFake.Models;
+using Service;
 using Service.Repository;
 
 namespace NotFake.Controllers
 {
     public class HomeController : Controller
     {
-        private GenreRepository Genre;
+        private INotFakeService service;
+        public HomeController(INotFakeService _service)
+        {
+            service = _service;
+        }
         public IActionResult Index()
         {
-            IList<Genre> genrelist = Genre.ListAll();
-            return View();
+            IList<Genre> genrelist = service.Genre.ListAll();
+            return View(genrelist);
         }
 
         public IActionResult About()

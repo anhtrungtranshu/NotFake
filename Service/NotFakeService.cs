@@ -14,10 +14,13 @@ namespace Service
             User = new UserRepository(context);
 
             Genre = new GenreRepository(context);
+
+            FilmsInGenre = new GenreRepository(context);
         }
         public IUserRepository User { get; set; }
 
         public IGenreRepository Genre { get; set; }
 
+        public IGenreRepository FilmsInGenre { get; set; }
     }
 }

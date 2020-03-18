@@ -10,5 +10,7 @@ namespace Service
         IUserRepository User { get; set; }
 
         IGenreRepository Genre { get; set; }
+
+        IGenreRepository FilmsInGenre { get; set; }
     }
 }
