@@ -9,6 +9,6 @@ namespace Service.Repository
 {
     public class FriendshipRepository : RepositoryBase<Friendship>, IFriendshipRepository
     {
-        public FriendshipRepository(NotFakeContext context) : base(context) { }
+        public FriendshipRepository(NotFakeContext context): base(context) { }
     }
 }

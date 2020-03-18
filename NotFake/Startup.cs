@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Service;
 using DAO;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace NotFake
 {
@@ -40,8 +41,18 @@ namespace NotFake
                 options.UseSqlServer(sqlConnectionString)
             );
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();   
+
             services.AddScoped<INotFakeService, NotFakeService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("User", policy => policy.RequireClaim("Role","User"));
+                options.AddPolicy("Admin", policy => policy.RequireClaim("Role","Admin"));
+            });
+                
+                
 
         }
 
@@ -59,6 +70,7 @@ namespace NotFake
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

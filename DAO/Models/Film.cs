@@ -6,10 +6,10 @@ namespace DAO.Models
     public class Film
     {
         [Key]
-        int FilmId { get; set; }
-        string Name { get; set; }
-        int RunTime { get; set; }
-        string FilmAddress { get; set; }
+        public int FilmId { get; set; }
+        public string Name { get; set; }
+        public int RunTime { get; set; }
+        public string FilmAddress { get; set; }
 
         [ForeignKey("Genre")]
         public int GenreID { get; set; }

@@ -17,5 +17,5 @@ namespace DAO.Models
         public string Password { get; set; }
         public UserRoles Role { get; set; }
         public string Fullname { get; set; }
-}
+    }
 }
