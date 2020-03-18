@@ -8,5 +8,7 @@ namespace Service
     public interface INotFakeService
     {
         IUserRepository User { get; set; }
+
+        IGenreRepository Genre { get; set; }
     }
 }

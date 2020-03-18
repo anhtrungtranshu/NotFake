@@ -12,8 +12,12 @@ namespace Service
         public NotFakeService(NotFakeContext context)
         {
             User = new UserRepository(context);
+
+            Genre = new GenreRepository(context);
         }
         public IUserRepository User { get; set; }
+
+        public IGenreRepository Genre { get; set; }
 
     }
 }

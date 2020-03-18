@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using DAO.Models;
 using Microsoft.AspNetCore.Mvc;
 using NotFake.Models;
+using Service.Repository;
 
 namespace NotFake.Controllers
 {
     public class HomeController : Controller
     {
+        private GenreRepository Genre;
         public IActionResult Index()
         {
+            IList<Genre> genrelist = Genre.ListAll();
             return View();
         }
 
