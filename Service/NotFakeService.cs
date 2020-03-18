@@ -16,9 +16,12 @@ namespace Service
             Post = new PostRepository(context);
             UserFilmInvite = new UserFilmInviteRepository(context);
         }
-        public IUserRepository User { get; set; }
+        public IFilmRepository Film { get; set; }
         public IFriendshipRepository Friendship { get; set; }
+        public IGenreRepository Genre { get; set; }
         public IPostRepository Post { get; set; }
         public IUserFilmInviteRepository UserFilmInvite { get; set; }
+        public IUserFimRepository UserFilm { get; set; }
+        public IUserRepository User { get; set; }
     }
 }

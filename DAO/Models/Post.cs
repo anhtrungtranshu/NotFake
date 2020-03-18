@@ -8,15 +8,16 @@ namespace DAO.Models
 {
     public class Post
     {
-        
-        [ForeignKey("User")]
-        public int User1ID { get; set; }
-        
-        [ForeignKey("User")]
-        public int User2ID { get; set; }
-        [Required]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int PostID { get; set; }
         public string Content { get; set; }
-        [Required]
         public DateTime Created { get; set; }
+        public int SentUserId { get; set; }
+        [ForeignKey("SentUserId")]
+        public virtual User SentUser { get; set; }
+        public int ReceivedUserId { get; set; }
+        [ForeignKey("ReceivedUserId")]
+        public virtual User ReceivedUser { get; set; }
     }
 }

@@ -6,18 +6,21 @@ using System.Text;
 
 namespace DAO.Models
 {
-    public class Friendship
+    public enum FriendShipStatus
     {
-        
-        //[ForeignKey("User1")]
-        public int User1Id { get; set; }
-        public User User1 { get; set; }
+        Pending,
+        Accepted,
+        Rejected
+    }
 
-        //[ForeignKey("User2")]
-        public int User2Id { get; set; }
-        public User User2 { get; set; }
-
-        [Required]
-        public string status { get; set; }
+    public class Friendship
+    {   
+        public int InvitingUserId { get; set; }
+        [ForeignKey("InvitingUserId")]
+        public virtual User InvitingUser { get; set; }
+        public int InvitedUserId { get; set; }
+        [ForeignKey("InvitedUserId")]
+        public virtual User InvitedUser { get; set; }
+        public FriendShipStatus Status { get; set; }
     }
 }

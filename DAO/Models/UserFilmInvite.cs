@@ -6,21 +6,26 @@ using System.Text;
 
 namespace DAO.Models
 {
+    public enum UserFilmInviteStatus
+    {
+        Pending,
+        Accepted,
+        Rejected
+    }
+
     public class UserFilmInvite
     {
-        
-        [ForeignKey("User")]
-        public int User1ID { get; set; }
-        [ForeignKey("User")]
-        public int User2ID { get; set; }
-        [ForeignKey("Film")]
-        public int FilmID { get; set; }
+        public int InvitingUserId { get; set; }
+        [ForeignKey("InvitingUserId")]
+        public virtual User InvitingUser { get; set; }
+        public int InvitedUserId { get; set; }
+        [ForeignKey("InvitedUserId")]
+        public virtual User InvitedUser { get; set; }
+        public int FilmId { get; set; }
+        [ForeignKey("FilmId")]
+        public virtual Film Film { get; set; }
         public DateTime WatchDate { get; set; }
-        [Required]
         public DateTime Created { get; set; }
-        [Required]
-        public Boolean isAccepted { get; set; }
-
-
+        public UserFilmInviteStatus isAccepted { get; set; }
     }
 }

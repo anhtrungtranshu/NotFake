@@ -14,28 +14,60 @@ namespace DAO
         {
             modelBuilder.Entity<User>().HasData(new User()
             {
-                Id = 1,
+                UserId = 1,
                 Email = "admin@demo.com",
                 Password = "@123456Xx",
                 Role = UserRoles.Admin,
                 Fullname = "admin"
             });
-            
             modelBuilder.Entity<Friendship>()
-                .HasKey( o => new { o.User1Id, o.User2Id });
+                .HasKey(f => new { f.InvitedUserId, f.InvitingUserId });
+            modelBuilder.Entity<Friendship>()
+                .HasOne(f => f.InvitingUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Friendship>()
+                .HasOne(f => f.InvitedUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<Post>()
-                .HasKey(o => new { o.User1ID, o.User2ID });
-            modelBuilder.Entity<UserFilmInvite>()
-                .HasKey(o => new { o.User1ID, o.User2ID, o.FilmID, o.WatchDate });
+               .HasOne(p => p.SentUser)
+               .WithMany()
+               .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Post>()
+                .HasOne(p => p.ReceivedUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<UserFilm>()
-                .HasKey(o => new { o.UserId, o.FilmId });
+                .HasKey(uf => new { uf.UserId, uf.FilmId});
+
+            modelBuilder.Entity<UserFilmInvite>()
+                .HasKey(ufi => new { ufi.InvitedUserId, ufi.InvitingUserId, ufi.FilmId });
+            modelBuilder.Entity<UserFilmInvite>()
+                .HasOne(ufi => ufi.InvitingUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<UserFilmInvite>()
+                .HasOne(ufi => ufi.InvitingUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<UserFilmInvite>()
+                .HasOne(ufi => ufi.InvitedUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<UserFilmInvite>()
+                .HasOne(ufi => ufi.Film)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
-        public DbSet<User> User { get; set; }
+        public DbSet<Film> Film { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
+        public DbSet<User> User { get; set; }
         public DbSet<UserFilmInvite> UserFilmInvites { get; set; }
         public DbSet<Post> Posts { get; set; }
-        public DbSet<Film> Film { get; set; }
         public DbSet<Genre> Genre { get; set; }
         public DbSet<UserFilm> UserFilm { get; set; }
     }

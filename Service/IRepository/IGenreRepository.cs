@@ -5,8 +5,7 @@ using System.Text;
 
 namespace Service.IRepository
 {
-    interface IGenreRepository: IRepositoryBase<Genre>
+    public interface IGenreRepository: IRepositoryBase<Genre>
     {
-
     }
 }

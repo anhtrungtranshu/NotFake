@@ -5,7 +5,7 @@ using DAO.Models;
 
 namespace Service.IRepository
 {
-    interface IUserFimRepository
+    public interface IUserFimRepository : IRepositoryBase<UserFilm>
     {
     }
 }
