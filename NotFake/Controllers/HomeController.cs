@@ -20,8 +20,10 @@ namespace NotFake.Controllers
         }
         public IActionResult Index()
         {
-            IList<Genre> genrelist = service.Genre.ListAll();
-            return View(genrelist);
+
+            //IList<Genre> genrelist = service.Genre.ListAll();
+            IList<Film> films = service.Genre.FilmsInGenre(1);
+            return View(films);
         }
 
         public IActionResult About()

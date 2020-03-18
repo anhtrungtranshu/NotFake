@@ -16,6 +16,9 @@ namespace Service.Repository
         public IList<Film> FilmsInGenre(int id)
         {
             Genre genre = context.Genre.Find(id);
+            context.Entry(genre)
+                .Collection(g => g.Films)
+                .Load();
             return genre.Films.ToList();
         }
     }
