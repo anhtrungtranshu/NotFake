@@ -12,5 +12,6 @@ namespace Service
         IGenreRepository Genre { get; set; }
 
         IGenreRepository FilmsInGenre { get; set; }
+    
     }
 }

@@ -21,6 +21,7 @@ namespace Service.Repository
                 .Load();
             return genre.Films.ToList();
         }
+        
     }
     
 }

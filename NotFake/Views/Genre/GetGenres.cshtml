@@ -24,6 +24,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
+            
+            @foreach(var flm in ViewData["FilmNames"] as IList<string>) 
+             { 
+                <td>@flm</td>
+             }
             <td>
                 <a asp-action="Edit" asp-route-id="@item.GenreId">Edit</a> |
                 <a asp-action="GetFilmsInGenre" asp-route-id="@item.GenreId">Details</a> |
