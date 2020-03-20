@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DAO.Models.Genre>
+﻿@model IEnumerable<NotFake.Models.MainPageViewModel>
 
 @{
     ViewData["Title"] = "GetGenres";
@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model)
             </th>
             <th></th>
         </tr>
@@ -22,7 +22,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Genre.Name)
             </td>
             
             @foreach(var genre in ViewData["FilmNames"] as IList<List<string>>) 
@@ -33,9 +33,9 @@
                  }
              }
             <td>
-                <a asp-action="Edit" asp-route-id="@item.GenreId">Edit</a> |
-                <a asp-action="GetFilmsInGenre" asp-route-id="@item.GenreId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.GenreId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Genre.GenreId">Edit</a> |
+                <a asp-action="GetFilmsInGenre" asp-route-id="@item.Genre.GenreId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Genre.GenreId">Delete</a>
             </td>
         </tr>
 }

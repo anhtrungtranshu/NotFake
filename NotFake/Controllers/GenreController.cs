@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DAO.Models;
+//using DAO.Models;
+using NotFake.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service;
@@ -19,29 +20,6 @@ namespace NotFake.Controllers
         public IActionResult GetGenres()
         {
             IList<Genre> genrelist = service.Genre.ListAll();
-            List<List<string>> namesArray = new List<List<string>>();
-            List<string> filmnames = new List<string>();
-            IList<Film> filmListForGenre = service.Genre.FilmsInGenre(1);
-            foreach (var item in genrelist)
-            {
-                filmListForGenre = service.Genre.FilmsInGenre(item.GenreId);
-                for (int i = 0; i < filmListForGenre.Count; i++)
-                {
-                    filmnames.Add(filmListForGenre[i].Name);
-                }
-                namesArray[(item.GenreId)-1]=filmnames;
-                filmnames.Clear();
-                filmListForGenre.Clear();
-            }  
-            ViewData["FilmNames"] = namesArray;
-
-           // IList<Film> filmListForGenre = service.Genre.FilmsInGenre(1);
-            //List<string> filmnames = new List<string>();
-            //for (int i = 0; i < filmListForGenre.Count; i++)
-            //{
-            //    filmnames.Add(filmListForGenre[i].Name);
-            //}
-            //ViewData["FilmNames"] = filmnames;        
 
             return View(genrelist);
         }
