@@ -8,8 +8,8 @@ namespace NotFake.Models
 {
     public class MainPageViewModel
     {
-        public IEnumerable<Genre> Genre { get; set; }
-        public IEnumerable<Film> Film { get; set; }
+        public Genre Genre { get; set; }
+        public List<Film> Films { get; set; }
     }
 
     //public class Genre

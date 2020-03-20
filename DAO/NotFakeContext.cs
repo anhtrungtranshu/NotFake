@@ -20,7 +20,6 @@ namespace DAO
                 Role = UserRoles.Admin,
                 Fullname = "admin"
             });
-            
         }
 
         public DbSet<User> User { get; set; }
