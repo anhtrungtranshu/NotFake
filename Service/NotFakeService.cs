@@ -15,6 +15,8 @@ namespace Service
 
             Genre = new GenreRepository(context);
 
+            Film = new FilmRepository(context);
+
             FilmsInGenre = new GenreRepository(context);
 
         }
@@ -23,6 +25,8 @@ namespace Service
         public IGenreRepository Genre { get; set; }
 
         public IGenreRepository FilmsInGenre { get; set; }
+
+        public IFilmRepository Film { get; set; }
 
     }
 }

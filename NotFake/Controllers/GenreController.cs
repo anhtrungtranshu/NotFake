@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//using DAO.Models;
+using DAO.Models;
 using NotFake.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,12 +19,15 @@ namespace NotFake.Controllers
         }
         public IActionResult GetGenres()
         {
-            IList<Genre> genrelist = service.Genre.ListAll();
-
-            return View(genrelist);
+            MainPageViewModel viewModel = new MainPageViewModel();
+            viewModel.Genre = service.Genre.ListAll();
+            viewModel.Film = service.Film.ListAll();
+            
+            return View(viewModel);
         }
         public IActionResult GetFilmsInGenre(int id)
         {
+            
             IList<Film> filmlist = service.Genre.FilmsInGenre(id);
             return View("GetFilmsInGenre", filmlist);
 

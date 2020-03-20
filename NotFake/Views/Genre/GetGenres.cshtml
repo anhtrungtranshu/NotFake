@@ -22,7 +22,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Genre.Name)
+                @Html.DisplayFor(modelItem => item.Genre)
             </td>
             
             @foreach(var genre in ViewData["FilmNames"] as IList<List<string>>) 
@@ -33,9 +33,9 @@
                  }
              }
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Genre.GenreId">Edit</a> |
-                <a asp-action="GetFilmsInGenre" asp-route-id="@item.Genre.GenreId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Genre.GenreId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Genre">Edit</a> |
+                <a asp-action="GetFilmsInGenre" asp-route-id="@item.Genre">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Genre">Delete</a>
             </td>
         </tr>
 }
