@@ -28,7 +28,7 @@ namespace NotFake.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(LoginViewModel loginData)
+        public async Task<IActionResult> Login(LoginViewModel loginData)
         {
             User _user = service.User.GetByEmail(loginData.Email);
             if (_user == null)
@@ -40,7 +40,7 @@ namespace NotFake.Controllers
                 bool isPasswordCorrect = Crypto.VerifyHashedPassword(_user.Password, loginData.Password);
                 if (isPasswordCorrect)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return await SignInUser(_user);
                 }
                 else
                 {
