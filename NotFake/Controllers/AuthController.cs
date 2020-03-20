@@ -133,13 +133,14 @@ namespace NotFake.Controllers
                 }
                 user.Email = model.Email;
                 user.Fullname = model.Fullname;
-                user.Password = model.Password;
+                user.Password = Crypto.HashPassword(user.Password);
+                user.Password= model.Password;
                 user.Role = UserRoles.User;
 
                 service.User.Add(user);
 
                 ViewData["message"] = "User created successfully!";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
