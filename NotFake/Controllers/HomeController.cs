@@ -20,9 +20,17 @@ namespace NotFake.Controllers
         }
         public IActionResult Index()
         {
-            //IList<Genre> genrelist = service.Genre.ListAll();
-            //IList<Film> films = service.Genre.FilmsInGenre(1);
-            return View();
+            List<Genre> _genres = service.Genre.ListAll().ToList();
+            // List<Film> _films = service.Film.ListAll().ToList();
+
+            List<MainPageViewModel> viewModel = _genres
+            .ConvertAll(g => new MainPageViewModel()
+            {
+                Genre = g,
+                Films = service.Genre.FilmsInGenre(g.GenreId).ToList()
+            });
+
+            return View(viewModel);
         }
 
         public IActionResult About()

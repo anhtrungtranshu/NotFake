@@ -36,7 +36,7 @@
                             @for (int i = 0; i < item.Films.Count(); i++)
                             {
                                 <div class="item @(i == 0 ? "active" : string.Empty)">
-                                    <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
+                                    <img src="@item.Films.ElementAt(i).ThumbnailAddress" alt="ASP.NET" class="img-responsive" />
                                     <div class="carousel-caption" role="option">
                                         <p>@item.Films.ElementAt(i).Name</p>
                                     </div>
