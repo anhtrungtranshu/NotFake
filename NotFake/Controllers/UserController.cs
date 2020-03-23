@@ -17,8 +17,6 @@ namespace NotFake.Controllers
             service = _service;
         }
 
-        
-
         public IActionResult Index()
         {
             IList<User> userList = service.User.ListAll();

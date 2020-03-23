@@ -1,0 +1,52 @@
+﻿@model List<NotFake.Models.MainPageViewModel>
+
+@{
+    ViewData["Title"] = "GetGenres";
+}
+
+<h2>GetGenres</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <p>@Html.DisplayFor(modelItem => item.Genre.Name)</p>
+                <div style="border: 2px solid #bababa">
+                    <h4>Films sector</h4>
+                    @foreach (var film in item.Films)
+                    {
+                        <p>@film.Name</p>
+                    }
+                </div>
+            </td>
+            
+
+
+            @* @foreach(var genre in ViewData["FilmNames"] as IList<List<string>>) 
+             { 
+                @foreach(var name in genre as List<string>)
+                 {
+                    <td>@name</td>
+                 }
+             } *@
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Genre">Edit</a> |
+                <a asp-action="GetFilmsInGenre" asp-route-id="@item.Genre">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Genre">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -12,6 +12,6 @@ namespace DAO.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GenreId { get; set; }
         public string Name { get; set; }
-        public List<Film> Films { get; set; }
+        public virtual List<Film> Films { get; set; }
     }
 }

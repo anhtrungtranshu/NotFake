@@ -11,5 +11,9 @@ namespace Service
         IFriendshipRepository Friendship { get; set; }
         IPostRepository Post { get; set; }
         IUserFilmInviteRepository UserFilmInvite { get; set; }
+        IGenreRepository Genre { get; set; }
+        IFilmRepository Film { get; set; }
+        IGenreRepository FilmsInGenre { get; set; }
+    
     }
 }
