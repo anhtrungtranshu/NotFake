@@ -9,6 +9,7 @@ namespace DAO.Models
         public int FilmId { get; set; }
         public string Name { get; set; }
         public int RunTime { get; set; }
+        public string ThumbnailAddress { get; set; }
         public string FilmAddress { get; set; }
 
     }
