@@ -11,9 +11,13 @@ namespace DAO.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        public int RunTime { get; set; }
+        public int RunTime { get; set; } // in mins
+        [Required]
+        public string ThumbnailAddress { get; set; }
         [Required]
         public string FilmAddress { get; set; }
-
+        public int GenreId { get; set; }
+        [ForeignKey("GenreId")]
+        public virtual Genre Genre { get; set; }
     }
 }

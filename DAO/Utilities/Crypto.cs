@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace Service.Utilities
+namespace DAO.Utilities
 {
     public class Crypto
     {

@@ -16,10 +16,28 @@ namespace DAO
             {
                 UserId = 1,
                 Email = "admin@demo.com",
-                Password = "@123456Xx",
+                Password = Utilities.Crypto.HashPassword("NotFake@123"),
                 Role = UserRoles.Admin,
                 Fullname = "admin"
             });
+
+            modelBuilder.Entity<Genre>()
+                .HasData(new Genre()
+                {
+                    GenreId = 1,
+                    Name = "Comedies"
+                });
+
+            modelBuilder.Entity<Film>()
+                .HasData(
+                        new Film() { FilmId = 1, 
+                        Name = "Balloon", 
+                        GenreId = 1, 
+                        RunTime = 100, 
+                        ThumbnailAddress = "Thumbnails/Balloon.PNG",
+                        FilmAddress = "" 
+                        }
+                );
             modelBuilder.Entity<Friendship>()
                 .HasKey(f => new { f.InvitedUserId, f.InvitingUserId });
             modelBuilder.Entity<Friendship>()
@@ -41,7 +59,7 @@ namespace DAO
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<UserFilm>()
-                .HasKey(uf => new { uf.UserId, uf.FilmId});
+                .HasKey(uf => new { uf.UserId, uf.FilmId });
 
             modelBuilder.Entity<UserFilmInvite>()
                 .HasKey(ufi => new { ufi.InvitedUserId, ufi.InvitingUserId, ufi.FilmId });

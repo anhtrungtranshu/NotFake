@@ -28,7 +28,7 @@ namespace NotFake.Controllers
                 Genre = g,
                 Films = service.Genre.FilmsInGenre(g.GenreId).ToList()
             });
-
+        
             return View(viewModel);
         }
         public IActionResult GetFilmsInGenre(int id)
