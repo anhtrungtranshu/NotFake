@@ -7,7 +7,7 @@
 @foreach(var item in Model)
 {
 <p><h3>@Html.DisplayFor(modelItem => item.Genre.Name)</h3></p>
-<div id="@item.Genre.Name" class="carousel slide" data-ride="carousel" data-interval="6000">
+<div id="@item.Genre.Name" class="carousel slide" data-ride="carousel" data-interval="500">
     <ol class="carousel-indicators">
         @for (int i = 0; i < item.Films.Count(); i++)
         {
@@ -18,12 +18,13 @@
         @for (int i = 0; i < item.Films.Count(); i++)
         {
             <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
-                <img src="@item.Films.ElementAt(i).ThumbnailAddress" alt="ASP.NET" class="d-block w-100" />
-                <div class="carousel-caption d-none d-md-block" role="option">
-                    <p>@item.Films.ElementAt(i).Name</p>
-                </div>
+                <a asp-controller="Film" asp-action="Index" asp-route-id="@item.Films.ElementAt(i).FilmId">
+                    <img src="@item.Films.ElementAt(i).ThumbnailAddress" alt="ASP.NET" class="d-block w-100" />
+                    <div class="carousel-caption d-none d-md-block" role="option">
+                        <p>@item.Films.ElementAt(i).Name</p>
+                    </div>
+                </a>
             </div>
-
         }
     </div>
     <a class="carousel-control-prev" href="#@item.Genre.Name" role="button" data-slide="prev">
