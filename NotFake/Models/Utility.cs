@@ -23,12 +23,7 @@ namespace NotFake.Models
         }
 
 
-        //private bool IsValidUser(string userName, string passWord)
-
-        //{
-
-
-        //}
+        
 
 
     }

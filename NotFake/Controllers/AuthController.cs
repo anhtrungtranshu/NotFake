@@ -16,6 +16,7 @@ namespace NotFake.Controllers
     public class AuthController : Controller
     {
         private INotFakeService service;
+
         public AuthController(INotFakeService _service)
         {
             service = _service;
@@ -113,16 +114,17 @@ namespace NotFake.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 User user = new User();
 
                 if (!Utility.IsEmailValid(model.Email))
                 {
-                    ViewData["message"] = "Enter Email";
+                    ViewData["message"] = "Enter correct Email";
                 }
                 else
                 {
 
-                    User existingUser = service.User.GetByEmail(model.Email);
+                    User existingUser =  service.User.GetByEmail(model.Email);
                     if (existingUser != null)
                     {
                         ModelState.AddModelError("Email", "User with this email already exists");
@@ -131,13 +133,14 @@ namespace NotFake.Controllers
                 }
                 user.Email = model.Email;
                 user.Fullname = model.Fullname;
-                user.Password = model.Password;
+                user.Password = Crypto.HashPassword(user.Password);
+                user.Password= model.Password;
                 user.Role = UserRoles.User;
 
                 service.User.Add(user);
 
                 ViewData["message"] = "User created successfully!";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
