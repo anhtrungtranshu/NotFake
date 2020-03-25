@@ -34,8 +34,8 @@ namespace DAO
                         Name = "Balloon", 
                         GenreId = 1, 
                         RunTime = 100, 
-                        ThumbnailAddress = "Thumbnails/Balloon.PNG",
-                        FilmAddress = "" 
+                        ThumbnailAddress = "https://ia600208.us.archive.org/4/items/Popeye_forPresident/__ia_thumb.jpg",
+                        FilmAddress = "https://ia600208.us.archive.org/4/items/Popeye_forPresident/Popeye_forPresident_512kb.mp4"
                         }
                 );
             modelBuilder.Entity<Friendship>()
