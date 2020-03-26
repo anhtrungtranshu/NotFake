@@ -4,11 +4,11 @@ namespace NotFake.Models
 {
     public class LoginViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Please input your email")]
+        [EmailAddress(ErrorMessage = "Email is not in correct form")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please input your password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }

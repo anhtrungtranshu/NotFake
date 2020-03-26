@@ -7,29 +7,38 @@
 <section id="signup" class="signup-section">
     <div class="container">
       <div class="row">
-        <div class="col-md-10 col-lg-8 mx-auto text-center">
-
-          <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-          <h2 class="text-white mb-5">Login</h2>
-
-          <form method="post" asp-controller="auth" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]">
-                <div class="form-group row">
-                    <label for="email" class="col-sm-2 col-md-3 col-form-label text-white">Email</label>
-                    <div class="col-sm-10 col-md-9">
-                        <input type="email" asp-for="Email" class="form-control mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email address...">
-                    </div>
-                    <small id="emailHelp" asp-validation-for="Email" class="form-text text-danger"></small>
+        <div class="col-md-8 col-lg-6 mx-auto">
+          <div class="col-12 text-center">
+            <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+            <h2 class="text-white mb-2">Login</h2>
+          </div>
+          <form autocomplete="off" method="post" asp-controller="Auth" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]">
+                <div class="form-group">
+                    <label asp-for="Email" class="col-form-label text-white">Email</label>
+                    <div class="input-group input-group__with-icon">
+                      <input type="email" asp-for="Email" class="form-control mr-0 mb-3 mb-sm-0" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email address...">
+                      @if(ViewData.ModelState.Keys.Contains("Email"))
+                      {
+                        <div class="icon-content" asp-validation-for="Email" data-toggle="tooltip" data-html="true" title='@Utility.ValidationErrorsTooltip(ViewData.ModelState["Email"].Errors)'>
+                          <i class="fas fa-exclamation text-danger"></i>
+                        </div>
+                      }
+                  </div>
                 </div>
-                <div class="form-group row">
-                    <label for="password" class="col-sm-2 col-md-3 col-form-label text-white">Password</label>
-                    <div class="col-sm-10 col-md-9">
-                        <input type="password" asp-for="Password" class="form-control mr-0 mr-sm-2 mb-3 mb-sm-0" id="password" aria-describedby="passwordHelp" placeholder="Please input password...">
-                        <small id="passwordHelp" asp-validation-for="Password" class="form-text text-danger"></small>
-                    </div>
+                <div class="form-group">
+                  <label asp-for="Password" class="col-form-label text-white">Password</label>
+                  <div class="input-group input-group__with-icon">
+                    <input type="password" asp-for="Password" class="form-control mr-0 mb-3 mb-sm-0" id="password" aria-describedby="passwordHelp" placeholder="Please input password...">
+                    @if(ViewData.ModelState.Keys.Contains("Password"))
+                    {
+                      <div class="icon-content" asp-validation-for="Password" data-html="true" data-toggle="tooltip" title='@Utility.ValidationErrorsTooltip(ViewData.ModelState["Password"].Errors)'>
+                        <i class="fas fa-exclamation text-danger"></i>
+                      </div>
+                    }
+                  </div>
                 </div>
-
-            @* <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address..."> *@
-            <button type="submit" class="btn btn-primary mx-auto btn-block">Login</button>
+            <button type="submit" class="btn btn-primary mt-2 mx-auto btn-block">Login</button>
+            <p class="text-danger">@ViewBag.LoginError</p>
           </form>
 
         </div>

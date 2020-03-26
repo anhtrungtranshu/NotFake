@@ -31,29 +31,45 @@ namespace NotFake.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginData)
         {
-            User _user = service.User.GetByEmail(loginData.Email);
-            if (_user == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
-            }
-            else
-            {
-                bool isPasswordCorrect = Crypto.VerifyHashedPassword(_user.Password, loginData.Password);
-                if (isPasswordCorrect)
+                try
                 {
-                    return await SignInUser(_user);
+                    User _user = service.User.GetByEmail(loginData.Email);
+                    if (_user == null)
+                    {
+                        ModelState.AddModelError("Email", "User does not exist");
+                        return View(loginData);
+                    }
+                    else
+                    {
+                        bool isPasswordCorrect = Crypto.VerifyHashedPassword(_user.Password, loginData.Password);
+                        if (isPasswordCorrect)
+                        {
+                            return await SignInUser(_user);
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("Password", "Wrong Password");
+                            return View(loginData);
+                        }
+                    }
                 }
-                else
+                catch
                 {
-                    return NotFound();
+                    ViewBag["LoginError"] = "Something went wrong, please try again later";
+                    return View(loginData);
                 }
+
             }
+
+            return View(loginData);
         }
         public IActionResult Index()
         {
             return View();
         }
-        
+
         private async Task<IActionResult> SignInUser(User user)
         {
             var claims = new List<Claim>
@@ -95,7 +111,7 @@ namespace NotFake.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-       
+
         public async Task<IActionResult> SignOut()
         {
             await HttpContext.SignOutAsync(
@@ -124,7 +140,7 @@ namespace NotFake.Controllers
                 else
                 {
 
-                    User existingUser =  service.User.GetByEmail(model.Email);
+                    User existingUser = service.User.GetByEmail(model.Email);
                     if (existingUser != null)
                     {
                         ModelState.AddModelError("Email", "User with this email already exists");
@@ -134,7 +150,7 @@ namespace NotFake.Controllers
                 user.Email = model.Email;
                 user.Fullname = model.Fullname;
                 user.Password = Crypto.HashPassword(user.Password);
-                user.Password= model.Password;
+                user.Password = model.Password;
                 user.Role = UserRoles.User;
 
                 service.User.Add(user);
