@@ -255,10 +255,10 @@
   height: auto;
   font-family: 'Varela Round';
   font-size: 80%;
-  text-transform: uppercase;
   letter-spacing: 0.15rem;
   border: 0;
   background-color: rgba(0,0,0,.5);
+  color: #fff;
 }
 
 .signup-section .form-inline input:focus,
@@ -267,10 +267,21 @@
   color: #fff;
 }
 
+::placeholder{
+  color: #495057;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #495057;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #495057;
+}
+
 .signup-section label{
   font-family: 'Varela Round';
   font-size: 80%;
-  text-transform: uppercase;
   letter-spacing: 0.15rem;
 }
 

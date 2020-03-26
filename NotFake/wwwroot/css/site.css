@@ -46,3 +46,30 @@
         color: #fff;
     }
 }
+
+.float-navigation{
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    animation: slice 700ms linear infinite forwards;
+}
+
+.float-navigation.left{
+    left: 10rem;
+}
+
+.float-navigation.right{
+    right: 10rem;
+}
+
+.float-navigation__link{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+@keyframes slice{
+    0%{transform: translateX(0px);}
+    25%{transform: translateX(5px);}
+    75%{transform: translateX(-5px);}
+    100%{transform: translateX(0px);}
+}
