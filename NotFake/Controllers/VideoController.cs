@@ -18,7 +18,6 @@ namespace NotFake.Controllers
     {
         private INotFakeService service;
         private IHostingEnvironment _env;
-        //private string CurrentFilmPath { get; set; }
         public VideoController(INotFakeService _service,IHostingEnvironment env)
         {
             _env = env;
