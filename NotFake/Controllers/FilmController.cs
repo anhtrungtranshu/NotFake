@@ -13,5 +13,10 @@ namespace NotFake.Controllers
             ViewBag.FilmId = id;
             return View();
         }
+
+        public IActionResult Chat()
+        {
+            return View("Chat");
+        }
     }
 }

@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Service;
 using DAO;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using NotFake.Hubs;
 
 namespace NotFake
 {
@@ -48,6 +49,7 @@ namespace NotFake
             services.AddScoped<INotFakeService, NotFakeService>();
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSignalR();
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("User", policy => policy.RequireClaim("Role","User"));
@@ -69,6 +71,10 @@ namespace NotFake
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chatHub");
+            });
             app.UseAuthentication();
 
             app.UseMvc(routes =>
