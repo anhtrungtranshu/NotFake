@@ -4,6 +4,18 @@
 =========================
 */
 
+.static-background{
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: -1;
+    background: linear-gradient(to bottom, rgba(22, 22, 22, 0.3) 0%, rgba(22, 22, 22, 0.7) 75%, #161616 100%), url("../../../images/bg-masthead.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
 .input-group__with-icon {
     position: relative;
 }
@@ -22,6 +34,7 @@
     box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
     background-color: rgba(0,0,0,.3);
     border-radius: 0;
+    transition: all 400ms ease-in-out;
 }
 
 .navbar-nav .dropdown-menu .dropdown-item{
@@ -67,9 +80,70 @@
     align-items: center;
     justify-content: center;
 }
+
 @keyframes slice{
     0%{transform: translateX(0px);}
     25%{transform: translateX(5px);}
     75%{transform: translateX(-5px);}
     100%{transform: translateX(0px);}
+}
+
+/*
+=========================
+        Slick
+=========================
+*/
+
+.slick-carousel{
+    padding: 5rem 10rem;
+    position: relative;
+}
+
+.slick-carousel .slick-arrow{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 150%;
+    top: 5rem;
+    bottom: 5rem;
+    width: 3rem;
+    background: rgba(0,0,0,.2);
+    color: #64a19d;
+    border: none;
+    outline: none;
+}
+
+.slick-carousel .slick-arrow:hover{
+    background-color: #64a19d;
+    color: #fff;
+}
+
+.slick-carousel .slick-arrow.slick-prev{
+    left: 0;
+}
+
+.slick-carousel .slick-arrow.slick-next{
+    right: 0;
+}
+
+.slick-carousel__item-wrapper{
+    position: relative;
+    width: 20rem;
+    padding-bottom: 15rem;
+    transition: all 500ms ease-in-out;
+}
+
+.slick-carousel__item-wrapper:hover{
+    transform: scale(1.2);
+    transition: all 500ms ease-in-out;
+}
+
+.slick-carousel__item-wrapper img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
 }
