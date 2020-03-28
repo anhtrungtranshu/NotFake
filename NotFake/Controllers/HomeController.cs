@@ -26,11 +26,12 @@ namespace NotFake.Controllers
             List<MainPageViewModel> viewModel = _genres
             .ConvertAll(g => new MainPageViewModel()
             {
-                Genre = g,
-                Films = service.Genre.FilmsInGenre(g.GenreId).ToList()
+               Genre = g,
+               Films = service.Genre.FilmsInGenre(g.GenreId).ToList()
             });
 
             return View(viewModel);
+            // return View();
         }
 
         public IActionResult About()
