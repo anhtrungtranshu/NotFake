@@ -95,8 +95,12 @@
 */
 
 .slick-carousel{
-    padding: 5rem 10rem;
+    padding: 2.5rem 5rem;
     position: relative;
+}
+
+.slick-carousel .slick-slide{
+    padding: .5rem;
 }
 
 .slick-carousel .slick-arrow{
@@ -105,8 +109,8 @@
     align-items: center;
     justify-content: center;
     font-size: 150%;
-    top: 5rem;
-    bottom: 5rem;
+    top: 3rem;
+    bottom: 3rem;
     width: 3rem;
     background: rgba(0,0,0,.2);
     color: #64a19d;
@@ -119,19 +123,17 @@
     color: #fff;
 }
 
-.slick-carousel .slick-arrow.slick-prev{
+.slick-carousel .slick-arrow.slic-prev{
     left: 0;
 }
 
-.slick-carousel .slick-arrow.slick-next{
+.slick-carousel .slick-arrow.slic-next{
     right: 0;
 }
 
 .slick-carousel__item-wrapper{
-    position: relative;
-    width: 20rem;
-    padding-bottom: 15rem;
     transition: all 500ms ease-in-out;
+    background-color: rgba(0,0,0,.3);
 }
 
 .slick-carousel__item-wrapper:hover{
@@ -140,10 +142,7 @@
 }
 
 .slick-carousel__item-wrapper img{
-    position: absolute;
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
     object-fit: cover;
 }
