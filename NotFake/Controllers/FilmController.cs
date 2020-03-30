@@ -16,6 +16,7 @@ namespace NotFake.Controllers
 
         public IActionResult Chat()
         {
+            ViewBag.UserId = HttpContext.User.Identity;
             return View("Chat");
         }
     }

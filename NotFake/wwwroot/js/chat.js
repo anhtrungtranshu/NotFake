@@ -20,10 +20,10 @@ connection.start().then(function () {
 });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
-    var user = document.getElementById("userInput").value;
-    var message = document.getElementById("messageInput").value;
+    var user = document.getElementById("userInput").value; // takes user value
+    var message = document.getElementById("messageInput").value; // takes message value - Doesn't change
     connection.invoke("SendMessage", user, message).catch(function (err) {
-        return console.error(err.toString());
+        return console.error(err.toString()); // calls Send Message in the Chat Hub and passes the message and user
     });
     event.preventDefault();
 });
