@@ -354,3 +354,11 @@ MigrationBackup/
 
 # Visual Studio Code
 .vscode/
+
+# Key pairs
+*.pem
+
+# Dockers
+*docker*
+.dockerignore
+Dockerfile

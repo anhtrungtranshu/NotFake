@@ -1,6 +1,15 @@
+<form class="form-inline my-2 my-lg-0 ml-auto">
+    <div class="input-group input-group__with-icon">
+        <button class="btn icon-content" aria-pressed="false" data-toggle="button" autocomplete="off">
+            <i class="fas fa-search text-white"></i>
+        </button>
+        <input type="text" class="form-control" placeholder="Search...">
+    </div>
+</form>
+
 @if(ViewBag.UserName == null )
 {
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-2">
         <li class="nav-item">
             <a class="btn btn-outline-primary" role="button" asp-action="Login" asp-controller="Auth">Login</a>
         </li>
@@ -11,7 +20,7 @@
 }
 else
 {
-    <ul class="navbar-nav">
+    <ul class="navbar-nav ml-2">
         <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="userMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Hello, @ViewBag.UserName
