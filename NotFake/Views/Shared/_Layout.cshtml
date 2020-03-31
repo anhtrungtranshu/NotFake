@@ -31,31 +31,29 @@
 <body id="page-top">
     <div class="static-background"></div>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container-fluid">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Not Fake</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-            </li>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" id="mainNav">
+        <div class="container-fluid">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">Not Fake</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+            </ul>
 
-        </ul>
-
-        @await Component.InvokeAsync("HeaderButtonGroups")
+            @await Component.InvokeAsync("HeaderButtonGroups")
+            </div>
         </div>
-    </div>
     </nav>
 
     @* <partial name="_CookieConsentPartial" /> *@
-    @RenderBody()
+    <div class="main">
+        @RenderBody()
+    </div>
 
     <!-- Footer -->
     <footer class="bg-black small text-center text-white-50">

@@ -27,7 +27,7 @@
                       <input type="email" asp-for="Email" class="form-control mr-0 mb-3 mb-sm-0" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email address...">
                       @if(ViewData.ModelState.Keys.Contains("Email"))
                       {
-                        <div class="icon-content" asp-validation-for="Email" data-toggle="tooltip" data-html="true" title='@Utility.ValidationErrorsTooltip(ViewData.ModelState["Email"].Errors)'>
+                        <div class="icon-content" data-toggle="tooltip" data-html="true" title='@Utility.ValidationErrorsTooltip(ViewData.ModelState["Email"].Errors)'>
                           <i class="fas fa-exclamation text-danger"></i>
                         </div>
                       }
@@ -39,7 +39,7 @@
                     <input type="password" asp-for="Password" class="form-control mr-0 mb-3 mb-sm-0" id="password" aria-describedby="passwordHelp" placeholder="Please input password...">
                     @if(ViewData.ModelState.Keys.Contains("Password"))
                     {
-                      <div class="icon-content" asp-validation-for="Password" data-html="true" data-toggle="tooltip" title='@Utility.ValidationErrorsTooltip(ViewData.ModelState["Password"].Errors)'>
+                      <div class="icon-content" data-html="true" data-toggle="tooltip" title='@Utility.ValidationErrorsTooltip(ViewData.ModelState["Password"].Errors)'>
                         <i class="fas fa-exclamation text-danger"></i>
                       </div>
                     }
