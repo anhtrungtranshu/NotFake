@@ -18,6 +18,12 @@ namespace NotFake.Hubs
         }
         public override async Task OnConnectedAsync()
         {
+            //provide a list of active connections
+            await Clients.Caller.SendAsync(
+                "ActiveConnections", 
+                await _chatRoomService.GetAllRooms());
+
+            //connect user to own room
             var roomId = await _chatRoomService.CreateRoom(
                 Context.ConnectionId);
             await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
@@ -29,5 +35,18 @@ namespace NotFake.Hubs
 
             await Clients.Group(roomID.ToString()).SendAsync("ReceiveMessage", user, message);
         }
+
+        public async Task JoinRoom(Guid roomId)
+        {
+            await Groups.AddToGroupAsync(
+                Context.ConnectionId, roomId.ToString());
+        }
+
+        public async Task LeaveRoom(Guid roomId)
+        {
+            await Groups.RemoveFromGroupAsync(
+                Context.ConnectionId, roomId.ToString());
+        }
+
     }
 }

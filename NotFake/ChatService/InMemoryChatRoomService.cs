@@ -19,7 +19,13 @@ namespace NotFake.ChatService
             };
             return Task.FromResult(id);
         }
-     
+
+        public Task<IReadOnlyDictionary<Guid, ChatRoom>> GetAllRooms()
+        {
+            return Task.FromResult(
+                _roomInfo as IReadOnlyDictionary<Guid, ChatRoom>);
+        }
+
         public Task<Guid> GetRoomForConnectionId(string connectionId)
         {
             var foundRoom = _roomInfo.FirstOrDefault(
