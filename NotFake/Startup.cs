@@ -14,6 +14,7 @@ using Service;
 using DAO;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using NotFake.Hubs;
+using NotFake.ChatService;
 
 namespace NotFake
 {
@@ -50,6 +51,7 @@ namespace NotFake
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSignalR();
+            services.AddSingleton<IChatRoomService, InMemoryChatRoomService>();
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("User", policy => policy.RequireClaim("Role","User"));
