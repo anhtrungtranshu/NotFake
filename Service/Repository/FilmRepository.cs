@@ -13,17 +13,16 @@ namespace Service.Repository
 {
     public class FilmRepository : RepositoryBase<Film>, IFilmRepository
     {
-        private HttpClient _httpClient;
-
         public FilmRepository(NotFakeContext context) : base(context)
         {
-            _httpClient = new HttpClient();
         }
 
-        public async Task<Stream> GetVideoByFilmId(int id)
+        public Film LoadFilmData(Film film)
         {
-            Film film = Get(id);
-            return await _httpClient.GetStreamAsync(film.FilmAddress);
+            context.Entry(film)
+            .Collection(f => f.FilmData)
+            .Load();
+            return film;
         }
     }
 }

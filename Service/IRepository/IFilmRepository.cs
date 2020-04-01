@@ -10,6 +10,6 @@ namespace Service.IRepository
 {
      public interface IFilmRepository: IRepositoryBase<Film>
     {
-        Task<Stream> GetVideoByFilmId(int id);
+        Film LoadFilmData(Film film);
     }
 }

@@ -1,8 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAO.Models
 {
+    public enum FilmType
+    {
+        Movie,
+        Series
+    }
     public class Film
     {
         [Key]
@@ -11,13 +17,12 @@ namespace DAO.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        public int RunTime { get; set; } // in mins
-        [Required]
         public string ThumbnailAddress { get; set; }
-        [Required]
-        public string FilmAddress { get; set; }
         public int GenreId { get; set; }
         [ForeignKey("GenreId")]
         public virtual Genre Genre { get; set; }
+        [Required]
+        public FilmType Type { get; set; }
+        public virtual List<FilmData> FilmData { get; set; }
     }
 }

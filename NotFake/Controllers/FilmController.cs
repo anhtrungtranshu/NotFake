@@ -8,9 +8,15 @@ namespace NotFake.Controllers
 {
     public class FilmController : Controller
     {
-        public IActionResult Index(int id)
+
+        [Route("Film/Watch", Name="WatchFilm")]
+        public IActionResult Index(int filmId, int? episodeId)
         {
-            ViewBag.FilmId = id;
+            ViewBag.FilmId = filmId;
+            if(episodeId != null)
+            {
+                ViewBag.EpisodeId = episodeId;
+            }
             return View();
         }
     }

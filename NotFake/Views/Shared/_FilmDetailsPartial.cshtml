@@ -1,0 +1,75 @@
+﻿@using DAO.Models
+@model DAO.Models.Film
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<div class="film-details">
+    <div class="film-details__background" style="background-image: linear-gradient(to right,rgba(0,0,0,.9) 0%,rgba(0,0,0,0) 45%), url(@Model.ThumbnailAddress);">
+    </div>
+
+    <div class="film-details__content">
+        <h3 class="text-white mt-5 mb-3">@Model.Name</h3>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="filmDetailOverview" role="tabpanel" aria-labelledby="overview-tab">
+                <div class="btn-group mb-3" role="group" aria-label="Basic example">
+                    <a type="button" class="btn btn-outline-primary" asp-route="WatchFilm" asp-route-filmId="@Model.FilmId" >
+                        <i class="far fa-play-circle text-white"></i>
+                        <span class="text-white">Play</span>
+                    </a>
+                    <a type="button" class="btn btn-outline-primary">
+                        <i class="far fa-plus-square text-white"></i>
+                        <span class="text-white">Add to List</span>
+                    </a>
+                </div>
+                <p class="text-white"><strong>Genres:</strong> @Model.Genre.Name</p>
+            </div>
+            <div class="tab-pane fade" id="filmDetailEpisodes" role="tabpanel" aria-labelledby="episodes-tab">
+                <div class="slick-carousel">
+                    @foreach(var item in @Model.FilmData)
+                    {
+                        <div class="slick-carousel__item-wrapper">
+                            <div class="film-item">
+                                <div class="loader"></div>
+                                <img data-lazy="@item.ThumbnailAddress" alt="">
+                                <div class="film-item__description">
+                                    <a asp-route="WatchFilm" asp-route-filmId="@Model.FilmId" asp-route-episodeId="@item.Id">
+                                        <i class="far fa-play-circle text-white"></i>
+                                        <span class="text-white">@item.Name</span>
+                                    </a>
+                                    <button 
+                                        class="btn" 
+                                        type="button" 
+                                        data-toggle="collapse"
+                                        data-target="#filmDetails-@item.FilmId" 
+                                        aria-expanded="false" 
+                                        aria-controls="filmDetails"
+                                    >
+                                        <i class="fas fa-chevron-down text-white"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>  
+            </div>
+        </div>
+    </div>
+    <ul class="nav justify-content-center" id=filmDetailsTabs role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active film-description-item" id="film-detail-overview-tab" data-toggle="tab" href="#filmDetailOverview" role="tab" aria-controls="filmDetailOverview" aria-selected="true">
+                <span>Overview</span>
+                <div class="film-description-item__decorator"></div>
+            </a>
+        </li>
+        @if(Model.Type == FilmType.Series)
+        {
+            <li class="nav-item">
+                <a class="nav-link film-description-item" id="film-detail-episodes-tab" data-toggle="tab" href="#filmDetailEpisodes" role="tab" aria-controls="filmDetailEpisodes" aria-selected="false">
+                    <span>Eposodes</span>
+                    <div class="film-description-item__decorator"></div>
+                </a>
+            </li>
+        }
+    </ul>
+</div>
