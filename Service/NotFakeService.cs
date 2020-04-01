@@ -17,9 +17,9 @@ namespace Service
             UserFilmInvite = new UserFilmInviteRepository(context);
             Genre = new GenreRepository(context);
             Film = new FilmRepository(context);
-            FilmsInGenre = new GenreRepository(context);
-
+            FilmData = new FilmDataRepository(context);
         }
+
         public IFilmRepository Film { get; set; }
         public IFriendshipRepository Friendship { get; set; }
         public IGenreRepository Genre { get; set; }
@@ -27,6 +27,6 @@ namespace Service
         public IUserFilmInviteRepository UserFilmInvite { get; set; }
         public IUserFimRepository UserFilm { get; set; }
         public IUserRepository User { get; set; }
-        public IGenreRepository FilmsInGenre { get; set; }
+        public IFilmDataRepository FilmData { get; set; }
     }
 }

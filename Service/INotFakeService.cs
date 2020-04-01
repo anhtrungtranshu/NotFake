@@ -13,7 +13,6 @@ namespace Service
         IUserFilmInviteRepository UserFilmInvite { get; set; }
         IGenreRepository Genre { get; set; }
         IFilmRepository Film { get; set; }
-        IGenreRepository FilmsInGenre { get; set; }
-    
+        IFilmDataRepository FilmData { get; set; }
     }
 }

@@ -23,19 +23,26 @@ namespace NotFake.Controllers
             _env = env;
             service = _service;
         }
-        [HttpGet("{id}")]
-        public async Task<FileStreamResult> GetVideo([FromRoute] int id)
+        [HttpGet("{filmId}")]
+        public async Task<FileStreamResult> GetVideo([FromRoute] int filmId)
         {
-            var stream = await service.Film.GetVideoByFilmId(id);
+            var stream = await service.FilmData.GetVideoByFilmId(filmId);
             return new FileStreamResult(stream, "video/mp4");
         }
 
-        [HttpGet("FromFile/{id}")]
-        public IActionResult GetVideoFromFile([FromRoute] int id)
+        [HttpGet("{filmId}/{episodeId}")]
+        public async Task<FileStreamResult> GetVideo([FromRoute] int filmId,[FromRoute] int episodeId)
         {
-            Film film = service.Film.Get(id);
-            string webRoot = _env.WebRootPath;
-            return PhysicalFile(System.IO.Path.Combine(webRoot, film.FilmAddress), "application/octet-stream");
+            var stream = await service.FilmData.GetVideoByFilmId(filmId, episodeId);
+            return new FileStreamResult(stream, "video/mp4");
         }
+
+        //[HttpGet("FromFile/{id}")]
+        //public IActionResult GetVideoFromFile([FromRoute] int id)
+        //{
+        //    Film film = service.Film.Get(id);
+        //    string webRoot = _env.WebRootPath;
+        //    return PhysicalFile(System.IO.Path.Combine(webRoot, film.FilmAddress), "application/octet-stream");
+        //}
     }
 }

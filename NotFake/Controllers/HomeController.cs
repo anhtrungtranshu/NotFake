@@ -27,7 +27,7 @@ namespace NotFake.Controllers
             .ConvertAll(g => new MainPageViewModel()
             {
                Genre = g,
-               Films = service.Genre.FilmsInGenre(g.GenreId).ToList()
+               Films = service.Genre.FilmsInGenre(g.GenreId).ToList().Select(f => service.Film.LoadFilmData(f)).ToList()
             });
 
             return View(viewModel);
