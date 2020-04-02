@@ -17,12 +17,11 @@
     <div class="row">
         <div class="col-6">&nbsp;</div>
         <div class="col-6">
-            User..........<input type="text" id="userInput" />
-            @*<input type="text" id="userInput" value="@(ViewBag.userName ?? String.Empty)">*@
+            <input type ="hidden" id="userInput" value="@ViewBag.UserId">
             <br />
             Message...<input type="text" id="messageInput" />
             <input type="button" id="sendButton" value="Send Message" />
-            
+
         </div>
         
     </div>
