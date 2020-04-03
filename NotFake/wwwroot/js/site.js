@@ -8,16 +8,19 @@ $(document).ready(function () {
     });
 
     // slick
-    $(".slick-carousel").slick({
+    $(".slick-carousel__home").slick({
         lazyLoad: 'ondemand',
         slidesToShow: 4,
         slidesToScroll: 2,
         prevArrow: "<button class='slic-prev slick-arrow'><i class='fas fa-chevron-left'></i></button>",
-        nextArrow: "<button class='slic-next slick-arrow'><i class='fas fa-chevron-right'></i></button>",
+        nextArrow: "<button class='slic-next slick-arrow'><i class='fas fa-chevron-right'></i></button>"
     });
 
-    // $('#filmDetailsTabs a').on('click', function (e) {
-    //     e.preventDefault()
-    //     $(this).tab('show')
-    // });
+    $(".slick-carousel__detail").slick({
+        slidesToShow: 4,
+        slidesToScroll: 2,
+        prevArrow: "<button class='slic-prev slick-arrow'><i class='fas fa-chevron-left'></i></button>",
+        nextArrow: "<button class='slic-next slick-arrow'><i class='fas fa-chevron-right'></i></button>"
+    });
+
 })

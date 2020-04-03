@@ -19,16 +19,11 @@ namespace Service.Repository
             _httpClient = new HttpClient();
         }
 
-        public async Task<Stream> GetVideoByFilmId(int filmId)
+        public async Task<Stream> GetVideoByFilmId(int filmId, int episode)
         {
-            FilmData _filmData = context.FilmData.Find(filmId);
+            FilmData _filmData = context.FilmData.Find(episode, filmId);
             return await _httpClient.GetStreamAsync(_filmData.Address);
         }
 
-        public async Task<Stream> GetVideoByFilmId(int filmId, int episode)
-        {
-            FilmData _filmData = context.FilmData.Find(filmId, episode);
-            return await _httpClient.GetStreamAsync(_filmData.Address);
-        }
     }
 }

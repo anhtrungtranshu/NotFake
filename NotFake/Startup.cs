@@ -30,6 +30,8 @@ namespace NotFake
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            AppContext.SetSwitch("Switch.Microsoft.AspNetCore.Mvc.EnableRangeProcessing", true);
+            services.AddHttpClient();
             services.AddHttpContextAccessor();
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -45,7 +47,7 @@ namespace NotFake
             );
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie();   
+                .AddCookie();
 
             services.AddScoped<INotFakeService, NotFakeService>();
             services.AddMvc()
@@ -54,8 +56,8 @@ namespace NotFake
             services.AddSingleton<IChatRoomService, InMemoryChatRoomService>();
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("User", policy => policy.RequireClaim("Role","User"));
-                options.AddPolicy("Admin", policy => policy.RequireClaim("Role","Admin"));
+                options.AddPolicy("User", policy => policy.RequireClaim("Role", "User"));
+                options.AddPolicy("Admin", policy => policy.RequireClaim("Role", "Admin"));
             });
         }
 

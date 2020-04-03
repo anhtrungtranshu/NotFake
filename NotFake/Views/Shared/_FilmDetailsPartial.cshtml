@@ -25,28 +25,18 @@
                 <p class="text-white"><strong>Genres:</strong> @Model.Genre.Name</p>
             </div>
             <div class="tab-pane fade" id="filmDetailEpisodes" role="tabpanel" aria-labelledby="episodes-tab">
-                <div class="slick-carousel">
+                <h5>List of Episodes:</h5>
+                <div class="slick-carousel slick-carousel__detail">
                     @foreach(var item in @Model.FilmData)
                     {
                         <div class="slick-carousel__item-wrapper">
                             <div class="film-item">
-                                <div class="loader"></div>
-                                <img data-lazy="@item.ThumbnailAddress" alt="">
+                                <img src="@item.ThumbnailAddress" alt="">
                                 <div class="film-item__description">
                                     <a asp-route="WatchFilm" asp-route-filmId="@Model.FilmId" asp-route-episodeId="@item.Id">
                                         <i class="far fa-play-circle text-white"></i>
                                         <span class="text-white">@item.Name</span>
                                     </a>
-                                    <button 
-                                        class="btn" 
-                                        type="button" 
-                                        data-toggle="collapse"
-                                        data-target="#filmDetails-@item.FilmId" 
-                                        aria-expanded="false" 
-                                        aria-controls="filmDetails"
-                                    >
-                                        <i class="fas fa-chevron-down text-white"></i>
-                                    </button>
                                 </div>
                             </div>
                         </div>

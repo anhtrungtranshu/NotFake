@@ -18,31 +18,21 @@ namespace NotFake.Controllers
     {
         private INotFakeService service;
         private IHostingEnvironment _env;
-        public VideoController(INotFakeService _service,IHostingEnvironment env)
+        public VideoController(INotFakeService _service, IHostingEnvironment env)
         {
             _env = env;
             service = _service;
         }
-        [HttpGet("{filmId}")]
-        public async Task<FileStreamResult> GetVideo([FromRoute] int filmId)
-        {
-            var stream = await service.FilmData.GetVideoByFilmId(filmId);
-            return new FileStreamResult(stream, "video/mp4");
-        }
 
-        [HttpGet("{filmId}/{episodeId}")]
-        public async Task<FileStreamResult> GetVideo([FromRoute] int filmId,[FromRoute] int episodeId)
+        [HttpGet("{filmId}/{episodeId:int?}")]
+        public async Task<IActionResult> GetVideo([FromRoute] int filmId, [FromRoute] int? episodeId)
         {
-            var stream = await service.FilmData.GetVideoByFilmId(filmId, episodeId);
-            return new FileStreamResult(stream, "video/mp4");
-        }
+            return PhysicalFile(Path.Combine(_env.WebRootPath, "Films/Popeye_forPresident_512kb.mp4"), "video/mp4", true);
 
-        //[HttpGet("FromFile/{id}")]
-        //public IActionResult GetVideoFromFile([FromRoute] int id)
-        //{
-        //    Film film = service.Film.Get(id);
-        //    string webRoot = _env.WebRootPath;
-        //    return PhysicalFile(System.IO.Path.Combine(webRoot, film.FilmAddress), "application/octet-stream");
-        //}
+            // var stream = await service.FilmData.GetVideoByFilmId(filmId, episodeId != null ? episodeId.GetValueOrDefault() : 1);
+            // var FSR = new FileStreamResult(stream, "video/mp4");
+            // FSR.EnableRangeProcessing = true;
+            // return FSR;
+        }
     }
 }
