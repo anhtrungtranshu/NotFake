@@ -41,6 +41,7 @@ namespace NotFake
             });
 
             var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
+            // var sqlConnectionString = Configuration.GetConnectionString("AlternativeConnection");
 
             services.AddDbContext<NotFakeContext>(options =>
                 options.UseSqlServer(sqlConnectionString)
