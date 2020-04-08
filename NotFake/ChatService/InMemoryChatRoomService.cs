@@ -10,12 +10,12 @@ namespace NotFake.ChatService
     {
         private readonly Dictionary<Guid, ChatRoom> _roomInfo
             = new Dictionary<Guid, ChatRoom>();
-        public Task<Guid> CreateRoom(string connectionId)
+        public Task<Guid> CreateRoom(string filmId)
         {
             var id = Guid.NewGuid();
             _roomInfo[id] = new ChatRoom
             {
-                OwnerConnectionId = connectionId
+                RoomFilmID = filmId
             };
             return Task.FromResult(id);
         }
@@ -26,15 +26,19 @@ namespace NotFake.ChatService
                 _roomInfo as IReadOnlyDictionary<Guid, ChatRoom>);
         }
 
-        public Task<Guid> GetRoomForConnectionId(string connectionId)
+        public Task<Guid> GetRoomForFilmId(string filmId)
         {
             var foundRoom = _roomInfo.FirstOrDefault(
-                x => x.Value.OwnerConnectionId == connectionId);
+                x => x.Value.RoomFilmID == filmId);
 
             if (foundRoom.Key == Guid.Empty)
-                throw new ArgumentException("Invalid connection ID");
-
-            return Task.FromResult(foundRoom.Key);
+            {
+                return null;
+            }
+            else 
+            { 
+                return Task.FromResult(foundRoom.Key);
+            }
         }
     }
 }

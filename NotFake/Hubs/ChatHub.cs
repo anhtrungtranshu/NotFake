@@ -12,12 +12,12 @@ namespace NotFake.Hubs
     public class ChatHub : Hub
     {
         private readonly IChatRoomService _chatRoomService;
-        private INotFakeService _notFakeService;
+        //private INotFakeService _notFakeService;
 
-        public ChatHub(IChatRoomService chatRoomService, INotFakeService notFakeService)
+        public ChatHub(IChatRoomService chatRoomService )//,INotFakeService notFakeService)
         {
             _chatRoomService = chatRoomService;
-            _notFakeService = notFakeService;
+           // _notFakeService = notFakeService;
         }
         public override async Task OnConnectedAsync()
         {
@@ -27,22 +27,35 @@ namespace NotFake.Hubs
                 await _chatRoomService.GetAllRooms());
 
             //connect user to own room
-            var roomId = await _chatRoomService.CreateRoom(Context.ConnectionId);
-            await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
+            //var roomId = await _chatRoomService.CreateRoom(Context.ConnectionId);
+            //await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
         }
-        public async Task SendMessage(string user, string message)
+        public async Task SendMessage(string user, string message, string filmId)
         {
-            var roomID = await _chatRoomService.GetRoomForConnectionId(
-                Context.ConnectionId);
+            var roomID = await _chatRoomService.GetRoomForFilmId(filmId);
 
             await Clients.Group(roomID.ToString()).SendAsync("ReceiveMessage", user, message);
         }
 
-        public async Task JoinRoom(Guid roomId)
+        public async Task Chat(string filmId)
         {
-            await Groups.AddToGroupAsync(
-                Context.ConnectionId, roomId.ToString());
+            if (_chatRoomService.GetRoomForFilmId(filmId) == null)
+            {
+                var roomId = await _chatRoomService.CreateRoom(filmId);
+                await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
+            }
+            else
+            {
+                var roomId = await _chatRoomService.GetRoomForFilmId(filmId);
+                await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
+            }   
+          
         }
+        //public async Task JoinRoom(Guid roomId)
+        //{
+        //    await Groups.AddToGroupAsync(
+        //        Context.ConnectionId, roomId.ToString());
+        //}
 
         public async Task LeaveRoom(Guid roomId)
         {

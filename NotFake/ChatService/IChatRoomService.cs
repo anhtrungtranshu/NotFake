@@ -8,8 +8,8 @@ namespace NotFake.ChatService
 {
     public interface IChatRoomService
     {
-        Task<Guid> CreateRoom(string connectionId);
-        Task<Guid> GetRoomForConnectionId(string connectionId);
+        Task<Guid> CreateRoom(string filmId);
+        Task<Guid> GetRoomForFilmId(string filmId);
         Task<IReadOnlyDictionary<Guid, ChatRoom>> GetAllRooms();
     }
 }
