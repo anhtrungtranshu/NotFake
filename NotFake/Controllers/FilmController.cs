@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Service;
 
 namespace NotFake.Controllers
 {
@@ -11,15 +12,18 @@ namespace NotFake.Controllers
     {
 
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private INotFakeService service;
         public string userName { get; set; }
 
-        public FilmController(IHttpContextAccessor httpContextAccessor)
+        public FilmController(INotFakeService _service, IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
             if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
             {
                 userName = _httpContextAccessor.HttpContext.User.Identity.Name;
             }
+
+            service = _service;
         }
 
         [Route("Film/Watch", Name = "WatchFilm")]

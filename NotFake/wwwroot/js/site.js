@@ -23,4 +23,22 @@ $(document).ready(function () {
         nextArrow: "<button class='slic-next slick-arrow'><i class='fas fa-chevron-right'></i></button>"
     });
 
+
+    // var mediaPlayer = $("#main-video")[0];
+    // mediaPlayer.controls = false;
+
+    // $("#play-pause-button").on("click", function () {
+    //     if (mediaPlayer.paused || mediaPlayer.ended) {
+    //         $(this).title = "pause";
+    //         // $(this).empty();
+    //         $(this).innerHTML = "<i class='fas fa-pause'></i>";
+    //         mediaPlayer.play();
+    //     }
+    //     else {
+    //         $(this).title = "pause";
+    //         // $(this).empty();
+    //         $(this).innerHTML = "<i class='fas fa-play'></i>";
+    //         mediaPlayer.pause();
+    //     }
+    // })
 })

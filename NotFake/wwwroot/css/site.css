@@ -283,14 +283,14 @@ input.form-control:focus {
 =========================
 */
 
-.film-details{
+.film-details {
     position: relative;
     height: 60vh;
     display: flex;
     flex-direction: column;
 }
 
-.film-details .film-details__background{
+.film-details .film-details__background {
     position: absolute;
     top: 0;
     left: 0;
@@ -302,15 +302,16 @@ input.form-control:focus {
     background-position: center center;
 }
 
-.film-details .film-details__content{
+.film-details .film-details__content {
     padding: .5rem;
     flex-grow: 1;
 }
 
-.film-description-item{
+.film-description-item {
     position: relative;
 }
-.film-description-item__decorator{
+
+.film-description-item__decorator {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -320,6 +321,71 @@ input.form-control:focus {
     background-color: #64a19d;
 }
 
-.film-description-item.active .film-description-item__decorator{
+.film-description-item.active .film-description-item__decorator {
     height: .2rem;
+}
+
+/*
+=========================
+        Film - Index
+=========================
+*/
+.main-film-section__video-wrapper {
+    height: calc(100vh - 68px);
+    width: 100%;
+    overflow-y: auto;
+}
+
+.main-film-section__video {
+    width: 100%;
+    height: 60%;
+    background-color: #000000;
+}
+
+.main-film-section__chat-wrapper {
+    height: calc(100vh - 68px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-film-section__chat-wrapper .tab-content {
+    flex-grow: 1;
+}
+
+.main-film-section__chat-wrapper .tab-content .tab-pane.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-film-section .posts {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+.main-film-section .posts-form {
+    width: 100%;
+}
+
+.main-film-section .posts-form textarea {
+    resize: none;
+}
+
+.main-film-section .posts-content {
+    background-color: #fff;
+    border-radius: .5rem;
+    display: inline-block;
+}
+
+.main-film-section .posts-content p {
+    margin-bottom: 0px;
+}
+
+.main-film-section .posts-content.posts-content_me {
+    background-color: rgba(100, 161, 157);
+}
+
+.main-film-section .posts-content + .post-title {
+    font-size: 50%;
+    color: #222222;
 }

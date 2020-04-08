@@ -5,27 +5,29 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using DAO.Models;
 using NotFake.ChatService;
+using Service;
 
 namespace NotFake.Hubs
 {
     public class ChatHub : Hub
     {
         private readonly IChatRoomService _chatRoomService;
+        private INotFakeService _notFakeService;
 
-        public ChatHub(IChatRoomService chatRoomService)
+        public ChatHub(IChatRoomService chatRoomService, INotFakeService notFakeService)
         {
             _chatRoomService = chatRoomService;
+            _notFakeService = notFakeService;
         }
         public override async Task OnConnectedAsync()
         {
             //provide a list of active connections
             await Clients.Caller.SendAsync(
-                "ActiveConnections", 
+                "ActiveConnections",
                 await _chatRoomService.GetAllRooms());
 
             //connect user to own room
-            var roomId = await _chatRoomService.CreateRoom(
-                Context.ConnectionId);
+            var roomId = await _chatRoomService.CreateRoom(Context.ConnectionId);
             await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
         }
         public async Task SendMessage(string user, string message)

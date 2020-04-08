@@ -21,7 +21,6 @@ namespace NotFake.Controllers
         public IActionResult Index()
         {
             List<Genre> _genres = service.Genre.ListAll().ToList();
-            // List<Film> _films = service.Film.ListAll().ToList();
 
             List<MainPageViewModel> viewModel = _genres
             .ConvertAll(g => new MainPageViewModel()

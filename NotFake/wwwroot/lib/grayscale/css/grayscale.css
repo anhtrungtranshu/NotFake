@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-grayscale/blob/master/LICENSE)
  */
 
- #mainNav {
+#mainNav {
   min-height: 56px;
   background-color: #fff;
 }
@@ -32,7 +32,8 @@
   background-color: transparent;
 }
 
-#mainNav .navbar-nav .nav-item:active, #mainNav .navbar-nav .nav-item:focus {
+#mainNav .navbar-nav .nav-item:active,
+#mainNav .navbar-nav .nav-item:focus {
   outline: none;
   background-color: transparent;
 }
@@ -45,52 +46,64 @@
     background-color: transparent;
     transition: background-color 0.3s ease-in-out;
   }
+
   #mainNav .navbar-brand {
     padding: .5rem 0;
     color: rgba(255, 255, 255, 0.5);
   }
+
   #mainNav .nav-link {
     transition: none;
     padding: 1.5rem 1.5rem 1.25rem;
     color: rgba(255, 255, 255, 0.5);
   }
+
   #mainNav .nav-link:hover {
     color: rgba(255, 255, 255, 0.75);
   }
+
   #mainNav .nav-link:active {
     color: white;
   }
+
   #mainNav.navbar-shrink {
     background-color: #000;
   }
+
   #mainNav.navbar-shrink .navbar-brand {
     /* color: #161616; */
     color: #fff;
   }
+
   #mainNav.navbar-shrink .nav-link {
     /* color: #161616; */
-    color: rgba(255,255,255,.8);
+    color: rgba(255, 255, 255, .8);
     padding: 1.5rem 1.5rem 1rem;
     border-bottom: 0.25rem solid transparent;
   }
+
   #mainNav.navbar-shrink .nav-link:hover {
-    color:#fff;
+    color: #fff;
     /* color: #64a19d; */
   }
+
   #mainNav.navbar-shrink .nav-link:active {
-    color:#fff;
+    color: #fff;
     /* color: #467370; */
   }
+
   #mainNav.navbar-shrink .nav-link.active {
-    color:#fff;
+    color: #fff;
     /* color: #64a19d; */
     outline: none;
     border-bottom: 0.25rem solid #64a19d;
   }
+
   #mainNav.navbar-shrink .btn-outline-primary {
-    color: rgba(255,255,255,.8);
+    color: rgba(255, 255, 255, .8);
     /* color: #161616; */
   }
+
   #mainNav.navbar-shrink .btn-outline-primary:hover,
   #mainNav.navbar-shrink .btn-outline-primary:focus,
   #mainNav.navbar-shrink .btn-outline-primary:active {
@@ -138,11 +151,13 @@
     height: 100vh;
     padding: 0;
   }
+
   .masthead h1 {
     font-size: 6.5rem;
     line-height: 6.5rem;
     letter-spacing: 0.8rem;
   }
+
   .masthead h2 {
     max-width: 30rem;
     font-size: 1.25rem;
@@ -159,7 +174,9 @@
   border: 0;
 }
 
-.btn-primary {
+.btn-primary,
+.btn-primary.disabled,
+.btn-primary:disabled {
   background-color: #64a19d;
 }
 
@@ -178,7 +195,7 @@
 
 .btn-outline-primary {
   border-color: #64a19d;
-  color:rgba(255,255,255,.5);
+  color: rgba(255, 255, 255, .5);
 }
 
 .btn-outline-primary:hover {
@@ -230,6 +247,7 @@
   .projects-section .project-text {
     padding: 5rem;
   }
+
   .projects-section .project-text hr {
     border-color: #64a19d;
     border-width: .25rem;
@@ -254,19 +272,21 @@
   font-size: 80%;
 }
 
-::placeholder{
+::placeholder {
   color: #495057;
 }
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
   color: #495057;
 }
 
-::-ms-input-placeholder { /* Microsoft Edge */
+::-ms-input-placeholder {
+  /* Microsoft Edge */
   color: #495057;
 }
 
-.signup-section label{
+.signup-section label {
   font-family: 'Varela Round';
   font-size: 80%;
   letter-spacing: 0.15rem;
@@ -325,7 +345,8 @@ a {
   color: #64a19d;
 }
 
-a:focus, a:hover {
+a:focus,
+a:hover {
   text-decoration: none;
   color: #3c6360;
 }
