@@ -8,5 +8,6 @@ namespace NotFake.Models
     public class ChatRoom
     {
         public string RoomFilmID { get; set; }
+        public int UserId { get; set; }
     }
 }

@@ -73,24 +73,22 @@
         }
     })
 
-    document.getElementById("sendButton").addEventListener("click", function (event) {
-        var user = document.getElementById("userInput").value; // takes user value
-        var message = document.getElementById("messageInput").value; // takes message value - Doesn't change
-        connection.invoke("SendMessage", user, message).catch(function (err) {
-            return console.error(err.toString()); // calls Send Message in the Chat Hub and passes the message and user
-        });
-        event.preventDefault();
-    });
+    // document.getElementById("sendButton").addEventListener("click", function (event) {
+    //     var user = document.getElementById("userInput").value; // takes user value
+    //     var message = document.getElementById("messageInput").value; // takes message value - Doesn't change
+    //     connection.invoke("SendMessage", user, message).catch(function (err) {
+    //         return console.error(err.toString()); // calls Send Message in the Chat Hub and passes the message and user
+    //     });
+    //     event.preventDefault();
+    // });
 
-    $("#messageInput").on("keydown", function (e) {
-        // e.preventDefault();
-        // e.stopPropagation();
-        console.log(e.target.value);
+    // $("#messageInput").on("keydown", function (e) {
+    //     console.log(e.target.value);
 
-        if (e.which == 13) {
-            console.log(e.target.value);
-        }
-    })
+    //     if (e.which == 13) {
+    //         console.log(e.target.value);
+    //     }
+    // })
 })
 
 

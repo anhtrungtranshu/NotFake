@@ -4,113 +4,67 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="main-film-section">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="main-film-section__video-wrapper">
-                    <video id="main-video" class="main-film-section__video" controls preload autoplay>
-                        <source src="/api/Video/@ViewBag.FilmId" type="video/mp4" />
-                        <source src="/api/Video/@ViewBag.FilmId/@ViewBag.EpisodeId" type="video/mp4" />
-                    </video>
-                    <div class="main-film-section__episodes">
-                        episode details here
-                    </div>
-                    
-                </div>
-                @* <div class="media-controls">
-                    <button id="play-pause-button" class="play-pause-button" title="play">
-                        <i class='fas fa-play'></i>
-                    </button>
-                </div> *@
+    <div class="main-film-section__layout" id="filmLayout">
+        <div class="main-film-section__video-wrapper">
+            <video id="main-video" class="main-film-section__video" controls preload autoplay>
+                <source src="/api/Video/@ViewBag.FilmId" type="video/mp4" />
+                <source src="/api/Video/@ViewBag.FilmId/@ViewBag.EpisodeId" type="video/mp4" />
+            </video>
+            <div class="main-film-section__episodes">
+                episode details here
             </div>
-            <div class="col-md-4">
-                <div class="main-film-section__chat-wrapper">
-                    <nav>
-                        <div class="nav nav-tabs" id="chatGroupManagement" role="tablist">
-                            <a class="nav-item nav-link active" id="chat-content-tab" data-toggle="tab" href="#chat-content" role="tab" aria-controls="chat-content" aria-selected="true">Home</a>
-                            <a class="nav-item nav-link" id="chat-group-member-tab" data-toggle="tab" href="#chat-group-member" role="tab" aria-controls="chat-group-member" aria-selected="false">Member</a>
-                        </div>
-                    </nav>
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane h-100 fade show active" id="chat-content" role="tabpanel" aria-labelledby="chat-content-tab">
-                            <div class="posts mb-2">
-                                <div id="messagesList" class="row no-gutters pl-2 pr-2">
-                                    <div class="col-md-8 offset-md-4">
-                                        <div class="float-right text-right posts-content posts-content_me mt-2 mb-2 p-2">
-                                            <p>something here</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="posts-content mt-2 m mb-2 p-2">
-                                            <p>something</p>
-                                        </div>
-                                        <p class="post-title text-primary"> Other say, <span>from now</span></p>
-                                    </div>
+            
+
+            <button class="btn btn-primary" id="testButton">Watch with friend</button>
+        </div>
+            @* <div class="media-controls">
+                <button id="play-pause-button" class="play-pause-button" title="play">
+                    <i class='fas fa-play'></i>
+                </button>
+        </div> *@
+        <div class="main-film-section__chat-wrapper">
+            <nav>
+                <div class="nav nav-tabs" id="chatGroupManagement" role="tablist">
+                    <a class="nav-item nav-link" id="chat-content-tab" data-toggle="tab" href="#chat-content" role="tab" aria-controls="chat-content" aria-selected="true">Home</a>
+                    <a class="nav-item nav-link active" id="chat-group-member-tab" data-toggle="tab" href="#chat-group-member" role="tab" aria-controls="chat-group-member" aria-selected="false">Member</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane h-100 fade show active" id="chat-content" role="tabpanel" aria-labelledby="chat-content-tab">
+                    <div class="posts mb-2">
+                        <div id="messagesList" class="row no-gutters pl-2 pr-2">
+                            <div class="col-md-8 offset-md-4">
+                                <div class="float-right text-right posts-content posts-content_me mt-2 mb-2 p-2">
+                                    <p>something here</p>
                                 </div>
                             </div>
-                            <form class="form-inline posts-form w-100" id="postsForm">
-                                <div class="form-group w-100">
-                                    <input type="hidden" id="userInput" name="user" value="@ViewBag.UserId">
-                                    <div class="input-group w-100 d-flex">
-                                        <textarea name="message" style="flex-grow: 1" type="text" id="messageInput" classs="form-control" placeholder="Message...." rows="2" cols="30"></textarea>
-                                        <div class="input-group-append">
-                                            <button id="sendButton" class="btn btn-primary">Send</button>
-                                        </div>
-                                    </div>
+                            <div class="col-md-8">
+                                <div class="posts-content mt-2 m mb-2 p-2">
+                                    <p>something</p>
                                 </div>
-                                        @* <input type="text" id="messageInput"> *@
-                            </form>
-                        </div>
-                        <div class="tab-pane h-100 fade" id="chat-group-member" role="tabpanel" aria-labelledby="chat-group-member-tab">
-                            member here
+                                <p class="post-title text-primary"> Other say, <span>from now</span></p>
+                            </div>
                         </div>
                     </div>
-
-
-               
-                  
-                    @* <ul id="messagesList" class="main-film-section__posts">
-                        <li class="main-film-section__posts-item main-film-section__posts-item_me">
-                            <span> Me say, <span>from now</span></span>
-                            <p>something here</p>
-                        </li>
-                        <li class="main-film-section__posts-item main-film-section__posts-item_other"></li>
-                    </ul> *@
-
+                    <form class="form-inline posts-form w-100" id="postsForm">
+                        <div class="form-group w-100">
+                            <input type="hidden" id="userInput" name="user" value="@ViewBag.UserId">
+                            <div class="input-group w-100 d-flex">
+                                <textarea name="message" style="flex-grow: 1" type="text" id="messageInput" classs="form-control" placeholder="Message...." rows="2" cols="30"></textarea>
+                                <div class="input-group-append">
+                                    <button id="sendButton" class="btn btn-primary">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                                @* <input type="text" id="messageInput"> *@
+                    </form>
+                </div>
+                <div class="tab-pane h-100 fade" id="chat-group-member" role="tabpanel" aria-labelledby="chat-group-member-tab">
+                    member here
                 </div>
             </div>
+            <a class="btn btn-outline-primary main-film-section__chat-toggle text-primary">hide</a>
         </div>
     </div>
 </div>
 
-
-
-@* 
-<div class="row">
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-6">&nbsp;</div>
-        <div class="col-6">
-            <input type ="hidden" id="userInput" value="@ViewBag.UserId">
-
-            <br />
-            Message...<input type="text" id="messageInput" />
-            <input type="button" id="sendButton" value="Send Message" />
-            
-        </div>
-        
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <hr />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">&nbsp;</div>
-        <div class="col-6">
-            <ul id="messagesList"></ul>
-        </div>
-    </div>
-</div> *@
-@* <script src="~/lib/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/chat.js"></script> *@

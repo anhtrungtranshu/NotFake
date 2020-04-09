@@ -23,6 +23,7 @@ $(document).ready(function () {
         nextArrow: "<button class='slic-next slick-arrow'><i class='fas fa-chevron-right'></i></button>"
     });
 
+    var isChatExpanded = false;
 
     // var mediaPlayer = $("#main-video")[0];
     // mediaPlayer.controls = false;
@@ -41,4 +42,15 @@ $(document).ready(function () {
     //         mediaPlayer.pause();
     //     }
     // })
+
+    $("#testButton").click(function (e) {
+        if (isChatExpanded) {
+            $("#filmLayout > div:first-child").removeClass("video-shirk");
+            $("#filmLayout > div:last-child").removeClass("chat-show");
+        } else {
+            $("#filmLayout > div:first-child").addClass("video-shirk");
+            $("#filmLayout > div:last-child").addClass("chat-show");
+        }
+        isChatExpanded = !isChatExpanded;
+    })
 })

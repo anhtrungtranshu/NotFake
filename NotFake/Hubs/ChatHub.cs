@@ -12,12 +12,12 @@ namespace NotFake.Hubs
     public class ChatHub : Hub
     {
         private readonly IChatRoomService _chatRoomService;
-        //private INotFakeService _notFakeService;
+        private INotFakeService _notFakeService;
 
-        public ChatHub(IChatRoomService chatRoomService )//,INotFakeService notFakeService)
+        public ChatHub(IChatRoomService chatRoomService, INotFakeService notFakeService)
         {
             _chatRoomService = chatRoomService;
-           // _notFakeService = notFakeService;
+            _notFakeService = notFakeService;
         }
         public override async Task OnConnectedAsync()
         {
@@ -48,8 +48,8 @@ namespace NotFake.Hubs
             {
                 var roomId = await _chatRoomService.GetRoomForFilmId(filmId);
                 await Groups.AddToGroupAsync(Context.ConnectionId, roomId.ToString());
-            }   
-          
+            }
+
         }
         //public async Task JoinRoom(Guid roomId)
         //{
