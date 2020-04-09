@@ -29,17 +29,25 @@
 
 
     connection.on("ReceiveMessage", function (user, message) {
-        console.log("message", message);
-        var msg = StringFormat(postMeTemp, message);
-        console.log(msg);
-        $("#messagesList").append(msg);
+        console.log("Received message", message);
+        //var msg = StringFormat(postMeTemp, message);
+        //console.log(msg);
+        //$("#messagesList").append(msg);
 
-        // var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+         var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-        // var encodedMsg = user + " says " + msg;
-        // var li = document.createElement("li");
-        // li.textContent = encodedMsg;
-        // document.getElementById("messagesList").appendChild(li);
+         var encodedMsg = user + " says " + msg;
+         var li = document.createElement("li");
+         li.textContent = encodedMsg;
+         document.getElementById("messagesList").appendChild(li);
+    });
+
+    document.getElementById("chatButton").addEventListener("click", function ()
+    {
+        var filmId = document.getElementById("filmId").value;
+        connection.invoke("Chat", filmId).catch(function (err) {
+            return console.error(err.toString());
+        });
     });
 
     connection.start().then(function () {
@@ -59,38 +67,42 @@
     //     console.log($(this).serialize());
     // })
 
-    $("#sendButton").click(function (e) {
-        e.preventDefault();
-        var formValue = $("#postsForm").serializeArray();
-        console.log(formValue);
-        var msg = ArrayToJSON(formValue);
-        console.log("msg", msg);
-        if (connection) {
-            connection.invoke("SendMessage", msg.user, msg.message)
-                .catch(function (err) {
-                    return console.error(err.toString());
-                })
-        }
-    })
+    //$("#sendButton").click(function (e) {
+    //    e.preventDefault();
+    //    var formValue = $("#postsForm").serializeArray();
+    //    console.log(formValue);
+    //    var msg = ArrayToJSON(formValue);
+    //    console.log("msg", msg);
+    //    if (connection) {
+    //        connection.invoke("SendMessage", msg.user, msg.message)
+    //            .catch(function (err) {
+    //                return console.error(err.toString());
+    //            })
+    //    }
+    //})
 
     document.getElementById("sendButton").addEventListener("click", function (event) {
         var user = document.getElementById("userInput").value; // takes user value
-        var message = document.getElementById("messageInput").value; // takes message value - Doesn't change
-        connection.invoke("SendMessage", user, message).catch(function (err) {
+        console.log(user);
+        var message = document.getElementById("messageInput").value;
+        console.log(message);
+        var filmId = document.getElementById("filmId").value;// takes message value - Doesn't change
+        console.log(filmId);
+        connection.invoke("SendMessage", user, message, filmId).catch(function (err) {
             return console.error(err.toString()); // calls Send Message in the Chat Hub and passes the message and user
         });
         event.preventDefault();
     });
 
-    $("#messageInput").on("keydown", function (e) {
-        // e.preventDefault();
-        // e.stopPropagation();
-        console.log(e.target.value);
+    //$("#messageInput").on("keydown", function (e) {
+    //    // e.preventDefault();
+    //    // e.stopPropagation();
+    //    console.log(e.target.value);
 
-        if (e.which == 13) {
-            console.log(e.target.value);
-        }
-    })
+    //    if (e.which == 13) {
+    //        console.log(e.target.value);
+    //    }
+    //})
 })
 
 
