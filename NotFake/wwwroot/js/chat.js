@@ -5,15 +5,20 @@
 
     //Disable send button until connection is established
     $("#sendButton").attr("disabled", true);
+    document.getElementById("sendButton").style.display = "none";
+    document.getElementById("messageInput").style.display = "none";
 
     connection.on("ActiveConnections", function (data) {
         console.log("list of Groups", data);
     })
 
-    var postMeTemp = `
+    var  before= `
     <div class="col-md-8 offset-md-4">
         <div class="float-right text-right posts-content posts-content_me mt-2 mb-2 p-2">
-            <p>{0}</p>
+            <p>
+    `;
+
+    var  after = `</p>
         </div>
     </div>
     `;
@@ -36,18 +41,22 @@
 
          var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-         var encodedMsg = user + " says " + msg;
+        var encodedMsg = before + user + " says " + msg +after;
          var li = document.createElement("li");
          li.textContent = encodedMsg;
          document.getElementById("messagesList").appendChild(li);
     });
 
-    document.getElementById("chatButton").addEventListener("click", function ()
+    document.getElementById("chatButton").addEventListener("click", function (e)
     {
+        document.getElementById("chatButton").style.display = "none";
+        document.getElementById("sendButton").style.display = "block";
+        document.getElementById("messageInput").style.display = "block";
         var filmId = document.getElementById("filmId").value;
         connection.invoke("Chat", filmId).catch(function (err) {
             return console.error(err.toString());
         });
+        e.preventDefault();
     });
 
     connection.start().then(function () {
@@ -92,6 +101,7 @@
             return console.error(err.toString()); // calls Send Message in the Chat Hub and passes the message and user
         });
         event.preventDefault();
+        document.getElementById("messageInput").value = '';
     });
 
     //$("#messageInput").on("keydown", function (e) {
