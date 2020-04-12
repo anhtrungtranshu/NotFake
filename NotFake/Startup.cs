@@ -40,8 +40,8 @@ namespace NotFake
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
-            // var sqlConnectionString = Configuration.GetConnectionString("AlternativeConnection");
+            // var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
+            var sqlConnectionString = Configuration.GetConnectionString("AlternativeConnection");
 
             services.AddDbContext<NotFakeContext>(options =>
                 options.UseSqlServer(sqlConnectionString)

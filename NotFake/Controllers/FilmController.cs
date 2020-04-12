@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Service;
+using System.Security.Claims;
 
 namespace NotFake.Controllers
 {
@@ -20,25 +21,37 @@ namespace NotFake.Controllers
             _httpContextAccessor = httpContextAccessor;
             if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
             {
-                userName = _httpContextAccessor.HttpContext.User.Identity.Name;
+                // userName = _httpContextAccessor.HttpContext.User.Identity.Name;
+                userName = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             }
 
             service = _service;
         }
 
         [Route("Film/Watch", Name = "WatchFilm")]
-        public IActionResult Index(int filmId, int? episodeId)
+        public IActionResult WatchFilm(int filmId, int? episodeId)
         {
             ViewBag.FilmId = filmId;
-            ViewBag.UserId = userName;
+            ViewBag.UserName = userName;
 
             if (episodeId != null)
             {
                 ViewBag.EpisodeId = episodeId;
             }
-            return View();
+            return View("Index");
         }
+        [Route("Film/WatchWithGroup", Name = "WatchFilmWithGroup")]
+        public IActionResult WatchFilmWithGroup(int filmId, string groupName, int? episodeId)
+        {
+            ViewBag.FilmId = filmId;
+            ViewBag.GroupName = groupName;
 
+            if (episodeId != null)
+            {
+                ViewBag.EpisodeId = episodeId;
+            }
+            return View("Index");
+        }
         public IActionResult Chat()
         {
 

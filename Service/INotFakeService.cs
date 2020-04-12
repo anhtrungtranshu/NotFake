@@ -14,5 +14,7 @@ namespace Service
         IGenreRepository Genre { get; set; }
         IFilmRepository Film { get; set; }
         IFilmDataRepository FilmData { get; set; }
+        IGroupRepository Group { get; set; }
+        IGroupMembersRepository GroupMembers { get; set; }
     }
 }

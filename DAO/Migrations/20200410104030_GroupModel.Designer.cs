@@ -4,14 +4,16 @@ using DAO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAO.Migrations
 {
     [DbContext(typeof(NotFakeContext))]
-    partial class NotFakeContextModelSnapshot : ModelSnapshot
+    [Migration("20200410104030_GroupModel")]
+    partial class GroupModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,11 +162,19 @@ namespace DAO.Migrations
 
                     b.Property<int?>("GroupId");
 
+                    b.Property<int?>("GroupId1");
+
+                    b.Property<int?>("UserId");
+
                     b.HasKey("PostID");
 
                     b.HasIndex("CreatorId");
 
                     b.HasIndex("GroupId");
+
+                    b.HasIndex("GroupId1");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Posts");
                 });
@@ -191,7 +201,7 @@ namespace DAO.Migrations
                     b.ToTable("User");
 
                     b.HasData(
-                        new { UserId = 1, Email = "admin@demo.com", Fullname = "admin", Password = "ABlxKXAgyZrphzsY72R4QS3cBiCZXGuXqlnz8PfUtBK7ZwaXv7UlvUG79EIOqDhxww==", Role = 1 }
+                        new { UserId = 1, Email = "admin@demo.com", Fullname = "admin", Password = "AGx7hblJX0Pfec8h5z9uRelro39oY67Oq2rBF8Y+2HTSy9oESE7Ds8/627CToj7dQg==", Role = 1 }
                     );
                 });
 
@@ -299,6 +309,14 @@ namespace DAO.Migrations
                         .WithMany()
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("DAO.Models.Group")
+                        .WithMany("Posts")
+                        .HasForeignKey("GroupId1");
+
+                    b.HasOne("DAO.Models.User")
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("DAO.Models.UserFilm", b =>

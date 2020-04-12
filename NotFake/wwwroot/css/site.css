@@ -374,6 +374,7 @@ input.form-control:focus {
 
 .main-film-section__chat-wrapper .tab-content {
     flex-grow: 1;
+    height: calc(100% - 42px);
 }
 
 .main-film-section__chat-wrapper .tab-content .tab-pane.active {
@@ -384,6 +385,7 @@ input.form-control:focus {
 .main-film-section .posts {
     flex-grow: 1;
     background-color: rgba(0, 0, 0, .2);
+    overflow-y: auto;
 }
 
 .main-film-section .posts-form {
@@ -397,20 +399,28 @@ input.form-control:focus {
 .main-film-section .posts-content {
     background-color: #fff;
     border-radius: .5rem;
-    display: inline-block;
-}
-
-.main-film-section .posts-content p {
-    margin-bottom: 0px;
+    position: relative;
+    float: left;
+    margin-bottom: 1rem;
 }
 
 .main-film-section .posts-content.posts-content_me {
     background-color: rgba(100, 161, 157);
+    float: right;
 }
 
-.main-film-section .posts-content+.post-title {
-    font-size: 50%;
-    color: #222222;
+.main-film-section .posts-content .post-title {
+    font-size: 65%;
+    line-height: 1rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    white-space: nowrap;
+}
+
+.main-film-section .posts-content.posts-content_me .post-title {
+    left: auto;
+    right: 0;
 }
 
 .main-film-section__chat-toggle {
@@ -425,4 +435,48 @@ a.text-primary:focus {
 
 .btn {
     cursor: pointer;
+}
+
+/*
+=========================
+        Notifications
+=========================
+*/
+
+.chat-require-action {
+    color: white;
+    padding: .5rem;
+    background-color: rgba(0, 0, 0, .7);
+    box-shadow: rgba(0, 0, 0, .6) 2px 3px 5px;
+}
+
+.chat-require-action .buttons {
+    margin-top: .5rem;
+    justify-content: space-evenly;
+}
+
+/*
+=========================
+        Scrollbar
+=========================
+*/
+
+::-webkit-scrollbar {
+    width: .3rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    /* background: #f1f1f1; */
+    background-color: rgba(0, 0, 0, .6);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #64a19d;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #4f837f;
 }

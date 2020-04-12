@@ -76,9 +76,8 @@ namespace NotFake.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Email.ToString()),
                 new Claim(ClaimTypes.Name, user.Fullname),
-                new Claim (ClaimTypes.Role, user.Role.ToString()),
+                new Claim(ClaimTypes.Role, user.Role.ToString()),
             };
-
 
             var authProperties = new AuthenticationProperties
             {
@@ -107,7 +106,6 @@ namespace NotFake.Controllers
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(principal, authProperties);
-
             return RedirectToAction("Index", "Home");
         }
 

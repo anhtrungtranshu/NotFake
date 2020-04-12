@@ -7,5 +7,7 @@ namespace Service.IRepository
 {
     public interface IPostRepository : IRepositoryBase<Post>
     {
+        List<Post> GetPosts(Group group);
+        List<Post> GetPosts(User user);
     }
 }

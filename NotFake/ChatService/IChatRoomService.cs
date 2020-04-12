@@ -1,4 +1,5 @@
-﻿using NotFake.Models;
+﻿using DAO.Models;
+using NotFake.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,15 @@ namespace NotFake.ChatService
 {
     public interface IChatRoomService
     {
-        Task<Guid> CreateRoom(string filmId);
-        Task<Guid> GetRoomForFilmId(string filmId);
+        Task<User> AddConnectedUser(string ConnectionId, string userEmail);
+        void RemoveDisconnectedUser(string ConnectionId);
+        Guid CreateRoom(string filmId, string userEmail);
+        Guid CreateRoom(Group group);
         Task<IReadOnlyDictionary<Guid, ChatRoom>> GetAllRooms();
+        Guid CheckRoomExist(string groupName);
+        Guid CheckRoomExist(string FilmId, string userEmail);
+        Group CheckRoomExistInDB(string FilmId, string userEmail);
+        HubPost AddPostToGroup(HubMessage message);
+        List<HubPost> GetPostsOfGroup(Group group);
     }
 }

@@ -18,6 +18,8 @@ namespace Service
             Genre = new GenreRepository(context);
             Film = new FilmRepository(context);
             FilmData = new FilmDataRepository(context);
+            Group = new GroupRepository(context);
+            GroupMembers = new GroupMembersRepository(context);
         }
 
         public IFilmRepository Film { get; set; }
@@ -28,5 +30,7 @@ namespace Service
         public IUserFimRepository UserFilm { get; set; }
         public IUserRepository User { get; set; }
         public IFilmDataRepository FilmData { get; set; }
+        public IGroupRepository Group { get; set; }
+        public IGroupMembersRepository GroupMembers { get; set; }
     }
 }
