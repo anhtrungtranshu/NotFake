@@ -7,5 +7,6 @@ namespace Service.IRepository
 {
     public interface IFriendshipRepository : IRepositoryBase<Friendship>
     {
+        List<Friendship> GetFriendships(User user, string keyword);
     }
 }

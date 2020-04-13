@@ -59,43 +59,49 @@ namespace NotFake.Hubs
 
                         if (roomName != Guid.Empty)
                         {
+                            List<HubPost> postOfGroup = _chatRoomService.GetPostsOfGroup(roomName);
+                            List<HubUser> memberOfGroup = _chatRoomService.GetMemberOfGroup(roomName);
                             await Groups.AddToGroupAsync(Context.ConnectionId, roomName.ToString());
-                            await Clients.Caller.SendAsync("Authorized", new
+                            await Clients.Caller.SendAsync("Authorized", new HubGroup()
                             {
-                                GroupName = roomName.ToString()
+                                GroupName = roomName.ToString(),
+                                Posts = postOfGroup,
+                                Members = memberOfGroup
                             });
                             return;
                         }
                     }
                     else
                     {
-                        Group previousGroup = _chatRoomService.CheckRoomExistInDB((string)form["FilmId"], userEmail);
-                        if (previousGroup != null)
+                        // Group previousGroup = _chatRoomService.CheckRoomExistInDB((string)form["FilmId"], userEmail);
+                        // if (previousGroup != null)
+                        // {
+                        //     await Clients.Caller.SendAsync("ChatRequireAction", new
+                        //     {
+                        //         message = "Do you want to load previous  group chat for this film?"
+                        //     });
+                        // }
+                        // else
+                        // {
+
+                        // }
+
+                        try
                         {
-                            await Clients.Caller.SendAsync("ChatRequireAction", new
+                            Guid guid = _chatRoomService.CreateRoom((string)form["FilmId"], userEmail);
+                            await Groups.AddToGroupAsync(Context.ConnectionId, guid.ToString());
+                            await Clients.Caller.SendAsync("Authorized", new
                             {
-                                message = "Do you want to load previous  group chat for this film?"
+                                GroupName = guid.ToString()
                             });
                         }
-                        else
+                        catch
                         {
-                            try
+                            await Clients.Caller.SendAsync("Error", new
                             {
-                                Guid guid = _chatRoomService.CreateRoom((string)form["FilmId"], userEmail);
-                                await Groups.AddToGroupAsync(Context.ConnectionId, guid.ToString());
-                                await Clients.Caller.SendAsync("Authorized", new
-                                {
-                                    GroupName = guid.ToString()
-                                });
-                            }
-                            catch
-                            {
-                                await Clients.Caller.SendAsync("Error", new
-                                {
-                                    success = false,
-                                    message = "There is an internal error, please try again later"
-                                });
-                            }
+                                success = false,
+                                message = "There is an internal error, please try again later"
+                            });
                         }
                     }
                 }
@@ -153,6 +159,34 @@ namespace NotFake.Hubs
             HubMessage msg = JsonConvert.DeserializeObject<HubMessage>(message);
             HubPost newPost = _chatRoomService.AddPostToGroup(msg);
             await Clients.Group(msg.GroupName).SendAsync("ReceiveMessage", newPost);
+        }
+
+        public async Task GroupFriendSuggestions(string keyword)
+        {
+            
+            await Clients.Caller.SendAsync("GroupFriendSuggestions", new List<HubUser>()
+            {
+                new HubUser(){
+                    UserEmail = "a@demo.com",
+                    UserName = "a"
+                },
+                new HubUser(){
+                    UserEmail = "b@demo.com",
+                    UserName = "b"
+                },
+                new HubUser(){
+                    UserEmail = "c@demo.com",
+                    UserName = "c"
+                },
+                new HubUser(){
+                    UserEmail = "d@demo.com",
+                    UserName = "d"
+                },
+                new HubUser(){
+                    UserEmail = "e@demo.com",
+                    UserName = "e"
+                }
+            });
         }
 
         public async Task LeaveRoom(Guid roomId)

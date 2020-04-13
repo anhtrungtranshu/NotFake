@@ -145,6 +145,36 @@ namespace NotFake.ChatService
                     });
         }
 
+        public List<HubPost> GetPostsOfGroup(Guid guid)
+        {
+            Group group = _roomInfo[guid];
+            return _notFakeService.Post.GetPosts(group)
+            .ConvertAll(p => new HubPost()
+            {
+                Message = p.Content,
+                Created = p.Created,
+                UserEmail = p.Creator.Email,
+                UserName = p.Creator.Fullname
+            });
+        }
+
+        public List<HubUser> GetMemberOfGroup(Guid guid)
+        {
+            Group group = _roomInfo[guid];
+            return _notFakeService.GroupMembers.GetGroupMembers(group)
+                        .ConvertAll(mb => new HubUser()
+                        {
+                            UserEmail = mb.Member.Email,
+                            UserName = mb.Member.Fullname,
+                            IsOnline = _listConnectedUsers.ContainsValue(mb.Member)
+                        });
+        }
+
+        // public List<HubUser> GetGroupFriendSuggestions(string keywords)
+        // {
+            
+        // }
+
         // public Task<Guid> GetRoomForFilmId(string filmId)
         // {
         //     var foundRoom = _roomInfo.FirstOrDefault(

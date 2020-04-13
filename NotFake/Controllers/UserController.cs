@@ -23,5 +23,10 @@ namespace NotFake.Controllers
 
             return View(userList);
         }
+
+        public IActionResult Profile()
+        {
+            return View();
+        }
     }
 }

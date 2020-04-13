@@ -19,5 +19,8 @@ namespace NotFake.ChatService
         Group CheckRoomExistInDB(string FilmId, string userEmail);
         HubPost AddPostToGroup(HubMessage message);
         List<HubPost> GetPostsOfGroup(Group group);
+        List<HubPost> GetPostsOfGroup(Guid guid);
+
+        List<HubUser> GetMemberOfGroup(Guid guid);
     }
 }

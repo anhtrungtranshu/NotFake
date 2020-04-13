@@ -27,12 +27,17 @@
                 <div class="nav nav-tabs" id="chatGroupManagement" role="tablist">
                     <a class="nav-item nav-link active" id="chat-content-tab" data-toggle="tab" href="#chat-content" role="tab" aria-controls="chat-content" aria-selected="true">Home</a>
                     <a class="nav-item nav-link" id="chat-group-member-tab" data-toggle="tab" href="#chat-group-member" role="tab" aria-controls="chat-group-member" aria-selected="false">Member</a>
+                    <button class="nav-item nav-link ml-auto nav-hide" id="chatPanelHideButton" role="tab">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane h-100 fade show active" id="chat-content" role="tabpanel" aria-labelledby="chat-content-tab">
-                    <div class="posts mb-2">
-                        <div id="messagesList" class="row no-gutters pl-2 pr-2">
+                    <div class="tab-content-wrapper mb-2">
+                        <div id="messagesList" class="posts row no-gutters pl-2 pr-2">
+                            
+                        </div>
                             @* <div class="col-md-8 offset-md-4">
                                 <div class="posts-content posts-content_me mt-2 p-2">
                                     something here
@@ -45,7 +50,6 @@
                                     <span class="post-title text-primary"> Other say, <span>from now</span></span>
                                 </div>
                             </div> *@
-                        </div>
                     </div>
                     <form class="form-inline posts-form w-100" id="postsForm">
                         <div class="form-group w-100">
@@ -53,18 +57,48 @@
                             <input type="hidden" id="groupName" name="GroupName" value="@ViewBag.GroupName">
                             <div class="input-group w-100 d-flex">
                                 <textarea name="Message" style="flex-grow: 1" type="text" id="messageInput" classs="form-control" placeholder="Message...." rows="2" cols="30"></textarea>
+                                <button class="btn btn-icon-primary">
+                                    <i style="font-size: 1rem" class="far fa-paper-plane"></i>
+                                </button>
                             </div>
                         </div>
-                                @* <input type="text" id="messageInput"> *@
                     </form>
                 </div>
                 <div class="tab-pane h-100 fade" id="chat-group-member" role="tabpanel" aria-labelledby="chat-group-member-tab">
-                    member here
+                    <div class="dropdown w-100">
+                        <form autocomplete="off" action="/action_page.php">
+                            <div class="autocomplete" style="width:300px;">
+                                <input id="friendSuggestionAuto" type="text" name="friendSuggestions" placeholder="Find a friend">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-content-wrapper mb-2">
+                        <div id="memberList" class="members row no-gutters pl-2 pr-2">
+                            <div class="col-12 member-of-group" data-email="admin@demo.com">
+                                <p class="m-0 member-name">member 1</p>
+                                <span class="member-status">Online</span>
+                            </div>
+                            <div class="col-12 member-of-group" data-email="admin@demo.com">
+                                <p class="m-0 member-name">member 2</p>
+                                <span class="member-status">Online</span>
+                            </div>
+                                    <div class="col-12 member-of-group" data-email="admin@demo.com">
+                                <p class="m-0 member-name">member 3</p>
+                                <span class="member-status">Online</span>
+                            </div>
+                                    <div class="col-12 member-of-group" data-email="admin@demo.com">
+                                <p class="m-0 member-name">member 4</p>
+                                <span class="member-status">Online</span>
+                            </div>
+                                    <div class="col-12 member-of-group" data-email="admin@demo.com">
+                                <p class="m-0 member-name">member 5</p>
+                                <span class="member-status">Online</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            @* <a class="btn btn-outline-primary main-film-section__chat-toggle text-primary">hide</a> *@
         </div>
     </div>
 </div>
-@* <script src="~/js/chat.js"></script> *@
 

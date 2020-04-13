@@ -27,7 +27,7 @@ else
                     Hello, @ViewBag.UserName
                 </a>
                 <div class="dropdown-menu" aria-labelledby="userMenuList">
-                    <a class="dropdown-item" href="#">Your Profile</a>
+                    <a class="dropdown-item" asp-controller="User" asp-action="Profile">Your Profile</a>
                     <a class="dropdown-item" asp-action="SignOut" asp-controller="Auth">Sign Out</a>
                 </div>
         </li>

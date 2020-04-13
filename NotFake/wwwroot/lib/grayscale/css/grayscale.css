@@ -214,6 +214,26 @@
   background-color: #64a19d !important;
 }
 
+[class*="btn-icon"] {
+  border-radius: 50%;
+  padding: 1.25rem;
+  box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
+  font-family: 'Varela Round';
+  border: 0;
+  font-size: 1rem;
+  background-color: transparent;
+}
+
+.btn-icon-primary {
+  color: #64a19d;
+}
+
+.btn-icon-primary:hover,
+.btn-icon-primary:focus,
+.btn-icon-primary.active {
+  color: #fff;
+}
+
 .about-section {
   padding-top: 10rem;
   background: linear-gradient(to bottom, #161616 0%, rgba(22, 22, 22, 0.9) 75%, rgba(22, 22, 22, 0.8) 100%);
@@ -341,15 +361,6 @@ body {
   letter-spacing: 0.0625em;
 }
 
-a {
-  color: #64a19d;
-}
-
-a:focus,
-a:hover {
-  text-decoration: none;
-  color: #3c6360;
-}
 
 .bg-black {
   background-color: #161616 !important;
@@ -365,4 +376,41 @@ a:hover {
 
 footer {
   padding: 5rem 0;
+}
+
+/*
+=========================
+        Links
+=========================
+*/
+
+a {
+  color: #64a19d;
+}
+
+a:focus,
+a:hover {
+  text-decoration: none;
+  color: #3c6360;
+}
+
+.nav-tabs {
+  border-bottom-color: #64a19d;
+}
+
+.nav-tabs .nav-link {
+  color: rgba(255, 255, 255, .5);
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+  color: #fff;
+  border-color: #64a19d;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #fff;
+  background-color: #64a19d;
+  border-color: #64a19d;
 }

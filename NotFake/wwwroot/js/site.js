@@ -52,6 +52,11 @@ $(document).ready(function () {
         }
 
         if ($("#postsForm").length) {
+            // check if there is a group in localStorage
+            var groupName = localStorage.getItem("hubGroupName");
+            if (groupName != undefined && groupName != null) {
+                $("#groupName").val(groupName);
+            }
             var _postForm = ArrayToJSON($("#postsForm").serializeArray());
             formValue = JSON.stringify(_postForm);
         }
@@ -71,10 +76,17 @@ $(document).ready(function () {
             $("#filmLayout > div:first-child").addClass("video-shirk");
             $("#filmLayout > div:last-child").addClass("chat-show");
             isChatExpanded = true;
+
+            // display previous posts
             if (data.posts) {
                 data.posts.forEach(function (post) {
                     AppendMessage(post);
                 })
+            }
+
+            // display group members and status
+            if (data.members) {
+
             }
         }
     })
@@ -134,6 +146,7 @@ $(document).ready(function () {
         // if ($("#messagesList")) {
         //     $("#messagesList").append(msg);
         // }
+
     });
 
     function AppendMessage(post) {
@@ -161,6 +174,7 @@ $(document).ready(function () {
         if ($("#messagesList")) {
             $("#messagesList").append(msg);
         }
+        $("#messagesList").animate({ scrollTop: $("#messagesList").height() }, 0);
     }
 
     $("#messageInput").keydown(function (e) {
@@ -175,6 +189,7 @@ $(document).ready(function () {
                         return console.error(err.toString());
                     })
             }
+            $("#messageInput").val("");
         }
     })
 
@@ -207,7 +222,11 @@ $(document).ready(function () {
         isChatExpanded = !isChatExpanded;
     })
 
-
+    $("#chatPanelHideButton").click(function () {
+        $("#filmLayout > div:first-child").removeClass("video-shirk");
+        $("#filmLayout > div:last-child").removeClass("chat-show");
+        isChatExpanded = false;
+    })
 
 
 
@@ -233,6 +252,74 @@ $(document).ready(function () {
     // })
 
 
+    // get friend suggestions from hubs
+
+    connection.on("GroupFriendSuggestions", function (data) {
+        console.log(data);
+        $("#autocomplete-list").empty();
+        var userTemp = `
+            <div class="friend-suggestion-item">
+                <span>{0}</span>
+                <button class="btn btn-outline-primary">Send Request</button>
+                <input type="hidden" value="{1}" />
+            </div>
+        `;
+
+        $("#autocomplete-list").append(
+            data.reduce(function (a, b) {
+                return a += StringFormat(userTemp, [b.userName, b.userEmail]);
+            }, "")
+        )
+    })
+
+    autocomplete($("#friendSuggestionAuto"))
+
+    // AutoComplete Bootstrap
+
+    function autocomplete(inp) {
+        /*the autocomplete function takes two arguments,
+        the text field element and an array of possible autocompleted values:*/
+        var currentFocus;
+        /*execute a function when someone writes in the text field:*/
+        $(inp).on("input", function (e) {
+            var a,
+                b,
+                i;
+            // keyword = this.value;
+
+            var keyword = e.target.value;
+            console.log(keyword);
+            /*close any already open lists of autocompleted values*/
+            closeAllLists();
+            if (!keyword) { return false; }
+            currentFocus = -1;
+
+            $(this).parent().append(`
+                <div class="autocomplete-items" id="autocomplete-list">
+                    <span>loading</span>
+                </div>
+            `);
+
+            if (connection) {
+                connection.invoke("GroupFriendSuggestions", keyword)
+            }
+        });
+
+        function closeAllLists(elmnt) {
+            /*close all autocomplete lists in the document,
+            except the one passed as an argument:*/
+            var x = document.getElementsByClassName("autocomplete-items");
+            for (var i = 0; i < x.length; i++) {
+                if (elmnt != x[i] && elmnt != inp) {
+                    x[i].parentNode.removeChild(x[i]);
+                }
+            }
+        }
+        /*execute a function when someone clicks in the document:*/
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
+        });
+    }
 
 
 })
