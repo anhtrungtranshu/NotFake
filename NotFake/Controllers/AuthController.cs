@@ -85,7 +85,7 @@ namespace NotFake.Controllers
                 //AllowRefresh = <bool>,
                 // Refreshing the authentication session should be allowed.
 
-                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(1440)
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(1440),
                 // The time at which the authentication ticket expires. A 
                 // value set here overrides the ExpireTimeSpan option of 
                 // CookieAuthenticationOptions set with AddCookie.
@@ -99,7 +99,7 @@ namespace NotFake.Controllers
                 //IssuedUtc = <DateTimeOffset>,
                 // The time at which the authentication ticket was issued.
 
-                //RedirectUri = <string>
+                RedirectUri = "/Home/Index/"
                 // The full path or absolute URI to be used as an http 
                 // redirect response value.
             };
@@ -110,7 +110,7 @@ namespace NotFake.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        [Authorize(Policy="User")]
         public async Task<IActionResult> SignOut()
         {
             await HttpContext.SignOutAsync(
@@ -165,6 +165,7 @@ namespace NotFake.Controllers
 
 
         [HttpGet]
+        [Authorize(Policy="User")]
         public IActionResult Profile()
         {
             string Email = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -217,6 +218,7 @@ namespace NotFake.Controllers
 
         }
 
+        [Authorize(Policy="User")]
         public void AddFriendRequest(User user, User friendUser)
         {
             var friendRequest = new Friendship()

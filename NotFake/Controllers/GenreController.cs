@@ -7,6 +7,7 @@ using NotFake.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NotFake.Controllers
 {
@@ -51,6 +52,8 @@ namespace NotFake.Controllers
         }
 
         // GET: Genre/Create
+        
+        [Authorize(Policy="Admin")]
         public ActionResult Create()
         {
             return View();
@@ -59,6 +62,7 @@ namespace NotFake.Controllers
         // POST: Genre/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy="Admin")]
         public ActionResult Create(IFormCollection collection)
         {
             try
@@ -74,6 +78,7 @@ namespace NotFake.Controllers
         }
 
         // GET: Genre/Edit/5
+        [Authorize(Policy="Admin")]
         public ActionResult Edit(int id)
         {
             return View();
@@ -82,6 +87,7 @@ namespace NotFake.Controllers
         // POST: Genre/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy="Admin")]
         public ActionResult Edit(int id, IFormCollection collection)
         {
             try
@@ -97,6 +103,7 @@ namespace NotFake.Controllers
         }
 
         // GET: Genre/Delete/5
+        [Authorize(Policy="Admin")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -105,6 +112,7 @@ namespace NotFake.Controllers
         // POST: Genre/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy="Admin")]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
