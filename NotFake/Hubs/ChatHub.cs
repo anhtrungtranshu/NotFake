@@ -9,9 +9,11 @@ using Service;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NotFake.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NotFake.Hubs
 {
+    [Authorize(Policy="User")]
     public class ChatHub : Hub
     {
         private readonly IChatRoomService _chatRoomService;

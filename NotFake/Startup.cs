@@ -41,6 +41,7 @@ namespace NotFake
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            
 
             // var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
             var sqlConnectionString = Configuration.GetConnectionString("AlternativeConnection");
@@ -50,7 +51,10 @@ namespace NotFake
             );
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie();
+                .AddCookie(options =>
+                {
+                options.AccessDeniedPath ="/Home/Index";
+                });
 
             services.AddScoped<INotFakeService, NotFakeService>();
             services.AddMvc()
@@ -59,15 +63,18 @@ namespace NotFake
             services.AddSingleton<IChatRoomService, InMemoryChatRoomService>();
             services.AddAuthorization(options =>
             {
+                
                 options.AddPolicy("User", policy =>
                 {
-                    policy.RequireClaim(ClaimTypes.Role, UserRoles.User.ToString());
+                    policy.RequireClaim(ClaimTypes.Role, UserRoles.User.ToString(), UserRoles.Admin.ToString());
                 });
                 options.AddPolicy("Admin", policy =>
                 {
                     policy.RequireClaim(ClaimTypes.Role, UserRoles.Admin.ToString());
                 });
+                
             });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

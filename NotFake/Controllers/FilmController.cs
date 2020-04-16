@@ -29,7 +29,7 @@ namespace NotFake.Controllers
             service = _service;
         }
 
-        [Authorize(Policy = "Admin", "User")]
+        [Authorize(Policy = "User")]
         [Route("Film/Watch", Name = "WatchFilm")]
         public IActionResult WatchFilm(int filmId, int? episodeId)
         {
@@ -42,6 +42,8 @@ namespace NotFake.Controllers
             }
             return View("Index");
         }
+
+        [Authorize(Policy ="User")]
         [Route("Film/WatchWithGroup", Name = "WatchFilmWithGroup")]
         public IActionResult WatchFilmWithGroup(int filmId, string groupName, int? episodeId)
         {
