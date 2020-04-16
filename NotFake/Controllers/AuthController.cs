@@ -180,7 +180,7 @@ namespace NotFake.Controllers
                     UserEmail = uf.InvitedUser == user ? uf.InvitingUser.Email : uf.InvitedUser.Email
                 })
             };
-            ViewBag["ReturnUrl"] = "/Auth/Profile";
+            ViewBag.ReturnUrl = "/Auth/Profile";
             return View(profile);
         }
 
@@ -198,16 +198,20 @@ namespace NotFake.Controllers
             if (ModelState.IsValid)
             {
                 string Email = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                User user = service.User.GetByEmail(Email);
-
-                user.Password = Crypto.HashPassword(user.Password);
-                service.User.Update(user);
-                ViewData["message"] = "Password has been changed!";
-                return RedirectToAction("Index", "Home");
+                if (service.User.IsCorrectPassword(Email, model.Password))
+                {
+                    service.User.UpdatePassword(Email, model.NewPassword);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Password is incorrect!";
+                    return View(model);
+                }
             }
             else
             {
-                ViewBag["Message"] = "Something went wrong";
+                ViewBag.ErrorMessage = "Something went wrong";
             }
             return View(model);
 
