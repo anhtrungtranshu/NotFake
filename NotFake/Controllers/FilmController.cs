@@ -29,7 +29,7 @@ namespace NotFake.Controllers
             service = _service;
         }
 
-        [Authorize(Policy = "Admin")]
+        [Authorize(Policy = "Admin", "User")]
         [Route("Film/Watch", Name = "WatchFilm")]
         public IActionResult WatchFilm(int filmId, int? episodeId)
         {
