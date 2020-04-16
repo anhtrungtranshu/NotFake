@@ -20,7 +20,7 @@
             <i class="fas fa-american-sign-language-interpreting fa-2x mb-2 text-white"></i>
             <h2 class="text-white mb-2">Register</h2>
           </div>
-          <form autocomplete="off" method="post" asp-controller="Auth" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">
+          <form autocomplete="off" method="post" asp-controller="Auth" asp-action="Register">
                 <div class="form-group">
                     <label asp-for="Email" class="col-form-label text-white">Email</label>
                     <div class="input-group input-group__with-icon">

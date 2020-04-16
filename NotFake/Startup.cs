@@ -15,6 +15,8 @@ using DAO;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using NotFake.Hubs;
 using NotFake.ChatService;
+using DAO.Models;
+using System.Security.Claims;
 
 namespace NotFake
 {
@@ -57,8 +59,14 @@ namespace NotFake
             services.AddSingleton<IChatRoomService, InMemoryChatRoomService>();
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("User", policy => policy.RequireClaim("Role", "User"));
-                options.AddPolicy("Admin", policy => policy.RequireClaim("Role", "Admin"));
+                options.AddPolicy("User", policy =>
+                {
+                    policy.RequireClaim(ClaimTypes.Role, UserRoles.User.ToString());
+                });
+                options.AddPolicy("Admin", policy =>
+                {
+                    policy.RequireClaim(ClaimTypes.Role, UserRoles.Admin.ToString());
+                });
             });
         }
 

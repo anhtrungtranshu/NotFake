@@ -21,5 +21,13 @@ namespace Service.Repository
                 || fs.InvitedUser.Fullname.Contains(keyword)
             )).ToList();
         }
+
+        public List<Friendship> GetFriendships(User user)
+        {
+            return context.Friendships.Where(
+                fs => (fs.InvitingUser == user || fs.InvitedUser == user)
+                && fs.Status == FriendShipStatus.Accepted
+            ).ToList();
+        }
     }
 }

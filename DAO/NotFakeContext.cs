@@ -12,14 +12,32 @@ namespace DAO
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasData(new User()
+            // add some more user
+            List<User> someMoreUsers = new List<User>(){
+                new User()
+                {
+                    UserId = 1,
+                    Email = "admin@demo.com",
+                    Password = Utilities.Crypto.HashPassword("NotFake@123"),
+                    Role = UserRoles.Admin,
+                    Fullname = "admin"
+                }
+            };
+            for (int i = 2; i < 10; i++)
             {
-                UserId = 1,
-                Email = "admin@demo.com",
-                Password = Utilities.Crypto.HashPassword("NotFake@123"),
-                Role = UserRoles.Admin,
-                Fullname = "admin"
-            });
+                someMoreUsers.Add(new User()
+                {
+                    UserId = i,
+                    Email = String.Format("user{0}@demo.com", i),
+                    Password = Utilities.Crypto.HashPassword(String.Format("password{0}", i)),
+                    Role = UserRoles.User,
+                    Fullname = String.Format("user full name {0}", i)
+                });
+            }
+
+            modelBuilder.Entity<User>().HasData(
+                someMoreUsers.ToArray()
+                );
 
             modelBuilder.Entity<Genre>()
                 .HasData(new Genre()

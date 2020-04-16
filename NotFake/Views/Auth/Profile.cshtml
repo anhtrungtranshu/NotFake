@@ -1,0 +1,21 @@
+﻿@model NotFake.Models.HubUser
+
+<section class="user-profile">
+    <div class="container-fluid text-white">
+        <div class="row">
+            <h4>User Profile</h4>
+            <div class="col-md-6">
+                <div class="col-4">User Name: </div>
+                <div class="col-8">@Model.UserName</div>
+                <div class="col-4">Email: </div>
+                <div class="col-8">@Model.UserEmail</div>
+            </div>
+            <div class="col-md-6">
+                <a asp-controller="Auth" asp-asp-action="ChangePassword" asp-route-returnUrl="@ViewBag.returnUrl" class="btn btn-outline-primary">Change Password</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12"></div>
+        </div>
+    </div>
+</section>

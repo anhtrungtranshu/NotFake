@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using DAO.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NotFake.Controllers
 {
@@ -162,5 +163,67 @@ namespace NotFake.Controllers
             return View(model);
         }
 
+
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            string Email = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            User user = service.User.GetByEmail(Email);
+            List<Friendship> userFriends = service.Friendship.GetFriendships(user);
+            HubUser profile = new HubUser()
+            {
+                UserEmail = user.Email,
+                UserName = user.Fullname,
+                Friends = userFriends.ConvertAll(uf => new HubUser()
+                {
+                    UserName = uf.InvitedUser == user ? uf.InvitingUser.Fullname : uf.InvitedUser.Fullname,
+                    UserEmail = uf.InvitedUser == user ? uf.InvitingUser.Email : uf.InvitedUser.Email
+                })
+            };
+            ViewBag["ReturnUrl"] = "/Auth/Profile";
+            return View(profile);
+        }
+
+        [Authorize]
+        public IActionResult ChangePassword(string returnUrl)
+        {
+            ViewBag.returnUrl = returnUrl;
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePasswordViewModel model, string returnurl)
+        {
+            if (ModelState.IsValid)
+            {
+                string Email = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                User user = service.User.GetByEmail(Email);
+
+                user.Password = Crypto.HashPassword(user.Password);
+                service.User.Update(user);
+                ViewData["message"] = "Password has been changed!";
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag["Message"] = "Something went wrong";
+            }
+            return View(model);
+
+        }
+
+        public void AddFriendRequest(User user, User friendUser)
+        {
+            var friendRequest = new Friendship()
+            {
+                InvitingUser = user,
+                InvitedUser = friendUser,
+                Status = FriendShipStatus.Pending
+            };
+
+            //user.SentFriendRequests.Add(friendRequest);
+
+        }
     }
 }

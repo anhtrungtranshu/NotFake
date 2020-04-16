@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Service;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NotFake.Controllers
 {
@@ -28,6 +29,7 @@ namespace NotFake.Controllers
             service = _service;
         }
 
+        [Authorize(Policy = "Admin")]
         [Route("Film/Watch", Name = "WatchFilm")]
         public IActionResult WatchFilm(int filmId, int? episodeId)
         {
