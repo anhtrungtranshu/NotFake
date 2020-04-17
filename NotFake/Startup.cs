@@ -53,7 +53,13 @@ namespace NotFake
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                options.AccessDeniedPath ="/Home/Index";
+                    options.Events = new CookieAuthenticationEvents {
+                        OnRedirectToLogin = ctx => {
+                            var requestPath = ctx.Request.Path;
+                                ctx.Response.Redirect("/Auth/Login");
+                            return Task.CompletedTask;
+                        }
+            		};
                 });
 
             services.AddScoped<INotFakeService, NotFakeService>();
