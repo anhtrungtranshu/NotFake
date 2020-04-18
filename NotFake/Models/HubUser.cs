@@ -8,6 +8,5 @@ namespace NotFake.Models
         public string UserEmail { get; set; }
         public string UserName { get; set; }
         public bool? IsOnline { get; set; }
-        public List<HubUser> Friends { get; set; }
     }
 }

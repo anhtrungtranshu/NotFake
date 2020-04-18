@@ -199,6 +199,10 @@ namespace DAO
                 .OnDelete(DeleteBehavior.Restrict);
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
         public DbSet<Film> Film { get; set; }
         public DbSet<FilmData> FilmData { get; set; }
         public DbSet<Friendship> Friendships { get; set; }

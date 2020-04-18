@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace NotFake.Hubs
 {
-    [Authorize(Policy="User")]
+    // [Authorize] 
     public class ChatHub : Hub
     {
         private readonly IChatRoomService _chatRoomService;
@@ -75,19 +75,6 @@ namespace NotFake.Hubs
                     }
                     else
                     {
-                        // Group previousGroup = _chatRoomService.CheckRoomExistInDB((string)form["FilmId"], userEmail);
-                        // if (previousGroup != null)
-                        // {
-                        //     await Clients.Caller.SendAsync("ChatRequireAction", new
-                        //     {
-                        //         message = "Do you want to load previous  group chat for this film?"
-                        //     });
-                        // }
-                        // else
-                        // {
-
-                        // }
-
                         try
                         {
                             Guid guid = _chatRoomService.CreateRoom((string)form["FilmId"], userEmail);
@@ -165,7 +152,7 @@ namespace NotFake.Hubs
 
         public async Task GroupFriendSuggestions(string keyword)
         {
-            
+
             await Clients.Caller.SendAsync("GroupFriendSuggestions", new List<HubUser>()
             {
                 new HubUser(){
@@ -189,6 +176,52 @@ namespace NotFake.Hubs
                     UserName = "e"
                 }
             });
+        }
+
+        public async Task GetUserFriendList(string data)
+        {
+            JObject obj = JObject.Parse(data);
+            List<HubUser> _friendList = _chatRoomService.GetUserFriendList((string)obj["email"], (string)obj["keyword"]);
+            await Clients.Caller.SendAsync("GetUserFriendList", _friendList);
+        }
+
+        public async Task GetFriendSuggestions(string data)
+        {
+            JObject obj = JObject.Parse(data);
+            if ((string)obj["keyword"] == "")
+            {
+                await Clients.Caller.SendAsync("GetFriendSuggestions", new List<HubUser>());
+                return;
+            }
+            List<HubUser> _friendSuggestionList = _chatRoomService.GetFriendSuggestions((string)obj["email"], (string)obj["keyword"]);
+            await Clients.Caller.SendAsync("GetFriendSuggestions", _friendSuggestionList);
+        }
+
+        public async Task RequestFriend(string data)
+        {
+            try
+            {
+                JObject obj = JObject.Parse(data);
+                User invitingUser = _notFakeService.User.GetByEmail((string)obj["email"]);
+                KeyValuePair<string, User> invitedUser = _chatRoomService.AddFriendRequest((string)obj["email"], (string)obj["requestTo"]);
+                if (!object.Equals(invitedUser, default(KeyValuePair<string, User>)))
+                {
+                    await Clients.Client(invitedUser.Key).SendAsync("IncommingFriendRequest", new
+                    {
+                        // message = String.Format("You have a friend request from {0}", invitingUser.Fullname),
+                        invitingUserEmail = invitingUser.Email,
+                        invitingUserName = invitingUser.Fullname
+                    });
+                }
+                await Clients.Caller.SendAsync("RequestFriend", new
+                {
+                    message = "Friend request sent"
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task LeaveRoom(Guid roomId)

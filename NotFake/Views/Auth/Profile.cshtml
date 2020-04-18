@@ -3,19 +3,76 @@
 <section class="user-profile">
     <div class="container-fluid text-white">
         <div class="row">
-            <h4>User Profile</h4>
-            <div class="col-md-6">
-                <div class="col-4">User Name: </div>
-                <div class="col-8">@Model.UserName</div>
-                <div class="col-4">Email: </div>
-                <div class="col-8">@Model.UserEmail</div>
+            <div class="col-sm-8">
+                <h4 class="ml-2 mb-3">User Profile</h4>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row flex-nowrap">
+                            <div class="col-2">User Name:</div>
+                            <div class="col-6">@Model.UserName</div>
+                        </div>
+                        <div class="row flex-nowrap">
+                            <div class="col-2">Email:</div>
+                            <div class="col-6">@Model.UserEmail</div>
+                        </div>
+                        <div class="row flex-nowrap">
+                            <div class="col-12">
+                                <a asp-controller="Auth" asp-action="ChangePassword" asp-route-returnUrl="@ViewBag.returnUrl" class="btn btn-primary btn-sm">Change Password</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="ml-2 mt-3 mb-3">Friend Lists</h4>
+                <div class="input-group w-100 d-flex input-group__with-icon mb-4">
+                    <input id="friendListKeyword" type="text" class="form-control" placeholder="Search friend...">
+                    <button class="btn btn-icon-primary btn-sm ml-2 icon-content">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-hover text-white" id="friendList">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>  
             </div>
-            <div class="col-md-6">
-                <a asp-controller="Auth" asp-action="ChangePassword" asp-route-returnUrl="@ViewBag.returnUrl" class="btn btn-outline-primary">Change Password</a>
+            <div class="col-sm-4">
+                <h4 class="ml-2 mb-3">Friend Suggestions</h4>
+                <form class="form-inline w-100 mb-4">
+                    <div class="input-group w-100 d-flex input-group__with-icon">
+                        <input type="text" class="form-control" id="friendSuggestions" placeholder="Search friend...">
+                        <button class="btn btn-icon-primary btn-sm ml-2 icon-content">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="card" style="max-height: 60vh; overflow-y: auto;">
+                    <div class="card-body">
+                        <table class="table table-hover text-white" id="friendSuggestionList">
+                            <thead>
+                                @* <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col"></th>
+                                </tr> *@
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12"></div>
         </div>
     </div>
 </section>

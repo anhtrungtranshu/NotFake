@@ -1,13 +1,17 @@
+@model NotFake.Models.HeaderViewModel;
+
 <form class="form-inline my-2 my-lg-0 ml-auto">
     <div class="input-group input-group__with-icon">
-        <button class="btn icon-content" aria-pressed="false" data-toggle="button" autocomplete="off">
+        <button class="btn btn-icon icon-content" aria-pressed="false" data-toggle="button" autocomplete="off">
             <i class="fas fa-search text-white"></i>
         </button>
         <input type="text" class="form-control" placeholder="Search...">
     </div>
 </form>
 
-@if(ViewBag.UserName == null )
+
+
+@if(@Model.currentUser.UserEmail == null )
 {
     <ul class="navbar-nav ml-2">
         <li class="nav-item">
@@ -20,11 +24,56 @@
 }
 else
 {
-    <input type="hidden" id="CurrentUserEmail" value="@ViewBag.UserEmail" />
+    <input type="hidden" id="CurrentUserEmail" value="@Model.currentUser.UserEmail" />
     <ul class="navbar-nav ml-2">
         <li class="nav-item dropdown">
+            <a class="nav-link d-flex align-items-center" href="#" id="incomingFriendRequests" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-users"></i>
+                @if(Model.friendRequests.Count == 0)
+                {
+                    <span id="pendingFriendRequests" class="badge badge-primary ml-2 d-none">0</span>
+                }
+                else
+                {
+                    <span id="pendingFriendRequests" class="badge badge-primary ml-2">@Model.friendRequests.Count</span>
+                }
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right" id="incomingFriendRequestsMenu" aria-labelledby="incomingFriendRequests">
+                @if(Model.friendRequests.Count == 0)
+                {
+                    <a class="dropdown-item" disabled>
+                        Oops! There is nothing new!
+                    </a>
+                }
+                else
+                {
+                    foreach (var item in Model.friendRequests)
+                    {
+                        <a class="dropdown-item" data-email="@item.UserEmail">
+                            <div class="d-flex align-items-center">
+                                <span style="white-space:break-spaces; width: 15rem; display: inline-block">@String.Format("{0} sent a friend request",item.UserName)</span>
+                                <div class="btn-group" role="group" aria-label="friend request action">
+                                    <button type="button" class="btn btn-icon-secondary friend-request-action-btn-no">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-icon-primary friend-request-action-btn-yes">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <input type="hidden" value="@item.UserEmail" />
+                                </div>
+                            </div>
+                        </a>
+                    }
+                }
+            </div>
+
+        </li>
+
+
+        <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="userMenuList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Hello, @ViewBag.UserName
+                    Hello, @Model.currentUser.UserName
                 </a>
                 <div class="dropdown-menu" aria-labelledby="userMenuList">
                     <a class="dropdown-item" asp-controller="Auth" asp-action="Profile">Your Profile</a>

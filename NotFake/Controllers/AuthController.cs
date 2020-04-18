@@ -170,16 +170,16 @@ namespace NotFake.Controllers
         {
             string Email = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             User user = service.User.GetByEmail(Email);
-            List<Friendship> userFriends = service.Friendship.GetFriendships(user);
+            // List<Friendship> userFriends = service.Friendship.GetFriendships(user);
             HubUser profile = new HubUser()
             {
                 UserEmail = user.Email,
-                UserName = user.Fullname,
-                Friends = userFriends.ConvertAll(uf => new HubUser()
-                {
-                    UserName = uf.InvitedUser == user ? uf.InvitingUser.Fullname : uf.InvitedUser.Fullname,
-                    UserEmail = uf.InvitedUser == user ? uf.InvitingUser.Email : uf.InvitedUser.Email
-                })
+                UserName = user.Fullname
+                // Friends = userFriends.ConvertAll(uf => new HubUser()
+                // {
+                //     UserName = uf.InvitedUser == user ? uf.InvitingUser.Fullname : uf.InvitedUser.Fullname,
+                //     UserEmail = uf.InvitedUser == user ? uf.InvitingUser.Email : uf.InvitedUser.Email
+                // })
             };
             ViewBag.ReturnUrl = "/Auth/Profile";
             return View(profile);
@@ -202,7 +202,7 @@ namespace NotFake.Controllers
                 if (service.User.IsCorrectPassword(Email, model.Password))
                 {
                     service.User.UpdatePassword(Email, model.NewPassword);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Auth", "Profile");
                 }
                 else
                 {

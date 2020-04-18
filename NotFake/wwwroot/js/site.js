@@ -29,12 +29,36 @@ $(document).ready(function () {
     $.notify.addStyle('chat-confirm', {
         html:
             "<div>" +
-            "<div class='clearfix chat-require-action'>" +
+            "<div class='clearfix notification'>" +
             "<div class='title' data-notify-html='title'/>" +
             "<div class='buttons d-flex'>" +
             "<button class='btn btn-outline-secondary disabled no'>Cancel</button>" +
             "<button class='btn btn-outline-primary yes'>Ok</button>" +
             "</div>" +
+            "</div>" +
+            "</div>"
+    });
+
+    // $.notify.addStyle('friend-request', {
+    //     html:
+    //         "<div>" +
+    //         "<div class='clearfix notification'>" +
+    //         "<div class='title' data-notify-html='title'/>" +
+    //         "<div class='buttons d-flex'>" +
+    //         "<button class='btn btn-outline-secondary disabled no'>Cancel</button>" +
+    //         "<button class='btn btn-outline-primary yes'>Ok</button>" +
+    //         "<span class='d-none' data-notify-text='email'/>" +
+    //         "</div>" +
+    //         "</div>" +
+    //         "</div>"
+    // });
+
+    // notification temp
+    $.notify.addStyle('notification', {
+        html:
+            "<div>" +
+            "<div class='clearfix notification'>" +
+            "<div class='title' data-notify-html='title'/>" +
             "</div>" +
             "</div>"
     });
@@ -62,6 +86,14 @@ $(document).ready(function () {
         }
         connection.invoke("Authorize", userEmail, formValue, false);
 
+        // get friends of User
+        if ($(".user-profile").length) {
+            var data = {
+                email: $("#CurrentUserEmail").val(),
+                keyword: $("#friendListKeyword").val(),
+            };
+            connection.invoke("GetUserFriendList", JSON.stringify(data));
+        }
     }).catch(function (err) {
         return console.error(err.toString());
     });
@@ -103,14 +135,11 @@ $(document).ready(function () {
 
     //listen for click events from this style
     $(document).on('click', '.notifyjs-chat-confirm-base .no', function () {
-        console.log("click notify no");
         ConfirmCreateGroup(false);
         $(this).trigger('notify-hide');
     });
 
     $(document).on('click', '.notifyjs-chat-confirm-base .yes', function () {
-        console.log("click notify yes");
-
         ConfirmCreateGroup(true);
         $(this).trigger('notify-hide');
     });
@@ -252,6 +281,149 @@ $(document).ready(function () {
     // })
 
 
+    connection.on("GetUserFriendList", function (data) {
+        console.log(data);
+        $("#friendList tbody").empty();
+
+        var friendItemHtml = `
+            <tr>
+                <td>{0}</td>
+                <td>{1}</td>
+            </tr>
+        `
+        if (data.length > 0) {
+            var listOfFriendsHtml = data.reduce(function (a, b, i) {
+                return a += StringFormat(friendItemHtml, [i + 1, b.userName]);
+            }, "");
+
+            $("#friendList tbody").append(listOfFriendsHtml);
+        } else {
+            $("#friendList tbody").append("<tr><td colspan='2'>You have no friends, so sad!!</td></tr>")
+        }
+
+    })
+
+    $("#friendSuggestions").on("input", function (e) {
+        var data = {
+            email: $("#CurrentUserEmail").val(),
+            keyword: e.target.value,
+        };
+        console.log(data);
+        connection.invoke("GetFriendSuggestions", JSON.stringify(data));
+    });
+
+    connection.on("GetFriendSuggestions", function (data) {
+        console.log(data);
+
+        var keyword = $("#friendSuggestions").val();
+        $("#friendSuggestionList tbody").empty();
+        var friendSuggestionTemp = `
+            <tr>
+                <td>
+                    <p class='m-0'>{0}</p>
+                    <span style='font-size: .625rem'>{1}</span>
+                </td>
+                <td>
+                    <button class='btn btn-primary btn-sm send-friend-request-btn'>Send Request</button>
+                    <input type='hidden' value='{2}' />
+                </td>
+            </tr>
+        `;
+
+        var friendSgtHtml = data.reduce(function (a, b) {
+            var _userName = b.userName.replace(keyword, StringFormat("<strong class='text-primary'>{0}</strong>", [keyword]));
+            var _userEmail = b.userEmail.replace(keyword, StringFormat("<strong class='text-primary'>{0}</strong>", [keyword]));
+
+            return a += StringFormat(friendSuggestionTemp, [_userName, _userEmail, b.userEmail]);
+        }, "");
+
+        $("#friendSuggestionList tbody").append(friendSgtHtml);
+    });
+
+    $("#friendSuggestionList").on("click", "button", function (e) {
+        var data = {
+            email: $("#CurrentUserEmail").val(),
+            requestTo: $(this).next().val()
+        }
+
+        connection.invoke("RequestFriend", JSON.stringify(data));
+    })
+
+    connection.on("RequestFriend", function (data) {
+        $.notify({
+            title: data.message
+        }, {
+            style: "notification",
+            autoHide: true,
+        })
+    })
+
+    connection.on("IncommingFriendRequest", function (data) {
+        $.notify({
+            title: StringFormat("{0} sent you a friend request!", [data.invitingUserName])
+        }, {
+            style: "notification",
+            autoHide: true
+        })
+
+        if ($("#incomingFriendRequestsMenu .dropdown-item[disabled]").length) {
+            $("#incomingFriendRequestsMenu").empty();
+            $("#pendingFriendRequests").removeClass("d-none");
+            $("#pendingFriendRequests").html("1");
+        } else {
+            $("#pendingFriendRequests").html($("#incomingFriendRequestsMenu .dropdown-item").length + 1);
+        }
+
+        var frmTemp = `
+            <a class="dropdown-item">
+                <div class="d-flex align-items-center">
+                    <span style="white-space:break-spaces; width: 15rem; display: inline-block">{0}</span>
+                    <div class="btn-group" role="group" aria-label="friend request action">
+                        <button type="button" class="btn btn-icon-secondary friend-request-action-btn-no">
+                            <i class="fas fa-ban"></i>
+                        </button>
+                        <button type="button" class="btn btn-icon-primary friend-request-action-btn-yes">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <input type="hidden" value="{1}" />
+                    </div>
+                </div>
+            </a>`;
+
+        var frmHtml = StringFormat(frmTemp, [
+            StringFormat("{0} sent you a friend request", [data.invitingUserName]),
+            data.invitingUserEmail
+        ])
+        $("#incomingFriendRequestsMenu").append(frmHtml);
+
+    })
+
+    $("#incomingFriendRequestsMenu").on("click", "button", function (e) {
+        e.stopPropagation();
+        var isAccepted = $(this).hasClass("friend-request-action-btn-no") ? false : true;
+        var invitingUserEmail = $(this).parent().find("input").val();
+
+        var data = {
+            invitedUserEmail: $("#CurrentUserEmail").val(),
+            invitingUserEmail: invitingUserEmail,
+            isAccepted: isAccepted
+        };
+
+        $.post("/api/Friendship/FriendRequestAction", data, function (res) {
+            if (res.success) {
+                $("#incomingFriendRequestsMenu").find("a.dropdown-item[data-email*='" + invitingUserEmail + "']").remove();
+                if (!$("#incomingFriendRequestsMenu a.dropdown-item").length) {
+                    $("#pendingFriendRequests").addClass("d-none");
+                    $("#pendingFriendRequests").html("0");
+                    $("#incomingFriendRequestsMenu").append("<a class='dropdown-item' disabled>Oops! There is nothing new!</a>");
+                } else {
+                    $("#pendingFriendRequests").html($("#incomingFriendRequestsMenu a.dropdown-item").length);
+                }
+            }
+        })
+    })
+
+
     // get friend suggestions from hubs
 
     connection.on("GroupFriendSuggestions", function (data) {
@@ -272,7 +444,8 @@ $(document).ready(function () {
         )
     })
 
-    autocomplete($("#friendSuggestionAuto"))
+    // autocomplete group friend suggestions field in chat feature
+    autocomplete($("#groupFriendSuggestionAuto"))
 
     // AutoComplete Bootstrap
 

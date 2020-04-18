@@ -7,6 +7,7 @@ using DAO.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json.Linq;
 
 namespace NotFake.Controllers
 {
@@ -18,7 +19,7 @@ namespace NotFake.Controllers
             service = _service;
         }
 
-        [Authorize(Policy="Admin")]
+        [Authorize(Policy = "Admin")]
         public IActionResult Index()
         {
             IList<User> userList = service.User.ListAll();

@@ -40,6 +40,16 @@ namespace NotFake.ChatService
             }
         }
 
+        public KeyValuePair<string, User> GetConnectedUser(string userEmail)
+        {
+            return _listConnectedUsers.Where(u => u.Value.Email == userEmail).FirstOrDefault();
+        }
+
+        public KeyValuePair<string, User> GetConnectedUser(User user)
+        {
+            return _listConnectedUsers.Where(u => u.Value == user).FirstOrDefault();
+        }
+
         public void RemoveDisconnectedUser(string ConnectionId)
         {
             _listConnectedUsers.Remove(ConnectionId);
@@ -170,9 +180,55 @@ namespace NotFake.ChatService
                         });
         }
 
+        public List<HubUser> GetUserFriendList(string email, string keyword)
+        {
+            User _user = _notFakeService.User.GetByEmail(email);
+            List<Friendship> _friendship = keyword == "" ? _notFakeService.Friendship.GetFriendships(_user, false)
+            : _notFakeService.Friendship.GetFriendships(_user, keyword, false);
+
+            return _friendship.ConvertAll(fs => new HubUser()
+            {
+                UserEmail = fs.InvitingUser == _user ? fs.InvitedUser.Email : fs.InvitingUser.Email,
+                UserName = fs.InvitingUser == _user ? fs.InvitedUser.Fullname : fs.InvitingUser.Fullname
+            });
+        }
+
+        public List<HubUser> GetFriendSuggestions(string email, string keyword)
+        {
+            User _user = _notFakeService.User.GetByEmail(email);
+            return _notFakeService.Friendship.GetFriendSuggestions(_user, keyword)
+                        .ConvertAll(u => new HubUser()
+                        {
+                            UserEmail = u.Email,
+                            UserName = u.Fullname
+                        });
+        }
+
+        public KeyValuePair<string, User> AddFriendRequest(string email, string requestToEmail)
+        {
+            try
+            {
+                User invitingUser = _notFakeService.User.GetByEmail(email);
+                User invitiedUser = _notFakeService.User.GetByEmail(requestToEmail);
+
+                _notFakeService.Friendship.Add(new Friendship()
+                {
+                    InvitingUser = invitingUser,
+                    InvitedUser = invitiedUser,
+                    Status = FriendShipStatus.Pending
+                });
+                return GetConnectedUser(invitiedUser);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         // public List<HubUser> GetGroupFriendSuggestions(string keywords)
         // {
-            
+
         // }
 
         // public Task<Guid> GetRoomForFilmId(string filmId)

@@ -101,7 +101,7 @@ namespace NotFake
             {
                 routes.MapHub<ChatHub>("/chatHub");
             });
-            app.UseAuthentication();
+            app.UseAuthentication(); 
 
             app.UseMvc(routes =>
             {
