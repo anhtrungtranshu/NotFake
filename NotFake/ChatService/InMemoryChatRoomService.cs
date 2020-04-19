@@ -85,7 +85,7 @@ namespace NotFake.ChatService
         }
         public KeyValuePair<Guid, Group> GetGroup(Group group)
         {
-            return _roomInfo.Where(r => r.Value == group).FirstOrDefault();
+            return _roomInfo.Where(r => r.Value.Id == group.Id).FirstOrDefault();
         }
 
         public Guid CreateRoom(string filmId, string userEmail)

@@ -77,10 +77,11 @@ $(document).ready(function () {
 
         if ($("#postsForm").length) {
             // check if there is a group in localStorage
-            var groupName = localStorage.getItem("hubGroupName");
-            if (groupName != undefined && groupName != null) {
-                $("#groupName").val(groupName);
-            }
+            // var groupName = localStorage.getItem("hubGroupName");
+            // if (groupName != undefined && groupName != null) {
+            //     $("#groupName").val(groupName);
+            // }
+
             var _postForm = ArrayToJSON($("#postsForm").serializeArray());
             formValue = JSON.stringify(_postForm);
         }
@@ -99,6 +100,9 @@ $(document).ready(function () {
     });
 
     connection.on("Authorized", function (data) {
+        console.log("Authorized");
+        console.log(data);
+        console.log(data && data.groupName);
         if (data && data.groupName) {
             // store GroupName in local storge in case user refresh browser
             localStorage.setItem("hubGroupName", data.groupName);
@@ -117,11 +121,24 @@ $(document).ready(function () {
             }
 
             // display group members and status
-            if (data.members) {
-
+            if (data.members.length > 0) {
+                $("#groupMemberList").empty();
+                appendGroupMemberToList(data.members)
             }
         }
     })
+
+    function appendGroupMemberToList(list) {
+        var temp = `
+        <div class="col-12 member-of-group p-2" data-email="{0}">
+            <p class="m-0 member-name">{1}</p>
+        </div>
+        `;
+        var html = list.reduce(function (a, b) {
+            return a += StringFormat(temp, [b.userEmail, b.userName]);
+        }, "");
+        $("#groupMemberList").append(html);
+    }
 
     connection.on("ChatRequireAction", function (data) {
         $.notify({
@@ -192,7 +209,7 @@ $(document).ready(function () {
         <div class="col-md-8">
             <div class="posts-content mt-2 m p-2">
                 {0}
-                <span class="post-title text-primary"> {1}<span>{2}</span></span>
+                <span class="post-title text-primary">{1} - <span>{2}</span></span>
             </div>
         </div>
         `;
