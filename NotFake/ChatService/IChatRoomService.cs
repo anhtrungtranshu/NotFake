@@ -19,6 +19,7 @@ namespace NotFake.ChatService
         Guid CheckRoomExist(string groupName);
         Guid CheckRoomExist(string FilmId, string userEmail);
         Group CheckRoomExistInDB(string FilmId, string userEmail);
+        KeyValuePair<Guid, Group> GetGroup(Group group);
         HubPost AddPostToGroup(HubMessage message);
         List<HubPost> GetPostsOfGroup(Group group);
         List<HubPost> GetPostsOfGroup(Guid guid);
@@ -26,5 +27,9 @@ namespace NotFake.ChatService
         List<HubUser> GetUserFriendList(string email, string keyword);
         List<HubUser> GetFriendSuggestions(string email, string keyword);
         KeyValuePair<string, User> AddFriendRequest(string email, string requestToEmail);
+        List<HubUser> GetGroupFriendSuggestion(string email, string keyword);
+        UserFilmInvite AddFilmInvitation(string groupName, string invitedUserEmail);
+        UserFilmInvite FilmInvitationHandle(int invitationId, string invitedUserEmail, bool isAccepted);
+        void AddMemberToGroup(Group group, string invitedUserEmail);
     }
 }

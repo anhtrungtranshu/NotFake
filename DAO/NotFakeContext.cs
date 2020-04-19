@@ -180,21 +180,12 @@ namespace DAO
                 .HasKey(uf => new { uf.UserId, uf.FilmId });
 
             modelBuilder.Entity<UserFilmInvite>()
-                .HasKey(ufi => new { ufi.InvitedUserId, ufi.InvitingUserId, ufi.FilmId });
-            modelBuilder.Entity<UserFilmInvite>()
-                .HasOne(ufi => ufi.InvitingUser)
+                .HasOne(ufi => ufi.Group)
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<UserFilmInvite>()
-                .HasOne(ufi => ufi.InvitingUser)
-                .WithMany()
-                .OnDelete(DeleteBehavior.Restrict);
+                
             modelBuilder.Entity<UserFilmInvite>()
                 .HasOne(ufi => ufi.InvitedUser)
-                .WithMany()
-                .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<UserFilmInvite>()
-                .HasOne(ufi => ufi.Film)
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);
         }

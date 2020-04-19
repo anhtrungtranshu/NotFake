@@ -83,6 +83,11 @@ namespace NotFake.ChatService
             }
             return null;
         }
+        public KeyValuePair<Guid, Group> GetGroup(Group group)
+        {
+            return _roomInfo.Where(r => r.Value == group).FirstOrDefault();
+        }
+
         public Guid CreateRoom(string filmId, string userEmail)
         {
             User _user = _notFakeService.User.GetByEmail(userEmail);
@@ -225,6 +230,68 @@ namespace NotFake.ChatService
             }
         }
 
+        public List<HubUser> GetGroupFriendSuggestion(string email, string keyword)
+        {
+            try
+            {
+                User currentUser = _notFakeService.User.GetByEmail(email);
+                return _notFakeService.Friendship.GetFriendships(currentUser, keyword, false)
+                                    .Where(fs => fs.InvitedUser == currentUser ? _listConnectedUsers.ContainsValue(fs.InvitingUser)
+                                    : _listConnectedUsers.ContainsValue(fs.InvitedUser))
+                                    .ToList()
+                                    .ConvertAll(fs => new HubUser()
+                                    {
+                                        UserEmail = fs.InvitedUser == currentUser ? fs.InvitingUser.Email : fs.InvitedUser.Email,
+                                        UserName = fs.InvitedUser == currentUser ? fs.InvitingUser.Fullname : fs.InvitedUser.Fullname
+                                    });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public UserFilmInvite AddFilmInvitation(string groupName, string invitedUserEmail)
+        {
+            try
+            {
+                Group group = _roomInfo
+                                        .Where(r => r.Key.ToString() == groupName)
+                                        .FirstOrDefault()
+                                        .Value;
+                User invitedUser = _notFakeService.User.GetByEmail(invitedUserEmail);
+
+                UserFilmInvite invitation = _notFakeService.UserFilmInvite.Add(new UserFilmInvite()
+                {
+                    Group = group,
+                    InvitedUser = invitedUser,
+                    isAccepted = UserFilmInviteStatus.Pending
+                });
+
+                return invitation;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public UserFilmInvite FilmInvitationHandle(int invitationId, string invitedUserEmail, bool isAccepted)
+        {
+            try
+            {
+                UserFilmInvite invitation = _notFakeService.UserFilmInvite.Get(invitationId);
+                invitation.isAccepted = isAccepted ? UserFilmInviteStatus.Accepted : UserFilmInviteStatus.Rejected;
+                _notFakeService.UserFilmInvite.Update(invitation);
+                return invitation;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
 
         // public List<HubUser> GetGroupFriendSuggestions(string keywords)
         // {
@@ -251,6 +318,22 @@ namespace NotFake.ChatService
         //     var room = _roomInfo[groupName];
 
         // }
+        public void AddMemberToGroup(Group group, string invitedUserEmail)
+        {
+            try
+            {
+                User invitedUser = _notFakeService.User.GetByEmail(invitedUserEmail);
+                _notFakeService.GroupMembers.Add(new GroupMembers()
+                {
+                    Group = group,
+                    Member = invitedUser
+                });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public void Dispose()
         {

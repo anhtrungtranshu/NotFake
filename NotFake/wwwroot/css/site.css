@@ -527,6 +527,7 @@ a.text-primary:focus {
     display: inline-block;
 }
 
+/* 
 .autocomplete input {
     border: 1px solid transparent;
     background-color: #f1f1f1;
@@ -537,11 +538,10 @@ a.text-primary:focus {
 .autocomplete input[type=text] {
     background-color: #f1f1f1;
     width: 100%;
-}
+} */
 
 .autocomplete-items {
     position: absolute;
-    border: 1px solid #d4d4d4;
     border-bottom: none;
     border-top: none;
     z-index: 99;
@@ -549,18 +549,30 @@ a.text-primary:focus {
     top: 100%;
     left: 0;
     right: 0;
+    background-color: rgba(0, 0, 0, .8);
 }
 
 .autocomplete-items div {
     padding: 10px;
     cursor: pointer;
-    background-color: #fff;
-    border-bottom: 1px solid #d4d4d4;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .autocomplete-items div:hover {
     /*when hovering an item:*/
-    background-color: #e9e9e9;
+    background-color: #64a19d;
+}
+
+.autocomplete-items div:hover button {
+    border-color: rgba(255, 255, 255, .5);
+}
+
+
+.autocomplete-items div:hover button:hover {
+    border-color: rgba(255, 255, 255, 1);;
 }
 
 .autocomplete-active {

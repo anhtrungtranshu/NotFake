@@ -358,13 +358,7 @@ $(document).ready(function () {
         })
     })
 
-    connection.on("IncommingFriendRequest", function (data) {
-        $.notify({
-            title: StringFormat("{0} sent you a friend request!", [data.invitingUserName])
-        }, {
-            style: "notification",
-            autoHide: true
-        })
+    function newRequestHandler(message, target, requestType) {
 
         if ($("#incomingFriendRequestsMenu .dropdown-item[disabled]").length) {
             $("#incomingFriendRequestsMenu").empty();
@@ -378,50 +372,109 @@ $(document).ready(function () {
             <a class="dropdown-item">
                 <div class="d-flex align-items-center">
                     <span style="white-space:break-spaces; width: 15rem; display: inline-block">{0}</span>
-                    <div class="btn-group" role="group" aria-label="friend request action">
-                        <button type="button" class="btn btn-icon-secondary friend-request-action-btn-no">
+                    <div class="btn-group" role="group" aria-label="request action">
+                        <button type="button" class="btn btn-icon-secondary request-action-btn-no">
                             <i class="fas fa-ban"></i>
                         </button>
-                        <button type="button" class="btn btn-icon-primary friend-request-action-btn-yes">
+                        <button type="button" class="btn btn-icon-primary request-action-btn-yes">
                             <i class="fas fa-check"></i>
                         </button>
-                        <input type="hidden" value="{1}" />
+                        <input type="hidden" name="target" value="{1}" />
+                        <input type="hidden" name="requestType" value={2} />
                     </div>
                 </div>
             </a>`;
 
         var frmHtml = StringFormat(frmTemp, [
-            StringFormat("{0} sent you a friend request", [data.invitingUserName]),
-            data.invitingUserEmail
+            message,
+            target,
+            requestType
         ])
         $("#incomingFriendRequestsMenu").append(frmHtml);
 
+    }
+
+    connection.on("IncommingFriendRequest", function (data) {
+        $.notify({
+            title: StringFormat("{0} sent you a friend request!", [data.invitingUserName])
+        }, {
+            style: "notification",
+            autoHide: true
+        })
+
+        newRequestHandler(
+            StringFormat("{0} sent you a friend request", [data.invitingUserName]),
+            data.invitingUserEmail,
+            "friendRequest"
+        );
+
     })
+
+    // Film invitation
+    connection.on("NewFilmInvitation", function (data) {
+        $.notify({
+            title: data.message
+        }, {
+            style: "notification",
+            autoHide: true
+        })
+
+        newRequestHandler(
+
+            data.message,
+            data.invitationId,
+            "filmRequest"
+        );
+    })
+
 
     $("#incomingFriendRequestsMenu").on("click", "button", function (e) {
         e.stopPropagation();
-        var isAccepted = $(this).hasClass("friend-request-action-btn-no") ? false : true;
-        var invitingUserEmail = $(this).parent().find("input").val();
+        var isAccepted = $(this).hasClass("request-action-btn-no") ? false : true;
 
-        var data = {
-            invitedUserEmail: $("#CurrentUserEmail").val(),
-            invitingUserEmail: invitingUserEmail,
-            isAccepted: isAccepted
-        };
+        var requestType = $(this).parent().find("input[name*='requestType']").val();
+        if (requestType == "friendRequest") {
+            var invitingUserEmail = $(this).parent().find("input[name*='target']").val();
 
-        $.post("/api/Friendship/FriendRequestAction", data, function (res) {
-            if (res.success) {
-                $("#incomingFriendRequestsMenu").find("a.dropdown-item[data-email*='" + invitingUserEmail + "']").remove();
-                if (!$("#incomingFriendRequestsMenu a.dropdown-item").length) {
-                    $("#pendingFriendRequests").addClass("d-none");
-                    $("#pendingFriendRequests").html("0");
-                    $("#incomingFriendRequestsMenu").append("<a class='dropdown-item' disabled>Oops! There is nothing new!</a>");
-                } else {
-                    $("#pendingFriendRequests").html($("#incomingFriendRequestsMenu a.dropdown-item").length);
+            var data = {
+                invitedUserEmail: $("#CurrentUserEmail").val(),
+                invitingUserEmail: invitingUserEmail,
+                isAccepted: isAccepted
+            };
+
+            $.post("/api/Friendship/FriendRequestAction", data, function (res) {
+                if (res.success) {
+                    $("#incomingFriendRequestsMenu").find("a.dropdown-item[data-email*='" + invitingUserEmail + "']").remove();
+                    if (!$("#incomingFriendRequestsMenu a.dropdown-item").length) {
+                        $("#pendingFriendRequests").addClass("d-none");
+                        $("#pendingFriendRequests").html("0");
+                        $("#incomingFriendRequestsMenu").append("<a class='dropdown-item' disabled>Oops! There is nothing new!</a>");
+                    } else {
+                        $("#pendingFriendRequests").html($("#incomingFriendRequestsMenu a.dropdown-item").length);
+                    }
                 }
+            })
+
+        } else {
+            var invitationId = $(this).parent().find("input[name*='target']").val();
+            var data = {
+                invitedUserEmail: $("#CurrentUserEmail").val(),
+                invitationId: invitationId,
+                isAccepted: isAccepted
             }
-        })
+
+            connection.invoke("FriendResponseToJoinGroup", JSON.stringify(data));
+        }
+
     })
+
+    connection.on("UserJoinGroup", function (data) {
+        var host = "http://" + window.location.host;
+        var path = "/Film/WatchWithGroup";
+        var params = StringFormat("?filmId={0}&groupName={1}", [data.filmId, data.groupName]);
+        window.location.href = StringFormat("{0}{1}{2}", [host, path, params]);
+    })
+
 
 
     // get friend suggestions from hubs
@@ -442,6 +495,31 @@ $(document).ready(function () {
                 return a += StringFormat(userTemp, [b.userName, b.userEmail]);
             }, "")
         )
+    })
+
+    $("#groupFriendSuggestionAuto").parent().on("click", "button", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log($(this));
+
+        var data = {
+            // email: $("#CurrentUserEmail"),
+            groupName: $("#groupName").val(),
+            gUserEmail: $(this).next().val()
+        };
+
+        if (connection) {
+            connection.invoke("RequestFriendJoinGroup", JSON.stringify(data))
+        }
+    })
+
+    connection.on("RequestFriendJoinGroup", function (data) {
+        $.notify({
+            title: data.message
+        }, {
+            style: "notification",
+            autoHide: true,
+        })
     })
 
     // autocomplete group friend suggestions field in chat feature
@@ -474,7 +552,11 @@ $(document).ready(function () {
             `);
 
             if (connection) {
-                connection.invoke("GroupFriendSuggestions", keyword)
+                var data = {
+                    email: $("#CurrentUserEmail").val(),
+                    keyword: keyword
+                }
+                connection.invoke("GroupFriendSuggestions", JSON.stringify(data));
             }
         });
 

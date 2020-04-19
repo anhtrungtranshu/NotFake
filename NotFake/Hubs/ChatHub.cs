@@ -150,34 +150,55 @@ namespace NotFake.Hubs
             await Clients.Group(msg.GroupName).SendAsync("ReceiveMessage", newPost);
         }
 
-        public async Task GroupFriendSuggestions(string keyword)
+        public async Task GroupFriendSuggestions(string data)
         {
-
-            await Clients.Caller.SendAsync("GroupFriendSuggestions", new List<HubUser>()
-            {
-                new HubUser(){
-                    UserEmail = "a@demo.com",
-                    UserName = "a"
-                },
-                new HubUser(){
-                    UserEmail = "b@demo.com",
-                    UserName = "b"
-                },
-                new HubUser(){
-                    UserEmail = "c@demo.com",
-                    UserName = "c"
-                },
-                new HubUser(){
-                    UserEmail = "d@demo.com",
-                    UserName = "d"
-                },
-                new HubUser(){
-                    UserEmail = "e@demo.com",
-                    UserName = "e"
-                }
-            });
+            JObject obj = JObject.Parse(data);
+            List<HubUser> suggestionForGroup = _chatRoomService.GetGroupFriendSuggestion((string)obj["email"], (string)obj["keyword"]);
+            await Clients.Caller.SendAsync("GroupFriendSuggestions", suggestionForGroup);
         }
 
+        public async Task RequestFriendJoinGroup(string data)
+        {
+            try
+            {
+                JObject obj = JObject.Parse(data);
+                UserFilmInvite filmInvitation = _chatRoomService.AddFilmInvitation((string)obj["groupName"], (string)obj["gUserEmail"]);
+                KeyValuePair<string, User> invitedUser = _chatRoomService.GetConnectedUser(filmInvitation.InvitedUser);
+                if (!object.Equals(invitedUser, default(KeyValuePair<string, User>)))
+                {
+
+                    await Clients.Client(invitedUser.Key).SendAsync("NewFilmInvitation", new
+                    {
+                        message = String.Format("{0} invited you to watch {1}", filmInvitation.Group.Creator.Fullname, filmInvitation.Group.Film.Name),
+                        invitationId = filmInvitation.Id
+                    });
+                    await Clients.Caller.SendAsync("RequestFriendJoinGroup", new
+                    {
+                        message = "Request sent!"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task FriendResponseToJoinGroup(string data)
+        {
+            FilmInvitationReaction obj = JsonConvert.DeserializeObject<FilmInvitationReaction>(data);
+            UserFilmInvite invitation = _chatRoomService.FilmInvitationHandle(obj.invitationId, obj.invitedUserEmail, obj.isAccepted);
+            if (invitation.isAccepted == UserFilmInviteStatus.Accepted)
+            {
+                KeyValuePair<Guid, Group> currentGroup = _chatRoomService.GetGroup(invitation.Group);
+                _chatRoomService.AddMemberToGroup(currentGroup.Value, obj.invitedUserEmail);
+                await Clients.Caller.SendAsync("UserJoinGroup", new
+                {
+                    filmId = currentGroup.Value.FilmId,
+                    groupName = currentGroup.Key.ToString()
+                });
+            }
+        }
         public async Task GetUserFriendList(string data)
         {
             JObject obj = JObject.Parse(data);
