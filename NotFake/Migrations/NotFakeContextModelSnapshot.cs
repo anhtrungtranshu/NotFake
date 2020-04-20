@@ -4,20 +4,18 @@ using DAO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DAO.Migrations
+namespace NotFake.Migrations
 {
     [DbContext(typeof(NotFakeContext))]
-    [Migration("20200418231114_FixModelUserFilmInvite")]
-    partial class FixModelUserFilmInvite
+    partial class NotFakeContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
+                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -193,15 +191,15 @@ namespace DAO.Migrations
                     b.ToTable("User");
 
                     b.HasData(
-                        new { UserId = 1, Email = "admin@demo.com", Fullname = "admin", Password = "AANSrwW7CFvk6iR0tjFzDrIdOyE6v0PEEhK1Z10swjtddsh93ZFf8mubsV/7sPGlwA==", Role = 1 },
-                        new { UserId = 2, Email = "user2@demo.com", Fullname = "user full name 2", Password = "AGVKMcu3wiING4pzFUTub4LCUPTHj8dxWFxfwKtlr3y59mxwXbCpHiWahxqwtZLISA==", Role = 0 },
-                        new { UserId = 3, Email = "user3@demo.com", Fullname = "user full name 3", Password = "AHcVY6t0uC+OI1l5/9FYn7p8RE8DuvXWqYzDfbxfKnw9nrrs1mwHuk2ec2S+e+ltBQ==", Role = 0 },
-                        new { UserId = 4, Email = "user4@demo.com", Fullname = "user full name 4", Password = "ABzkxRSA4Artvzut39ekiFigLC3+YNnjo0redIwEe7GULb0oSGRcthy8Eqdc8DD2TQ==", Role = 0 },
-                        new { UserId = 5, Email = "user5@demo.com", Fullname = "user full name 5", Password = "AJI2+/Paxp8UJQqkI9j70rH7exF3Jc6Wqu5sIaBfbwOR1KNhZ32vljf0GrQxmzQSEg==", Role = 0 },
-                        new { UserId = 6, Email = "user6@demo.com", Fullname = "user full name 6", Password = "AJqgtIQ6d9tlpe0gECR4Gditi2HJ8DE2RLkHvFv9KzWlSTnO+mSDGDhQ5Jn9ZqVmeg==", Role = 0 },
-                        new { UserId = 7, Email = "user7@demo.com", Fullname = "user full name 7", Password = "ALQj6RjQZ8kIvDxONM6SZSSokGyxDaePP0xRoBvcn9YAIfqL5NRaePnfq9Mq+QwUGQ==", Role = 0 },
-                        new { UserId = 8, Email = "user8@demo.com", Fullname = "user full name 8", Password = "AONdDLWn5ZLkLPJwRedPav7ldV9+YfFCKS4jujCFmMULv0KPiP6EUJC6PnoixTVhug==", Role = 0 },
-                        new { UserId = 9, Email = "user9@demo.com", Fullname = "user full name 9", Password = "ANGtaH9ZzxWwfgGfzaPF9G0Q/lmwr24y/ehSR/+F6LB9DBP0nG2a60V14O8sy22X2A==", Role = 0 }
+                        new { UserId = 1, Email = "admin@demo.com", Fullname = "admin", Password = "ABBs2Tvg7fWKN+zbmTSaFqgsB0qskKj9iYk8JvlkZf+YSWCbsrJJOGhVf1JcXj9unQ==", Role = 1 },
+                        new { UserId = 2, Email = "user2@demo.com", Fullname = "user full name 2", Password = "ALXmRRHjdrssywjhNe535WjJ129s+69NzRryuUo8wFFw9SW5+LgLv861HVbUdb43Ow==", Role = 0 },
+                        new { UserId = 3, Email = "user3@demo.com", Fullname = "user full name 3", Password = "AKeAaIXnNCMgXX43nrNus2NjTrueCJKiFngwkMvzXK+iu9hDKTlABlCMH4wZLVigKg==", Role = 0 },
+                        new { UserId = 4, Email = "user4@demo.com", Fullname = "user full name 4", Password = "APH53kuVzPfZwk+M4+zq1B6AkZ3i/z9mZ2bw5/E8VmceYiGD7Tt08XfkQ2x2xdg3lg==", Role = 0 },
+                        new { UserId = 5, Email = "user5@demo.com", Fullname = "user full name 5", Password = "APDrU+4pCKpD7eJbVid7Pb36C6J/Fu3+xvAYR4IXLlScvvSDkT5TgE3vZOy4ydmgiQ==", Role = 0 },
+                        new { UserId = 6, Email = "user6@demo.com", Fullname = "user full name 6", Password = "AC/AgcVvQCzVfcIOiycs0HhCsEKONsS5v9uTW50v/sxPpVm1mAs8dsH2V+2MnMV/BQ==", Role = 0 },
+                        new { UserId = 7, Email = "user7@demo.com", Fullname = "user full name 7", Password = "APaQW/t8vDjArYyzVpst6pDydzb40y2hfZqS1Z4Dqz2XJnOgqu7HJFGqoy31drIgCA==", Role = 0 },
+                        new { UserId = 8, Email = "user8@demo.com", Fullname = "user full name 8", Password = "AM4TgsoMEWhj0Rne3110nipLij4aGJz47gbcqpAh70yuB4etoymKiYLSieLLWCsmcQ==", Role = 0 },
+                        new { UserId = 9, Email = "user9@demo.com", Fullname = "user full name 9", Password = "APl7HLhEUbn6h8NXH7YPwNbAYDWyZ7x9fPU5mo1rqP3RIUoZf2q5oRafRD02CmIZqA==", Role = 0 }
                     );
                 });
 

@@ -7,17 +7,17 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DAO.Migrations
+namespace NotFake.Migrations
 {
     [DbContext(typeof(NotFakeContext))]
-    [Migration("20200416154401_MoreUser")]
-    partial class MoreUser
+    [Migration("20200420115943_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
+                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -193,15 +193,15 @@ namespace DAO.Migrations
                     b.ToTable("User");
 
                     b.HasData(
-                        new { UserId = 1, Email = "admin@demo.com", Fullname = "admin", Password = "AAp8Gl5mR9l+RlupYIJ1UoXUjW81CKVwf0iuiFGfp1MLOG88+6/QXX2otuFVpOUc5A==", Role = 1 },
-                        new { UserId = 2, Email = "user2@demo.com", Fullname = "user full name 2", Password = "AJE0hszwGTufuEp64wM8sW8y6F6/N5xtGWWPPZ29CTGAO4+bJkUtwugDJlDGMlW02Q==", Role = 0 },
-                        new { UserId = 3, Email = "user3@demo.com", Fullname = "user full name 3", Password = "APGxsJVpfYZiES+mBThYBzMnv7ro5WBBmP8yR2ebSm/+g0qrQ4YW+LcfKMRQDorKPw==", Role = 0 },
-                        new { UserId = 4, Email = "user4@demo.com", Fullname = "user full name 4", Password = "APu00iJlok7VpieXTelifUq5/G+gVuXv7txQ6n3XuFVktbjDIyjDmZxKkt8os33j1A==", Role = 0 },
-                        new { UserId = 5, Email = "user5@demo.com", Fullname = "user full name 5", Password = "AJ8Ex959VwH588C3PJoNM/lo6AIMHYJKax8ONrMG0nb8Iy34JIBgR+4Oq8Lylckfbw==", Role = 0 },
-                        new { UserId = 6, Email = "user6@demo.com", Fullname = "user full name 6", Password = "ADnEvfd1JW88Gic0Kk5d0PyjNlN7Wt4qd+/gIs4z/p4NmiLKrJo78dxNTqhNhPuVUQ==", Role = 0 },
-                        new { UserId = 7, Email = "user7@demo.com", Fullname = "user full name 7", Password = "APenOYHGcuN3gimx0iX3/2mb+NumdtURe7zifyFTmwEZQkdHCNvc2qA4Wrd0j3Re2g==", Role = 0 },
-                        new { UserId = 8, Email = "user8@demo.com", Fullname = "user full name 8", Password = "AAnCe8M7LcMpKj4xJkKs9QbpccuZ7h1NmzU5mKLjgI00aaz+kf5O92oDLZ/DzLKAqg==", Role = 0 },
-                        new { UserId = 9, Email = "user9@demo.com", Fullname = "user full name 9", Password = "AJkuTMEnzAMAi0fZ1MVFKUEe8Y48eIw+O/Bi1m3QahX2iWH9yjRkkgKfDewXHu7iDw==", Role = 0 }
+                        new { UserId = 1, Email = "admin@demo.com", Fullname = "admin", Password = "ABBs2Tvg7fWKN+zbmTSaFqgsB0qskKj9iYk8JvlkZf+YSWCbsrJJOGhVf1JcXj9unQ==", Role = 1 },
+                        new { UserId = 2, Email = "user2@demo.com", Fullname = "user full name 2", Password = "ALXmRRHjdrssywjhNe535WjJ129s+69NzRryuUo8wFFw9SW5+LgLv861HVbUdb43Ow==", Role = 0 },
+                        new { UserId = 3, Email = "user3@demo.com", Fullname = "user full name 3", Password = "AKeAaIXnNCMgXX43nrNus2NjTrueCJKiFngwkMvzXK+iu9hDKTlABlCMH4wZLVigKg==", Role = 0 },
+                        new { UserId = 4, Email = "user4@demo.com", Fullname = "user full name 4", Password = "APH53kuVzPfZwk+M4+zq1B6AkZ3i/z9mZ2bw5/E8VmceYiGD7Tt08XfkQ2x2xdg3lg==", Role = 0 },
+                        new { UserId = 5, Email = "user5@demo.com", Fullname = "user full name 5", Password = "APDrU+4pCKpD7eJbVid7Pb36C6J/Fu3+xvAYR4IXLlScvvSDkT5TgE3vZOy4ydmgiQ==", Role = 0 },
+                        new { UserId = 6, Email = "user6@demo.com", Fullname = "user full name 6", Password = "AC/AgcVvQCzVfcIOiycs0HhCsEKONsS5v9uTW50v/sxPpVm1mAs8dsH2V+2MnMV/BQ==", Role = 0 },
+                        new { UserId = 7, Email = "user7@demo.com", Fullname = "user full name 7", Password = "APaQW/t8vDjArYyzVpst6pDydzb40y2hfZqS1Z4Dqz2XJnOgqu7HJFGqoy31drIgCA==", Role = 0 },
+                        new { UserId = 8, Email = "user8@demo.com", Fullname = "user full name 8", Password = "AM4TgsoMEWhj0Rne3110nipLij4aGJz47gbcqpAh70yuB4etoymKiYLSieLLWCsmcQ==", Role = 0 },
+                        new { UserId = 9, Email = "user9@demo.com", Fullname = "user full name 9", Password = "APl7HLhEUbn6h8NXH7YPwNbAYDWyZ7x9fPU5mo1rqP3RIUoZf2q5oRafRD02CmIZqA==", Role = 0 }
                     );
                 });
 
@@ -222,23 +222,21 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("DAO.Models.UserFilmInvite", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("GroupId");
+
                     b.Property<int>("InvitedUserId");
-
-                    b.Property<int>("InvitingUserId");
-
-                    b.Property<int>("FilmId");
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<DateTime>("WatchDate");
 
                     b.Property<int>("isAccepted");
 
-                    b.HasKey("InvitedUserId", "InvitingUserId", "FilmId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("FilmId");
+                    b.HasIndex("GroupId");
 
-                    b.HasIndex("InvitingUserId");
+                    b.HasIndex("InvitedUserId");
 
                     b.ToTable("UserFilmInvites");
                 });
@@ -326,19 +324,14 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("DAO.Models.UserFilmInvite", b =>
                 {
-                    b.HasOne("DAO.Models.Film", "Film")
+                    b.HasOne("DAO.Models.Group", "Group")
                         .WithMany()
-                        .HasForeignKey("FilmId")
+                        .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("DAO.Models.User", "InvitedUser")
                         .WithMany()
                         .HasForeignKey("InvitedUserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("DAO.Models.User", "InvitingUser")
-                        .WithMany()
-                        .HasForeignKey("InvitingUserId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618

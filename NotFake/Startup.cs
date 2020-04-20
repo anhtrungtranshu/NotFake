@@ -41,25 +41,27 @@ namespace NotFake
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            
+
 
             // var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
             var sqlConnectionString = Configuration.GetConnectionString("AlternativeConnection");
 
             services.AddDbContext<NotFakeContext>(options =>
-                options.UseSqlServer(sqlConnectionString)
+                options.UseSqlServer(sqlConnectionString, o => o.MigrationsAssembly("NotFake"))
             );
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.Events = new CookieAuthenticationEvents {
-                        OnRedirectToLogin = ctx => {
+                    options.Events = new CookieAuthenticationEvents
+                    {
+                        OnRedirectToLogin = ctx =>
+                        {
                             var requestPath = ctx.Request.Path;
-                                ctx.Response.Redirect("/Auth/Login");
+                            ctx.Response.Redirect("/Auth/Login");
                             return Task.CompletedTask;
                         }
-            		};
+                    };
                 });
 
             services.AddScoped<INotFakeService, NotFakeService>();
@@ -69,7 +71,7 @@ namespace NotFake
             services.AddSingleton<IChatRoomService, InMemoryChatRoomService>();
             services.AddAuthorization(options =>
             {
-                
+
                 options.AddPolicy("User", policy =>
                 {
                     policy.RequireClaim(ClaimTypes.Role, UserRoles.User.ToString(), UserRoles.Admin.ToString());
@@ -78,9 +80,9 @@ namespace NotFake
                 {
                     policy.RequireClaim(ClaimTypes.Role, UserRoles.Admin.ToString());
                 });
-                
+
             });
-           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -101,7 +103,7 @@ namespace NotFake
             {
                 routes.MapHub<ChatHub>("/chatHub");
             });
-            app.UseAuthentication(); 
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
