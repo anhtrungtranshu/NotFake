@@ -31,5 +31,6 @@ namespace NotFake.ChatService
         UserFilmInvite AddFilmInvitation(string groupName, string invitedUserEmail);
         UserFilmInvite FilmInvitationHandle(int invitationId, string invitedUserEmail, bool isAccepted);
         void AddMemberToGroup(Group group, string invitedUserEmail);
+        bool CheckGroupAdmin(Guid groupName, string userEmail);
     }
 }

@@ -335,6 +335,13 @@ namespace NotFake.ChatService
             }
         }
 
+        public bool CheckGroupAdmin(Guid groupName, string userEmail)
+        {
+            KeyValuePair<Guid, Group> _group = _roomInfo.Where(r => r.Key == groupName).FirstOrDefault();
+            User _user = _notFakeService.User.GetByEmail(userEmail);
+            return _group.Value.Creator == _user;
+        }
+
         public void Dispose()
         {
             _scope?.Dispose();

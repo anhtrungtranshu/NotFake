@@ -68,7 +68,8 @@ namespace NotFake.Hubs
                             {
                                 GroupName = roomName.ToString(),
                                 Posts = postOfGroup,
-                                Members = memberOfGroup
+                                Members = memberOfGroup,
+                                isGroupAdmin = _chatRoomService.CheckGroupAdmin(roomName, userEmail)
                             });
                             return;
                         }
@@ -81,7 +82,8 @@ namespace NotFake.Hubs
                             await Groups.AddToGroupAsync(Context.ConnectionId, guid.ToString());
                             await Clients.Caller.SendAsync("Authorized", new
                             {
-                                GroupName = guid.ToString()
+                                GroupName = guid.ToString(),
+                                isGroupAdmin = true
                             });
                         }
                         catch
@@ -130,7 +132,8 @@ namespace NotFake.Hubs
                 await Clients.Caller.SendAsync("Authorized", new HubGroup
                 {
                     GroupName = guid.ToString(),
-                    Posts = posts
+                    Posts = posts,
+                    isGroupAdmin = true
                 });
             }
             catch
@@ -147,7 +150,7 @@ namespace NotFake.Hubs
         {
             HubMessage msg = JsonConvert.DeserializeObject<HubMessage>(message);
             HubPost newPost = _chatRoomService.AddPostToGroup(msg);
-            await Clients.Group(msg.GroupName).SendAsync("ReceiveMessage", newPost);
+            await Clients.GroupExcept(msg.GroupName, Context.ConnectionId).SendAsync("ReceiveMessage", newPost);
         }
 
         public async Task GroupFriendSuggestions(string data)
@@ -197,6 +200,9 @@ namespace NotFake.Hubs
                     filmId = currentGroup.Value.FilmId,
                     groupName = currentGroup.Key.ToString()
                 });
+                List<HubUser> memberOfGroup = _chatRoomService.GetMemberOfGroup(currentGroup.Key);
+
+                await Clients.Group(currentGroup.Key.ToString()).SendAsync("GroupMembersChange", memberOfGroup);
             }
         }
         public async Task GetUserFriendList(string data)
@@ -243,6 +249,13 @@ namespace NotFake.Hubs
             {
                 throw ex;
             }
+        }
+
+        public async Task AdminVideoTimeUpdate(string data)
+        {
+            JObject obj = JObject.Parse(data);
+            await Clients.GroupExcept((string)obj["groupName"], Context.ConnectionId)
+                        .SendAsync("AdminVideoTimeUpdate", (long)obj["currentProgress"]);
         }
 
         public async Task LeaveRoom(Guid roomId)

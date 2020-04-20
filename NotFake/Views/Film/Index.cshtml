@@ -6,22 +6,34 @@
 <div class="main-film-section">
     <div class="main-film-section__layout" id="filmLayout">
         <div class="main-film-section__video-wrapper">
-            <video id="main-video" class="main-film-section__video" controls preload autoplay>
-                <source src="/api/Video/@ViewBag.FilmId" type="video/mp4" />
-                <source src="/api/Video/@ViewBag.FilmId/@ViewBag.EpisodeId" type="video/mp4" />
-            </video>
+            <div class="main-film-section__video-thumbnail" id="videoThumbnail">
+                <video id="my-video" class="main-film-section__video" controls="false" preload muted>
+                    <source src="/api/Video/@ViewBag.FilmId" type="video/mp4" />
+                    <source src="/api/Video/@ViewBag.FilmId/@ViewBag.EpisodeId" type="video/mp4" />
+                </video>
+                <div class="media-controls pl-2 pr-2 pt-1 pb-1">
+                    <div class="progress mb-1" id="video-progress">
+                        @* <div class="progress-bar root-bar" id="rootProgressBar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div> *@
+                        <div class="progress-bar my-bar" id="myProgressBar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                    </div>
+                    <div class="buttons d-flex">
+                        <button id="play-pause-button" class="play-pause-button p-0" title="play">
+                            <i class='fas fa-play'></i>
+                        </button>
+                        <button id="chatGroup" class="chat-group-button p-0 ml-auto mr-2" title="chat">
+                            <i class="far fa-comment-dots"></i>
+                        </button>
+                        <button id="expand-collapse-button" class="p-0" title="expand">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div class="main-film-section__episodes">
                 episode details here
             </div>
-            
-
-            <button class="btn btn-primary" id="testButton">Watch with friend</button>
         </div>
-            @* <div class="media-controls">
-                <button id="play-pause-button" class="play-pause-button" title="play">
-                    <i class='fas fa-play'></i>
-                </button>
-        </div> *@
+
         <div class="main-film-section__chat-wrapper">
             <nav>
                 <div class="nav nav-tabs" id="chatGroupManagement" role="tablist">

@@ -115,6 +115,15 @@ input.form-control:focus {
     }
 }
 
+#mainNav {
+    transition: all 300ms ease-in-out;
+    /* overflow: hidden; */
+}
+
+#mainNav.video-fullscreen {
+    visibility: collapse;
+}
+
 .float-navigation {
     position: fixed;
     z-index: 999;
@@ -359,9 +368,76 @@ input.form-control:focus {
     width: 70%;
 }
 
-.main-film-section__video {
+.main-film-section__video-thumbnail {
+    position: relative;
     width: 100%;
     height: 60%;
+}
+
+.media-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* height: 5%; */
+}
+
+.media-controls .progress {
+    height: 2px !important;
+    line-height: 2px !important;
+    background-color: transparent;
+    position: relative;
+}
+
+.media-controls .progress .progress-bar {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.media-controls .progress .progress-bar.my-bar {
+    background-color: #64a19d;
+    z-index: 2;
+}
+
+.media-controls .progress .progress-bar.root-bar {
+    background-color: white;
+}
+
+.media-controls .buttons {
+    align-items: center;
+}
+
+.media-controls .buttons button {
+    color: white;
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+.media-controls .buttons button:focus {
+    outline: none;
+}
+
+.media-controls .buttons button:hover {
+    color: #64a19d;
+}
+
+.main-film-section__video-thumbnail.fullscreen {
+    /* width: 100vw;
+    height: 100vh; */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100vh;
+    position: fixed;
+}
+
+.main-film-section__video {
+    width: 100%;
+    height: 100%;
     background-color: #000000;
 }
 
@@ -375,6 +451,10 @@ input.form-control:focus {
     right: -30%;
     bottom: 0;
     padding-left: .5rem;
+}
+
+.main-film-section__chat-wrapper.fullsize {
+    top: 0;
 }
 
 .main-film-section__chat-wrapper .nav-hide {
@@ -489,6 +569,10 @@ a.text-primary:focus {
     justify-content: space-evenly;
 }
 
+.notification .post-title {
+    font-size: 60%;
+}
+
 /*
 =========================
         Scrollbar
@@ -572,7 +656,8 @@ a.text-primary:focus {
 
 
 .autocomplete-items div:hover button:hover {
-    border-color: rgba(255, 255, 255, 1);;
+    border-color: rgba(255, 255, 255, 1);
+    ;
 }
 
 .autocomplete-active {
@@ -607,4 +692,14 @@ a.text-primary:focus {
 .badge.badge-primary {
     color: white;
     background-color: #64a19d;
+}
+
+/*
+=========================
+        Videos
+=========================
+*/
+video::before,
+video::after {
+    content: ''
 }

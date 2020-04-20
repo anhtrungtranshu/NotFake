@@ -4,7 +4,7 @@
 // Write your JavaScript code.
 $(document).ready(function () {
     var isChatWithFriend = false;
-
+    var isGroupAdmin = false;
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     });
@@ -39,20 +39,6 @@ $(document).ready(function () {
             "</div>"
     });
 
-    // $.notify.addStyle('friend-request', {
-    //     html:
-    //         "<div>" +
-    //         "<div class='clearfix notification'>" +
-    //         "<div class='title' data-notify-html='title'/>" +
-    //         "<div class='buttons d-flex'>" +
-    //         "<button class='btn btn-outline-secondary disabled no'>Cancel</button>" +
-    //         "<button class='btn btn-outline-primary yes'>Ok</button>" +
-    //         "<span class='d-none' data-notify-text='email'/>" +
-    //         "</div>" +
-    //         "</div>" +
-    //         "</div>"
-    // });
-
     // notification temp
     $.notify.addStyle('notification', {
         html:
@@ -62,6 +48,16 @@ $(document).ready(function () {
             "</div>" +
             "</div>"
     });
+
+    $.notify.addStyle('post-message', {
+        html:
+            "<div style='z-index:999'>" +
+            "<div class='clearfix notification'>" +
+            "<div class='post-content' data-notify-html='content'/>" +
+            "<div class='post-title' data-notify-html='title'/>" +
+            "</div>" +
+            "</div>"
+    })
 
     // startup chatHub
     var isChatExpanded = false;
@@ -125,7 +121,17 @@ $(document).ready(function () {
                 $("#groupMemberList").empty();
                 appendGroupMemberToList(data.members)
             }
+
+            isGroupAdmin = data.isGroupAdmin;
+            if (!isGroupAdmin) {
+                $("#video-progress").append("<div class='progress-bar root-bar' id='rootProgressBar' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100' style='width: 0%'></div>")
+            }
         }
+    })
+
+    connection.on("GroupMembersChange", function (data) {
+        $("#groupMemberList").empty();
+        appendGroupMemberToList(data);
     })
 
     function appendGroupMemberToList(list) {
@@ -185,6 +191,13 @@ $(document).ready(function () {
     })
 
     connection.on("ReceiveMessage", function (data) {
+        $.notify({
+            content: data.message,
+            title: data.userName
+        }, {
+            style: "post-message",
+            autoHide: true,
+        })
         AppendMessage(data);
         // var msg = data.userEmail == $("#CurrentUserEmail").val() ? StringFormat(postMeTemp, [data.message, moment(data.created).format("YYYY-MM-DD HH:MM")])
         //     : StringFormat(postOtherTemp, [data.message, data.userName, moment(data.created).format("YYYY-MM-DD HH:MM")]);
@@ -239,7 +252,7 @@ $(document).ready(function () {
         }
     })
 
-    $("#testButton").click(function (e) {
+    $("#chatGroup").click(function (e) {
         if (!isChatWithFriend) {
 
             var userEmail = "";
@@ -275,27 +288,6 @@ $(document).ready(function () {
     })
 
 
-
-
-
-
-    // var mediaPlayer = $("#main-video")[0];
-    // mediaPlayer.controls = false;
-
-    // $("#play-pause-button").on("click", function () {
-    //     if (mediaPlayer.paused || mediaPlayer.ended) {
-    //         $(this).title = "pause";
-    //         // $(this).empty();
-    //         $(this).innerHTML = "<i class='fas fa-pause'></i>";
-    //         mediaPlayer.play();
-    //     }
-    //     else {
-    //         $(this).title = "pause";
-    //         // $(this).empty();
-    //         $(this).innerHTML = "<i class='fas fa-play'></i>";
-    //         mediaPlayer.pause();
-    //     }
-    // })
 
 
     connection.on("GetUserFriendList", function (data) {
@@ -593,8 +585,106 @@ $(document).ready(function () {
         });
     }
 
+    var isFullScreen = false;
 
+    // full screen
+    $("#expand-collapse-button").click(function (e) {
+        if (!isFullScreen) {
+            var el = document.documentElement
+                , rfs = // for newer Webkit and Firefox
+                    el.requestFullScreen
+                    || el.webkitRequestFullScreen
+                    || el.mozRequestFullScreen
+                    || el.msRequestFullScreen
+                ;
+            if (typeof rfs != "undefined" && rfs) {
+                rfs.call(el);
+            } else if (typeof window.ActiveXObject != "undefined") {
+                // for Internet Explorer
+                var wscript = new ActiveXObject("WScript.Shell");
+                if (wscript != null) {
+                    wscript.SendKeys("{F11}");
+                }
+            }
+            $("#videoThumbnail").addClass("fullscreen");
+            $("#mainNav").addClass("video-fullscreen");
+            $(".main-film-section__chat-wrapper").addClass("fullsize");
+            $(this).empty();
+            $(this).append("<i class='fas fa-compress'></i>");
+
+        } else {
+
+            $("#videoThumbnail").removeClass("fullscreen");
+            $("#mainNav").removeClass("video-fullscreen");
+            $(".main-film-section__chat-wrapper").removeClass("fullsize");
+            $(this).empty();
+            $(this).append("<i class='fas fa-expand'></i>");
+
+            closeFullscreen();
+        }
+        isFullScreen = !isFullScreen;
+    })
+
+    // custom media controller
+
+    var mediaPlayer = $("#my-video")[0];
+    if (mediaPlayer != null && mediaPlayer != undefined) {
+        mediaPlayer.ontimeupdate = function () { onVideoTimeUpdate($("#myProgressBar")[0]) }
+    }
+    mediaPlayer.controls = false;
+
+    $("#play-pause-button").on("click", function () {
+        if (mediaPlayer.paused || mediaPlayer.ended) {
+            $(this).title = "pause";
+            $(this).empty();
+            $(this).append("<i class='fas fa-pause'></i>");
+            mediaPlayer.play();
+        }
+        else {
+            $(this).title = "pause";
+            $(this).empty();
+            $(this).append("<i class='fas fa-play'></i>");
+            mediaPlayer.pause();
+        }
+    })
+
+    // updateOnTime
+    function onVideoTimeUpdate(element) {
+        var mediaPlayer = $("#my-video")[0];
+        var duration = mediaPlayer.duration;
+        var currentProgress = mediaPlayer.currentTime / duration * 100;
+        $(element).css("width", currentProgress + "%");
+        console.log("isGroupAdmin", isGroupAdmin);
+        if (isGroupAdmin) {
+            if (connection) {
+                var data = {
+                    groupName: $("#groupName").val(),
+                    currentProgress: currentProgress
+                }
+                connection.invoke("AdminVideoTimeUpdate", JSON.stringify(data));
+            }
+        }
+    }
+
+    connection.on("AdminVideoTimeUpdate", function (data) {
+        console.log(data);
+        if ($("#rootProgressBar").length) {
+            $("#rootProgressBar").css("width", data + "%");
+        }
+    })
 })
+
+function closeFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+    }
+}
 
 function ArrayToJSON(arr) {
     return arr.reduce((a, b, i) => {
