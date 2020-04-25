@@ -4,14 +4,16 @@ using DAO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace NotFake.Migrations
 {
     [DbContext(typeof(NotFakeContext))]
-    partial class NotFakeContextModelSnapshot : ModelSnapshot
+    [Migration("20200425113857_AnhMigration")]
+    partial class AnhMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,16 +44,7 @@ namespace NotFake.Migrations
                     b.ToTable("Film");
 
                     b.HasData(
-                        new { FilmId = 1, GenreId = 1, Name = "Tom and Jerry", ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg", Type = 1 },
-                        new { FilmId = 2, GenreId = 1, Name = "Tom and Jerry 2", ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg", Type = 1 },
-                        new { FilmId = 3, GenreId = 1, Name = "The Land Before Rhyme", ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg", Type = 1 },
-                        new { FilmId = 4, GenreId = 1, Name = "Excalibur!", ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg", Type = 1 },
-                        new { FilmId = 5, GenreId = 1, Name = "Meet the Dogs", ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg", Type = 1 },
-                        new { FilmId = 6, GenreId = 1, Name = "Home Away From Home", ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg", Type = 1 },
-                        new { FilmId = 7, GenreId = 2, Name = "Action Film Example 1", ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg", Type = 1 },
-                        new { FilmId = 8, GenreId = 2, Name = "Hard Gun", ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg", Type = 1 },
-                        new { FilmId = 9, GenreId = 2, Name = "Hard Gun II : Reloaded", ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg", Type = 1 },
-                        new { FilmId = 10, GenreId = 2, Name = "A Knock at the Door", ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg", Type = 1 }
+                        new { FilmId = 1, GenreId = 1, Name = "Tom and Jerry", ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg", Type = 1 }
                     );
                 });
 
@@ -85,25 +78,7 @@ namespace NotFake.Migrations
                         new { Id = 5, FilmId = 1, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/005%20%20%20Dog%20Trouble%20%5B1942%5D.mp4", Name = "Dog Trouble", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/005%20%20%20Dog%20Trouble%20%5B1942%5D_000001.jpg" },
                         new { Id = 6, FilmId = 1, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/006%20%20%20Puss%20n%27%20Toots%20%5B1942%5D.mp4", Name = "Puss n' Toots", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/006%20%20%20Puss%20n%27%20Toots%20%5B1942%5D_000001.jpg" },
                         new { Id = 7, FilmId = 1, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/007%20%20%20The%20Bowling%20Alley%20Cat%20%5B1942%5D.mp4", Name = "The Bowling Alley Cat", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/007%20%20%20The%20Bowling%20Alley%20Cat%20%5B1942%5D_000001.jpg" },
-                        new { Id = 8, FilmId = 1, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 9, FilmId = 2, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 10, FilmId = 2, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 11, FilmId = 3, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 12, FilmId = 3, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 13, FilmId = 4, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 14, FilmId = 4, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 15, FilmId = 5, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 16, FilmId = 5, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 17, FilmId = 6, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 18, FilmId = 6, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 19, FilmId = 7, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 20, FilmId = 7, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 21, FilmId = 8, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 22, FilmId = 8, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 23, FilmId = 9, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 24, FilmId = 9, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 25, FilmId = 10, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" },
-                        new { Id = 26, FilmId = 10, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" }
+                        new { Id = 8, FilmId = 1, Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4", Name = "Fine Feathered Friend", RunTime = 100, ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg" }
                     );
                 });
 
@@ -135,8 +110,7 @@ namespace NotFake.Migrations
                     b.ToTable("Genre");
 
                     b.HasData(
-                        new { GenreId = 1, Name = "Cartoons" },
-                        new { GenreId = 2, Name = "Action" }
+                        new { GenreId = 1, Name = "Cartoons" }
                     );
                 });
 
@@ -219,15 +193,15 @@ namespace NotFake.Migrations
                     b.ToTable("User");
 
                     b.HasData(
-                        new { UserId = 1, Email = "admin@demo.com", Fullname = "admin", Password = "AJkaPNio0CZvhiTNa45pyuOnCfsVUX7aCav0c0jAQ9fkSCb/MUJjn0yMJN+FV6qJnA==", Role = 1 },
-                        new { UserId = 2, Email = "user2@demo.com", Fullname = "user full name 2", Password = "AFOsk2DGjOCBiu2qPkqIDIXg9AIRWQzLef9dx+rZnZrMrMClerg/pR7u/1s0wRSEjg==", Role = 0 },
-                        new { UserId = 3, Email = "user3@demo.com", Fullname = "user full name 3", Password = "AADAehi+qNplWugpsXIG5e3XjZyc5+QcUBOpvCk1fu7ZtgQsOvIm3Iu2IOXKgnJQww==", Role = 0 },
-                        new { UserId = 4, Email = "user4@demo.com", Fullname = "user full name 4", Password = "AMaj8yHcueRHZ34Qz/qM9fbkFVCf/ZVDM/coftO8Qbh15YJTTKq2RYTE9/0Pr/an6g==", Role = 0 },
-                        new { UserId = 5, Email = "user5@demo.com", Fullname = "user full name 5", Password = "AGmSh7MY8kdg3Vaoo4nRqscv7pkcqY/ductqakHcNpld45fdQxiP8CTimi2XD2/tMg==", Role = 0 },
-                        new { UserId = 6, Email = "user6@demo.com", Fullname = "user full name 6", Password = "APVnKyyueY468TKj1iNYcTMDS/HBTnrrraN4BJVFdMJgGv1RVAhNd/cquMFpsu90jA==", Role = 0 },
-                        new { UserId = 7, Email = "user7@demo.com", Fullname = "user full name 7", Password = "AC6n8EbS+zeh+aCAJLrmD1aTFVy0zvgdkJp+whCh7pyxiHYZJHQM6mUnO/44qdJ/Lg==", Role = 0 },
-                        new { UserId = 8, Email = "user8@demo.com", Fullname = "user full name 8", Password = "AGtnnbHoJSUMTggEtmBQImYvi0Gc6LCZT0Z5c7EAbUMvCr7qNiq84yq6+e7drW3Fdg==", Role = 0 },
-                        new { UserId = 9, Email = "user9@demo.com", Fullname = "user full name 9", Password = "ALH98hHwAcxu+aQltmzCkINET8DJ37g6kgplGJTC8f4CFg2nvxwF7V2PpgtbYSPYDA==", Role = 0 }
+                        new { UserId = 1, Email = "admin@demo.com", Fullname = "admin", Password = "ANUhHzTPpImI2jouF/cYEADKo8PE306TH5SR9RZBE5R+0AoTzJdekxww1/FT5JD4OQ==", Role = 1 },
+                        new { UserId = 2, Email = "user2@demo.com", Fullname = "user full name 2", Password = "ANYbRFBwwBizUR8GETM8s4VVzSftcdfhrmFlCqIe/Uv6N+MxmtcqddLSqZPZkYkArQ==", Role = 0 },
+                        new { UserId = 3, Email = "user3@demo.com", Fullname = "user full name 3", Password = "ACvYZhsZsYy5yR28B5r8/St6jWqwVP1e1nOgIb8lGlwwUDXUoJ9J92sY0hz2WFJLQg==", Role = 0 },
+                        new { UserId = 4, Email = "user4@demo.com", Fullname = "user full name 4", Password = "AIbyomJIKALguGJicoMukD0BRxgCH45ASr3kQqrmjLHomygKJA+9lroU+kBi3F+7zQ==", Role = 0 },
+                        new { UserId = 5, Email = "user5@demo.com", Fullname = "user full name 5", Password = "AJoDHiPPF4geOrdsFl4uSbdFTiJ+g5ddu6BpnhSc+xOHYgGLm/h1S6SncK8aYEdJXQ==", Role = 0 },
+                        new { UserId = 6, Email = "user6@demo.com", Fullname = "user full name 6", Password = "AIXrcPD3w9C1lH9BzrduegXk5SEbkzq5IDMJ6jPNWTHEA9dTG47lAEGeIDS37cYemw==", Role = 0 },
+                        new { UserId = 7, Email = "user7@demo.com", Fullname = "user full name 7", Password = "ADHumWYCkTcqbgGLHNv8UN+Sxs0F6hcIQsVelqN/h7Q+adg53v6pw+ahvzVy/HzYJA==", Role = 0 },
+                        new { UserId = 8, Email = "user8@demo.com", Fullname = "user full name 8", Password = "AAOI/8C8hv/VXbA0EdWNzMHsXWfGxA3Ub5/OkyDWxIzofs1vpQ7kzaNDg7/Q556W/g==", Role = 0 },
+                        new { UserId = 9, Email = "user9@demo.com", Fullname = "user full name 9", Password = "AGpVzlKFw8uc9bth5KYPpa2192v5Zn0hx26ztA402kQzdjiqIgk9NGadKUufU3+SGw==", Role = 0 }
                     );
                 });
 

@@ -40,11 +40,19 @@ namespace DAO
                 );
 
             modelBuilder.Entity<Genre>()
-                .HasData(new Genre()
-                {
-                    GenreId = 1,
-                    Name = "Cartoons"
-                });
+                .HasData(
+                    new Genre()
+                    {
+                        GenreId = 1,
+                        Name = "Cartoons"
+                    },
+                    new Genre()
+                    {
+                        GenreId = 2,
+                        Name = "Action"
+                    }
+                );
+                
 
             modelBuilder.Entity<Film>()
                 .HasData(
@@ -54,6 +62,78 @@ namespace DAO
                         Name = "Tom and Jerry",
                         ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg",
                         GenreId = 1,
+                        Type = FilmType.Series
+                    },
+                    new Film()
+                    {
+                        FilmId = 2,
+                        Name = "Tom and Jerry 2",
+                        ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg",
+                        GenreId = 1,
+                        Type = FilmType.Series
+                    },
+                    new Film()
+                    {
+                        FilmId = 3,
+                        Name = "The Land Before Rhyme",
+                        ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg",
+                        GenreId = 1,
+                        Type = FilmType.Series
+                    },
+                    new Film()
+                    {
+                        FilmId = 4,
+                        Name = "Excalibur!",
+                        ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg",
+                        GenreId = 1,
+                        Type = FilmType.Series
+                    },
+                    new Film()
+                    {
+                        FilmId = 5,
+                        Name = "Meet the Dogs",
+                        ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg",
+                        GenreId = 1,
+                        Type = FilmType.Series
+                    },
+                    new Film()
+                    {
+                        FilmId = 6,
+                        Name = "Home Away From Home",
+                        ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg",
+                        GenreId = 1,
+                        Type = FilmType.Series
+                    },
+                    new Film()
+                    {
+                        FilmId = 7,
+                        Name = "Action Film Example 1",
+                        ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg",
+                        GenreId = 2,
+                        Type = FilmType.Series
+                    },
+                    new Film()
+                    {
+                        FilmId = 8,
+                        Name = "Hard Gun",
+                        ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg",
+                        GenreId = 2,
+                        Type = FilmType.Series
+                    },
+                    new Film()
+                    {
+                        FilmId = 9,
+                        Name = "Hard Gun II : Reloaded",
+                        ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg",
+                        GenreId = 2,
+                        Type = FilmType.Series
+                    },
+                    new Film()
+                    {
+                        FilmId = 10,
+                        Name = "A Knock at the Door",
+                        ThumbnailAddress = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/__ia_thumb.jpg",
+                        GenreId = 2,
                         Type = FilmType.Series
                     }
                 );
@@ -132,6 +212,168 @@ namespace DAO
                         Name = "Fine Feathered Friend",
                         RunTime = 100,
                         FilmId = 1,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 9,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 2,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 10,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 2,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 11,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 3,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 12,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 3,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 13,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 4,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 14,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 4,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 15,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 5,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 16,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 5,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 17,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 6,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 18,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 6,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 19,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 7,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 20,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 7,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 21,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 8,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 22,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 8,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 23,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 9,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 24,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 9,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 25,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 10,
+                        ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
+                        Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
+                    },
+                    new FilmData()
+                    {
+                        Id = 26,
+                        Name = "Fine Feathered Friend",
+                        RunTime = 100,
+                        FilmId = 10,
                         ThumbnailAddress = "https://archive.org/download/126BuddiesThickerThanWater1962/126BuddiesThickerThanWater1962.thumbs/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D_000001.jpg",
                         Address = "https://ia601204.us.archive.org/33/items/126BuddiesThickerThanWater1962/008%20%20%20Fine%20Feathered%20Friend%20%5B1942%5D.mp4"
                     }
