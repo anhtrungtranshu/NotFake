@@ -150,7 +150,7 @@ namespace NotFake.Hubs
         {
             HubMessage msg = JsonConvert.DeserializeObject<HubMessage>(message);
             HubPost newPost = _chatRoomService.AddPostToGroup(msg);
-            await Clients.GroupExcept(msg.GroupName, Context.ConnectionId).SendAsync("ReceiveMessage", newPost);
+            await Clients.Group(msg.GroupName).SendAsync("ReceiveMessage", newPost);
         }
 
         public async Task GroupFriendSuggestions(string data)
@@ -254,7 +254,7 @@ namespace NotFake.Hubs
         public async Task AdminVideoTimeUpdate(string data)
         {
             JObject obj = JObject.Parse(data);
-            await Clients.GroupExcept((string)obj["groupName"], Context.ConnectionId)
+            await Clients.Group((string)obj["groupName"])
                         .SendAsync("AdminVideoTimeUpdate", (long)obj["currentProgress"]);
         }
 

@@ -378,9 +378,9 @@ $(document).ready(function () {
         }
 
         var frmTemp = `
-            <a class="dropdown-item">
+            <a class="dropdown-item" data-email="{0}">
                 <div class="d-flex align-items-center">
-                    <span style="white-space:break-spaces; width: 15rem; display: inline-block">{0}</span>
+                    <span style="white-space:break-spaces; width: 15rem; display: inline-block">{1}</span>
                     <div class="btn-group" role="group" aria-label="request action">
                         <button type="button" class="btn btn-icon-secondary request-action-btn-no">
                             <i class="fas fa-ban"></i>
@@ -388,13 +388,14 @@ $(document).ready(function () {
                         <button type="button" class="btn btn-icon-primary request-action-btn-yes">
                             <i class="fas fa-check"></i>
                         </button>
-                        <input type="hidden" name="target" value="{1}" />
-                        <input type="hidden" name="requestType" value={2} />
+                        <input type="hidden" name="target" value="{2}" />
+                        <input type="hidden" name="requestType" value={3} />
                     </div>
                 </div>
             </a>`;
 
         var frmHtml = StringFormat(frmTemp, [
+            target,
             message,
             target,
             requestType
@@ -473,6 +474,15 @@ $(document).ready(function () {
             }
 
             connection.invoke("FriendResponseToJoinGroup", JSON.stringify(data));
+
+            $("#incomingFriendRequestsMenu").find("a.dropdown-item[data-email*='" + invitationId + "']").remove();
+            if (!$("#incomingFriendRequestsMenu a.dropdown-item").length) {
+                $("#pendingFriendRequests").addClass("d-none");
+                $("#pendingFriendRequests").html("0");
+                $("#incomingFriendRequestsMenu").append("<a class='dropdown-item' disabled>Oops! There is nothing new!</a>");
+            } else {
+                $("#pendingFriendRequests").html($("#incomingFriendRequestsMenu a.dropdown-item").length);
+            }
         }
 
     })
